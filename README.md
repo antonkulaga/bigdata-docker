@@ -1,2 +1,4 @@
 # bigdata-docker
-hdfs, hue, spark-notebook docker-compose
+hdfs, yarn, hive, spark, spark-notebook, hue
+
+Inspired by https://github.com/big-data-europe/
