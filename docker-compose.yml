@@ -1,7 +1,7 @@
 version: '3.3'
 services:
 
-  # HADOOP STUFF
+  # HADOOP HDFS STUFF
   namenode:
     image: bde2020/hadoop-namenode:1.1.0-hadoop2.8-java8
       #:1.1.0-hadoop2.7.1-java8
@@ -25,16 +25,35 @@ services:
       - ./bigdata.env
     ports:
       - 50075:50075
+
+  # YARN STUFF
+  historyserver:
+    image: bde2020/hadoop-historyserver:1.1.0-hadoop2.8-java8
+    container_name: historyserver
+    volumes:
+      - ./data/historyserver:/hadoop/yarn/timeline
+    depends_on:
+      - "namenode"
+    links:
+      - "namenode"
+    ports:
+      - "58188:8188"
+    env_file:
+      - ./bigdata.env
+
   resourcemanager:
-    image: bde2020/hadoop-resourcemanager:1.1.0-hadoop2.7.1-java8
+    image: bde2020/hadoop-resourcemanager:1.1.0-hadoop2.8-java8
+    #1.1.0-hadoop2.7.1-java8
     container_name: resourcemanager
+    ports:
+      - "58088:8088"
     depends_on:
       - namenode
       - datanode
     env_file:
       - ./bigdata.env
 
-  #SPARK STUFF
+  # SPARK STUFF
   spark-master:
     image: bde2020/spark-master:2.1.0-hadoop2.8-hive-java8
       #2.1.0-hadoop2.8-hive-java8
@@ -66,7 +85,7 @@ services:
     volumes:
       - ./notebooks:/opt/spark-notebook/notebooks
 
-  #HIVE STUFF
+  # HIVE STUFF
   hive-server:
     image: bde2020/hive:2.1.0-postgresql-metastore
     container_name: hive-server
@@ -85,7 +104,7 @@ services:
   hive-metastore-postgresql:
     image: bde2020/hive-metastore-postgresql:2.1.0
 
-  #HUE STUFF
+  # HUE STUFF
   hue:
     image: gethue/hue:latest
     ports:
