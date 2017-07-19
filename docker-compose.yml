@@ -62,6 +62,7 @@ services:
     ports:
       - 8080:8080
       - 7077:7077
+      - 4040:4040
     env_file:
       - ./bigdata.env
   spark-worker:

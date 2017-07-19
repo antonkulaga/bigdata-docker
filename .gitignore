@@ -1,0 +1,6 @@
+data/namenode
+data/datanode
+data/historyserver
+.DS_Store
+env
+target
