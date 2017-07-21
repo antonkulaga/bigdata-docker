@@ -4,3 +4,6 @@ data/historyserver
 .DS_Store
 env
 target
+.idea
+.idea/*
+*.iml

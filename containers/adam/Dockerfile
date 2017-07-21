@@ -1,0 +1,26 @@
+FROM bde2020/spark-base:2.1.0-hadoop2.8-hive-java8
+
+MAINTAINER Anton Kulaga antonkulaga@gmail.com
+
+ENV MAVEN_HOME /opt/apache-maven-3.5.0
+
+# we rely on apache maven > 3.1.1 to build ADAM, so we can't use the
+# version of maven installed by apt-get
+RUN mkdir /opt/apache-maven-3.5.0
+
+RUN curl http://mirror.evowise.com/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz \
+  | tar --strip-components=1 -xzC /opt/apache-maven-3.5.0
+
+WORKDIR /opt
+
+# clone adam
+RUN git clone https://github.com/bigdatagenomics/adam.git
+
+# build adam
+WORKDIR /opt/adam
+
+RUN /opt/adam/scripts/move_to_spark_2.sh
+
+RUN /opt/adam/scripts/move_to_scala_2.11.sh
+
+RUN /opt/apache-maven-3.5.0/bin/mvn package -DskipTests
