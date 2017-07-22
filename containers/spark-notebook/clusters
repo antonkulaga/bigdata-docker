@@ -12,9 +12,9 @@
 	"customDeps" : null,
     "customImports" : null,
     "customSparkConf" : {
-    "spark.app.name" : "Notebook",
-    "spark.master" : "spark://localhost:7077",
-    "spark.executor.memory" : "16G"
+        "spark.app.name" : "Notebook",
+        "spark.master" : "spark://spark-master:7077",
+        "spark.executor.memory" : "10G"
     }
    }
   }

@@ -9,8 +9,8 @@
       "customImports" : null,
       "customSparkConf" : {
         "spark.app.name" : "Notebook",
-        "spark.master" : "spark://localhost:7077",
-        "spark.executor.memory" : "16G",
+        "spark.master" : "spark://spark-master:7077",
+        "spark.executor.memory" : "20G",
         "repos"      = [
           "comp-bio-aging % default % https://dl.bintray.com/comp-bio-aging/main/",
           "denigma % default % https://dl.bintray.com/denigma/denigma-releases/"
