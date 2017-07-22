@@ -1,6 +1,5 @@
 version: '3.3'
 services:
-
   # HADOOP HDFS STUFF
   namenode:
     image: bde2020/hadoop-namenode:1.1.0-hadoop2.8-java8
@@ -14,11 +13,17 @@ services:
       - ./bigdata.env
     ports:
       - 50070:50070
+    healthcheck:
+      interval: 5s
+      retries: 100
   datanode:
     image: bde2020/hadoop-datanode:1.1.0-hadoop2.8-java8
       #1.1.0-hadoop2.7.1-java8
     depends_on:
       - namenode
+    healthcheck:
+      interval: 5s
+      retries: 100
     volumes:
       - ./data/datanode:/hadoop/dfs/data
     env_file:
@@ -33,11 +38,15 @@ services:
     volumes:
       - ./data/historyserver:/hadoop/yarn/timeline
     depends_on:
-      - "namenode"
+      - namenode
+    healthcheck:
+      interval: 5s
+      retries: 100
     links:
       - "namenode"
     ports:
-      - "58188:8188"
+      - 8188:8188
+      #- "58188:8188"
     env_file:
       - ./bigdata.env
 
@@ -46,7 +55,8 @@ services:
     #1.1.0-hadoop2.7.1-java8
     container_name: resourcemanager
     ports:
-      - "58088:8088"
+      - "8088:8088"
+      #- "58088:8088"
     depends_on:
       - namenode
       - datanode
@@ -62,7 +72,12 @@ services:
     ports:
       - 8080:8080
       - 7077:7077
-      - 4040:4040
+    depends_on:
+      - namenode
+      - datanode
+    healthcheck:
+      interval: 5s
+      retries: 100
     env_file:
       - ./bigdata.env
   spark-worker:
@@ -70,10 +85,13 @@ services:
       #2.1.1-hadoop2.7
     depends_on:
       - spark-master
+    healthcheck:
+      interval: 5s
+      retries: 100
     environment:
       - SPARK_MASTER=spark://spark-master:7077
     ports:
-      - "8081:8081"
+      - 8081:8081
     env_file:
       - ./bigdata.env
   spark-notebook:
@@ -83,9 +101,13 @@ services:
     env_file:
       - ./bigdata.env
     ports:
-      - 9001:9001
+      #- 9001:9001
+      - 9000:9000
     volumes:
       - ./notebooks:/opt/spark-notebook/notebooks
+    depends_on:
+      - spark-master
+      - namenode
 
   # HIVE STUFF
   hive-server:
@@ -103,12 +125,19 @@ services:
     env_file:
       - ./bigdata.env
     command: /opt/hive/bin/hive --service metastore
+    ports:
+      - 9083:9083
   hive-metastore-postgresql:
     image: bde2020/hive-metastore-postgresql:2.1.0
+    ports:
+      - 5432:5432
 
   # HUE STUFF
   hue:
     image: gethue/hue:latest
+    depends_on:
+      - namenode
+      - datanode
     ports:
       - 8888:8888
     volumes:
