@@ -8,7 +8,8 @@ import $ivy.`com.github.pathikrit::better-files:3.0.0`
 import better.files._
 import java.io.{File => JFile}
 
-lazy val tag: String = "c251f79c6bde3dce12e685c6cf03d5b1c30e9273--4e4d61f3cdc33b5978dd028151e7a2f5027ffa9d"
+//lazy val tag: String = "c251f79c6bde3dce12e685c6cf03d5b1c30e9273--4e4d61f3cdc33b5978dd028151e7a2f5027ffa9d"
+lazy val tag: String = "latest"
 lazy val network: String = "bigdatadocker_default"
 lazy val adamPort = 9999
 
@@ -36,7 +37,6 @@ def fasta2adam(fasta: String, adam: String, fragment_length: Int = 1000000, net:
 	println("---running---")
 	println(str)
 	println("")
-
 	%docker("run",  "-p", s"${adamPort}:${adamPort}",
 				s"--net=${net}",
 				"-v", s"${folder.toString}:/data",
@@ -50,7 +50,7 @@ def fasta2adam(fasta: String, adam: String, fragment_length: Int = 1000000, net:
 
 @main
 def flagstat(path: String, net: String = network, folder: Path = pwd) = {
-	val container = s"docker run -p ${adamPort}:${adamPort} --net=${net} -v ${folder.toString}:/data quay.io/ucsc_cgl/adam:${tag}"
+	val container = s"docker run -p ${adamPort}:${adamPort} --net=${net} -v ${folder.toString}:/data quay.io/comp-bio-aging/adam:${tag}"
 	val params = s"flagstat hdfs://namenode:8020/${path}"
 	val str = container + " " + params
 	println("---running---")
@@ -60,7 +60,7 @@ def flagstat(path: String, net: String = network, folder: Path = pwd) = {
 	%docker("run",  "-p", s"${adamPort}:${adamPort}",
 				s"--net=${net}",
 				"-v", s"${folder.toString}:/data",
-				s"quay.io/ucsc_cgl/adam:${tag}",
+				s"quay.io/comp-bio-aging/adam:${tag}",
 				//s"-- master spark://spark-master:7077 --",
 				//s"--conf", s"spark.driver.port=${adamPort} --",
 				s"flagstat", p

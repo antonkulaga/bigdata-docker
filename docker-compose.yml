@@ -77,7 +77,8 @@ services:
     env_file:
       - ./bigdata.env
   spark-notebook:
-    image: bde2020/spark-notebook:2.1.0-hadoop2.8-hive
+    #image: bde2020/spark-notebook:2.1.0-hadoop2.8-hive
+    image: quay.io/comp-bio-aging/notebook:latest
     container_name: spark-notebook
     env_file:
       - ./bigdata.env

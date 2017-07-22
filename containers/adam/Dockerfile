@@ -24,3 +24,5 @@ RUN /opt/adam/scripts/move_to_spark_2.sh
 RUN /opt/adam/scripts/move_to_scala_2.11.sh
 
 RUN /opt/apache-maven-3.5.0/bin/mvn package -DskipTests
+
+ENTRYPOINT ["/opt/adam/bin/adam-submit"]
