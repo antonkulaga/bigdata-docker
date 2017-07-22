@@ -49,13 +49,12 @@ services:
       #- "58188:8188"
     env_file:
       - ./bigdata.env
-
   resourcemanager:
     image: bde2020/hadoop-resourcemanager:1.1.0-hadoop2.8-java8
     #1.1.0-hadoop2.7.1-java8
     container_name: resourcemanager
     ports:
-      - "8088:8088"
+      - 8088:8088
       #- "58088:8088"
     depends_on:
       - namenode
@@ -72,6 +71,7 @@ services:
     ports:
       - 8080:8080
       - 7077:7077
+      - 6066:6066
     depends_on:
       - namenode
       - datanode

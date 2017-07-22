@@ -40,7 +40,7 @@ def fasta2adam(fasta: String, adam: String, fragment_length: Int = 1000000, net:
 	%docker("run",  "-p", s"${adamPort}:${adamPort}",
 				s"--net=${net}",
 				"-v", s"${folder.toString}:/data",
-				s"quay.io/ucsc_cgl/adam:${tag}",
+				s"quay.io/comp-bio-aging/adam:${tag}",
 				//s"--master", "spark://spark-master:7077",
 				sparkArgs,
 				s"fasta2adam", f, a,
@@ -72,7 +72,7 @@ def adam(command: String, net: String = network, folder: Path = pwd) = {
 	%docker("run",  "-p", s"${adamPort}:${adamPort}",
 				s"--net=${net}",
         "-v", s"${folder.toString}:/data",
-				s"quay.io/ucsc_cgl/adam:${tag}",
+				s"quay.io/comp-bio-aging/adam:${tag}",
 				s"--conf spark.driver.port=${adamPort}",
 				command
 	)
