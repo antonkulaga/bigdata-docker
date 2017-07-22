@@ -5,7 +5,7 @@
     "status" : "stopped",
     "template" : {
     "customLocalRepo" : null,
-	"repos"      = [
+	"repos" :  [
 		"comp-bio-aging % default % https://dl.bintray.com/comp-bio-aging/main/",
 		"denigma % default % https://dl.bintray.com/denigma/denigma-releases/"
 	],	      
