@@ -5,7 +5,7 @@ ENV APACHE_SPARK_VERSION 2.1.1
 ENV APACHE_HADOOP_VERSION 2.8.1
 
 RUN set -x \
-    && curl -fSL "https://s3.eu-central-1.amazonaws.com/spark-notebook/tgz/spark-notebook-master-scala-2.11.8-spark-2.1.0-hadoop-2.8.0-with-hive.tgz?max-keys=100000" -o /tmp/spark-notebook.tgz \
+    && curl -fSL "https://s3.eu-central-1.amazonaws.com/spark-notebook/tgz/spark-notebook-master-scala-2.11.8-spark-2.2.0-hadoop-2.8.1-with-hive.tgz?max-keys=100000" -o /tmp/spark-notebook.tgz \
     && tar -xzvf /tmp/spark-notebook.tgz -C /opt/ \
     && mv /opt/spark-notebook-* /opt/spark-notebook \
     && rm /tmp/spark-notebook.tgz

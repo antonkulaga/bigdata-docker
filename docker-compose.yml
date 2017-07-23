@@ -64,7 +64,7 @@ services:
 
   # SPARK STUFF
   spark-master:
-    image: bde2020/spark-master:2.1.0-hadoop2.8-hive-java8
+    image: bde2020/spark-master:2.2.0-hadoop2.7
       #2.1.0-hadoop2.8-hive-java8
       #2.1.1-hadoop2.7
     container_name: spark-master
@@ -81,7 +81,7 @@ services:
     env_file:
       - ./bigdata.env
   spark-worker:
-    image: bde2020/spark-worker:2.1.0-hadoop2.8-hive-java8
+    image: bde2020/spark-worker:2.2.0-hadoop2.7
       #2.1.1-hadoop2.7
     depends_on:
       - spark-master
@@ -118,7 +118,7 @@ services:
     environment:
       - "HIVE_CORE_CONF_javax_jdo_option_ConnectionURL=jdbc:postgresql://hive-metastore/metastore"
     ports:
-      - "10000:10000"
+      - 10000:10000
   hive-metastore:
     image: bde2020/hive:2.1.0-postgresql-metastore
     container_name: hive-metastore
