@@ -1,4 +1,4 @@
-FROM bde2020/spark-base:2.1.0-hadoop2.8-hive-java8
+FROM bde2020/spark-base:2.2.0-hadoop2.7
 
 MAINTAINER Anton Kulaga antonkulaga@gmail.com
 
@@ -10,6 +10,8 @@ RUN mkdir /opt/apache-maven-3.5.0
 
 RUN curl http://mirror.evowise.com/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz \
   | tar --strip-components=1 -xzC /opt/apache-maven-3.5.0
+
+ENV SPARK_HOME /spark/
 
 WORKDIR /opt
 
