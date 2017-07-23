@@ -10,11 +10,11 @@ services:
     environment:
       - CLUSTER_NAME=bigdata
     env_file:
-      - ./bigdata.env
+      - conf/bigdata.env
     ports:
       - 50070:50070
     healthcheck:
-      interval: 5s
+      interval: 20s
       retries: 100
   datanode:
     image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
@@ -22,12 +22,12 @@ services:
     depends_on:
       - namenode
     healthcheck:
-      interval: 5s
+      interval: 20s
       retries: 100
     volumes:
       - ./data/datanode:/hadoop/dfs/data
     env_file:
-      - ./bigdata.env
+      - conf/bigdata.env
     ports:
       - 50075:50075
 
@@ -41,7 +41,7 @@ services:
     depends_on:
       - namenode
     healthcheck:
-      interval: 5s
+      interval: 20s
       retries: 100
     links:
       - "namenode"
@@ -49,7 +49,7 @@ services:
       - 8188:8188
       #- "58188:8188"
     env_file:
-      - ./bigdata.env
+      - conf/bigdata.env
   resourcemanager:
     image: bde2020/hadoop-resourcemanager:1.1.0-hadoop2.7.1-java8
     #1.1.0-hadoop2.8-java8
@@ -61,7 +61,7 @@ services:
       - namenode
       - datanode
     env_file:
-      - ./bigdata.env
+      - conf/bigdata.env
 
   # SPARK STUFF
   spark-master:
@@ -77,29 +77,34 @@ services:
       - namenode
       - datanode
     healthcheck:
-      interval: 5s
+      interval: 20s
       retries: 100
     env_file:
-      - ./bigdata.env
+      - conf/bigdata.env
+    volumes:
+      - ./conf/spark/master.conf:/spark/conf/spark-defaults.conf
   spark-worker:
     image: bde2020/spark-worker:2.2.0-hadoop2.7
       #2.1.1-hadoop2.7
     depends_on:
       - spark-master
     healthcheck:
-      interval: 5s
+      interval: 20s
       retries: 100
     environment:
       - SPARK_MASTER=spark://spark-master:7077
     ports:
       - 8081:8081
+      - 4040:4040
     env_file:
-      - ./bigdata.env
+      - conf/bigdata.env
+    volumes:
+      - ./conf/spark/worker.conf:/spark/conf/spark-defaults.conf
   spark-notebook:
     image: quay.io/comp-bio-aging/notebook:latest
     container_name: spark-notebook
     env_file:
-      - ./bigdata.env
+      - conf/bigdata.env
     ports:
       #- 9001:9001
       - 9000:9000
@@ -114,7 +119,7 @@ services:
     image: bde2020/hive:2.1.0-postgresql-metastore
     container_name: hive-server
     env_file:
-      - ./bigdata.env
+      - conf/bigdata.env
     environment:
       - "HIVE_CORE_CONF_javax_jdo_option_ConnectionURL=jdbc:postgresql://hive-metastore/metastore"
     ports:
@@ -123,7 +128,7 @@ services:
     image: bde2020/hive:2.1.0-postgresql-metastore
     container_name: hive-metastore
     env_file:
-      - ./bigdata.env
+      - conf/bigdata.env
     command: /opt/hive/bin/hive --service metastore
     ports:
       - 9083:9083
@@ -141,4 +146,4 @@ services:
     ports:
       - 8888:8888
     volumes:
-      - ./hue.ini:/hue/desktop/conf/pseudo-distributed.ini
+      - ./conf/hue.ini:/hue/desktop/conf/pseudo-distributed.ini
