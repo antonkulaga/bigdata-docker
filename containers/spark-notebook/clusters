@@ -4,7 +4,9 @@
     "name" : "Local Spark",
     "status" : "stopped",
     "template" : {
-    "customLocalRepo" : null,
+    "customLocalRepo" : [
+        "local % default % file:///root/.m2/repository"
+    ],
 	"repos" :  [
 		"comp-bio-aging % default % https://dl.bintray.com/comp-bio-aging/main/",
 		"denigma % default % https://dl.bintray.com/denigma/denigma-releases/"

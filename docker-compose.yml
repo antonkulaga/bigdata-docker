@@ -95,7 +95,6 @@ services:
       - SPARK_MASTER=spark://spark-master:7077
     ports:
       - 8081:8081
-      - 4040:4040
     env_file:
       - conf/bigdata.env
     volumes:
@@ -110,6 +109,7 @@ services:
       - 9000:9000
     volumes:
       - ./notebooks:/opt/spark-notebook/notebooks
+      - ./conf/notebook/repos/m2:/root/.m2/repository
     depends_on:
       - spark-master
       - namenode
@@ -146,4 +146,4 @@ services:
     ports:
       - 8888:8888
     volumes:
-      - ./conf/hue.ini:/hue/desktop/conf/pseudo-distributed.ini
+      - ./conf/hue/hue.ini:/hue/desktop/conf/pseudo-distributed.ini

@@ -3,7 +3,9 @@
     "id" : "Local Spark Cluster",
     "name" : "Local Spark Cluster",
     "template" : {
-      "customLocalRepo" : null,
+      "customLocalRepo" : [
+         "local % default % file:///root/.m2/repository"
+      ],
       "customRepos" : null,
       "customDeps" : null,
       "customImports" : null,
