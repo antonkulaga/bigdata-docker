@@ -2,8 +2,7 @@ version: '3.3'
 services:
   # HADOOP HDFS STUFF
   namenode:
-    image: bde2020/hadoop-namenode:1.1.0-hadoop2.7.1-java8
-    #1.1.0-hadoop2.8-java8
+    image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
     container_name: namenode
     volumes:
       - ./data/namenode:/hadoop/dfs/name
@@ -17,8 +16,7 @@ services:
       interval: 20s
       retries: 100
   datanode:
-    image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
-    #1.1.0-hadoop2.8-java8
+    image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
     depends_on:
       - namenode
     healthcheck:
@@ -33,8 +31,7 @@ services:
 
   # YARN STUFF
   historyserver:
-    image: bde2020/hadoop-historyserver:1.1.0-hadoop2.7.1-java8
-    #1.1.0-hadoop2.8-java8
+    image: bde2020/hadoop-historyserver:2.0.0-hadoop2.7.4-java8
     container_name: historyserver
     volumes:
       - ./data/historyserver:/hadoop/yarn/timeline
@@ -51,8 +48,7 @@ services:
     env_file:
       - conf/bigdata.env
   resourcemanager:
-    image: bde2020/hadoop-resourcemanager:1.1.0-hadoop2.7.1-java8
-    #1.1.0-hadoop2.8-java8
+    image: bde2020/hadoop-resourcemanager:2.0.0-hadoop2.7.4-java8
     container_name: resourcemanager
     ports:
       - 8088:8088
@@ -66,13 +62,13 @@ services:
   # SPARK STUFF
   spark-master:
     image: bde2020/spark-master:2.2.0-hadoop2.7
-      #2.1.0-hadoop2.8-hive-java8
       #2.1.1-hadoop2.7
     container_name: spark-master
     ports:
       - 8080:8080
       - 7077:7077
       - 6066:6066
+      - 4040:4040
     depends_on:
       - namenode
       - datanode
@@ -85,7 +81,6 @@ services:
       - ./conf/spark/master.conf:/spark/conf/spark-defaults.conf
   spark-worker:
     image: bde2020/spark-worker:2.2.0-hadoop2.7
-      #2.1.1-hadoop2.7
     depends_on:
       - spark-master
     healthcheck:

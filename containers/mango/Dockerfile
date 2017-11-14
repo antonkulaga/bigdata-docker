@@ -17,16 +17,15 @@ ENV SPARK_HOME /spark/
 
 WORKDIR /opt
 
-# clone adam
-RUN git clone https://github.com/bigdatagenomics/adam.git
+#clone mango
+RUN git clone https://github.com/bigdatagenomics/mango.git
 
-# build adam
-WORKDIR /opt/adam
+WORKDIR /opt/mango
 
-RUN /opt/adam/scripts/move_to_spark_2.sh
+RUN /opt/mango/scripts/move_to_spark_2.sh
 
-RUN /opt/adam/scripts/move_to_scala_2.11.sh
+RUN /opt/mango/scripts/move_to_scala_2.11.sh
 
 RUN /opt/apache-maven-$MAVEN_VERSION/bin/mvn package -DskipTests
 
-CMD ["/opt/adam/bin/adam-submit"]
+ENTRYPOINT ["/opt/adam/bin/adam-submit"]
