@@ -1,5 +1,36 @@
 version: '3'
 services:
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
+    networks:
+      - core
+    volumes:
+      - namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - conf/bigdata.env
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 50070:50070
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
+    networks:
+      - core
+    volumes:
+      - datanode:/hadoop/dfs/data
+    env_file:
+      - conf/bigdata.env
+    depends_on:
+      - namenode
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
   spark-master:
     image: bde2020/spark-master:2.2.0-hadoop2.7
     networks:
@@ -12,6 +43,8 @@ services:
     ports:
       - 8080:8080
       - 7077:7077
+    depends_on:
+      - namenode
     env_file:
       - conf/bigdata.env
   spark-worker:
@@ -20,6 +53,8 @@ services:
       - core
     environment:
       - SPARK_MASTER=spark://spark-master:7077
+    depends_on:
+      - spark-master
     deploy:
       mode: global
       restart_policy:
@@ -49,7 +84,6 @@ services:
     image: gethue/hue:latest
     depends_on:
       - namenode
-      - datanode
     ports:
       - 8888:8888
     volumes:
