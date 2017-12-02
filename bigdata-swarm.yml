@@ -55,6 +55,8 @@ services:
       - conf/bigdata.env
   spark-notebook:
     image: quay.io/comp-bio-aging/notebook:latest
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
     env_file:
       - conf/bigdata.env
     ports:
