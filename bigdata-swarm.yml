@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 services:
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
@@ -21,6 +21,8 @@ services:
       - datanode:/hadoop/dfs/data
     env_file:
       - conf/bigdata.env
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070"
     depends_on:
       - namenode
     deploy:
@@ -91,3 +93,8 @@ services:
 volumes:
   datanode:
   namenode:
+
+networks:
+  default:
+    driver: overlay
+    attachable: true
