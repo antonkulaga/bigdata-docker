@@ -53,6 +53,10 @@ services:
       mode: global
       restart_policy:
         condition: on-failure
+    ports:
+      - 8081:8081
+      - 8082:8082
+      - 8083:8083
     env_file:
       - conf/bigdata.env
   spark-notebook:
