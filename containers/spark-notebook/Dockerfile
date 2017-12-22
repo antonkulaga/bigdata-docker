@@ -5,7 +5,7 @@ ENV APACHE_SPARK_VERSION 2.2.1
 ENV APACHE_HADOOP_VERSION 2.7.4
 
 RUN set -x \
-    && curl -fSL "https://s3.eu-central-1.amazonaws.com/spark-notebook/tgz/spark-notebook-master-scala-2.11.8-spark-2.2.1-hadoop-2.7.4-with-hive.tgz?max-keys=100000" -o /tmp/spark-notebook.tgz \
+    && curl -fSL "https://s3.eu-central-1.amazonaws.com/spark-notebook/tgz/spark-notebook-master-scala-2.11.8-spark-${APACHE_SPARK_VERSION}-hadoop-${APACHE_HADOOP_VERSION}-with-hive.tgz?max-keys=100000" -o /tmp/spark-notebook.tgz \
     && tar -xzvf /tmp/spark-notebook.tgz -C /opt/ \
     && mv /opt/spark-notebook-* /opt/spark-notebook \
     && rm /tmp/spark-notebook.tgz
@@ -13,16 +13,14 @@ RUN set -x \
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
 
-COPY application.conf /opt/spark-notebook/conf/
-COPY clusters /opt/spark-notebook/conf/
-COPY profiles /opt/spark-notebook/conf/
+#COPY application.conf /opt/spark-notebook/conf/
 
 RUN mkdir -p /data/resources
 
 ENV NOTEBOOKS_DIR "/opt/spark-notebook/notebooks"
 ENV RESOURCES_DIR "/data/resources"
 ENV SPARK_MASTER "spark://spark-master:7077"
-ENV SPARK_EXECUTOR_MEMORY "12G"
+#ENV SPARK_EXECUTOR_MEMORY "12G"
 
 EXPOSE 9000
 

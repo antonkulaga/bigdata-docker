@@ -75,6 +75,7 @@ services:
     volumes:
       - ./notebooks:/opt/spark-notebook/notebooks
       - ./conf/notebook/repos/m2/repository:/root/.m2/repository
+      - ./conf/notebook/application.conf:/opt/spark-notebook/notebooks/application.conf
     depends_on:
       - spark-master
       - namenode
