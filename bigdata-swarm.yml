@@ -64,7 +64,7 @@ services:
     volumes:
       - ./conf/spark/worker.conf:/spark/conf/spark-defaults.conf
   spark-notebook:
-    image: quay.io/comp-bio-aging/notebook:latest
+    image: quay.io/comp-bio-aging/notebook:master
     environment:
       - SPARK_MASTER=spark://spark-master:7077
     env_file:
