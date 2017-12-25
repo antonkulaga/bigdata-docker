@@ -30,7 +30,7 @@ services:
       restart_policy:
         condition: on-failure
   spark-master:
-    image: bde2020/spark-master:2.2.0-hadoop2.7
+    image: bde2020/spark-master:2.2.1-hadoop2.7
     deploy:
       replicas: 1
       mode: replicated
@@ -44,9 +44,10 @@ services:
     env_file:
       - conf/bigdata.env
     volumes:
-      - ./conf/spark/master.conf:/spark/conf/spark-defaults.conf
+      - ./conf/spark/master.conf:/spark/conf/spark-defaults.
+      - /pipelines:/pipelines
   spark-worker:
-    image: bde2020/spark-worker:2.2.0-hadoop2.7
+    image: bde2020/spark-worker:2.2.1-hadoop2.7
     environment:
       - SPARK_MASTER=spark://spark-master:7077
     depends_on:
@@ -63,8 +64,9 @@ services:
       - conf/bigdata.env
     volumes:
       - ./conf/spark/worker.conf:/spark/conf/spark-defaults.conf
+      - /pipelines:/pipelines
   spark-notebook:
-    image: quay.io/comp-bio-aging/notebook:master
+    image: quay.io/comp-bio-aging/notebook:master_spark_2.2.1
     environment:
       - SPARK_MASTER=spark://spark-master:7077
     env_file:
@@ -74,8 +76,8 @@ services:
       - 9000:9000
     volumes:
       - ./notebooks:/opt/spark-notebook/notebooks
-      - ./conf/notebook/repos/m2/repository:/root/.m2/repository
       - ./conf/notebook/application.conf:/opt/spark-notebook/notebooks/application.conf
+      - /pipelines:/pipelines
     depends_on:
       - spark-master
       - namenode

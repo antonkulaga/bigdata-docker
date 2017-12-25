@@ -1,7 +1,7 @@
 FROM bde2020/hadoop-base:2.0.0-hadoop2.7.4-java8
 MAINTAINER Anton Kulaga <antonkulaga@gmail.com>
 
-ENV APACHE_SPARK_VERSION 2.2.0
+ENV APACHE_SPARK_VERSION 2.2.1
 ENV APACHE_HADOOP_VERSION 2.7.4
 
 RUN set -x \
@@ -21,6 +21,12 @@ ENV NOTEBOOKS_DIR "/opt/spark-notebook/notebooks"
 ENV RESOURCES_DIR "/data/resources"
 ENV SPARK_MASTER "spark://spark-master:7077"
 #ENV SPARK_EXECUTOR_MEMORY "12G"
+
+#fetch dependencies
+RUN curl -L -o coursier https://git.io/vgvpD && chmod +x coursier
+RUN ./coursier fetch org.typelevel:frameless-cats_2.11:0.4.0 org.typelevel:frameless-dataset_2.11:0.4.0 com.github.pathikrit:better-files-akka_2.11:3.4.0
+RUN ./coursier fetch -r https://oss.sonatype.org/content/repositories/snapshots org.bdgenomics.adam:adam-distribution-spark2_2.11:0.23.0-SNAPSHOT
+
 
 EXPOSE 9000
 
