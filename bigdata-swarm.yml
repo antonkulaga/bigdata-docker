@@ -5,7 +5,7 @@ services:
     volumes:
       - namenode:/hadoop/dfs/name
     environment:
-      - CLUSTER_NAME=test
+      - CLUSTER_NAME=gerontomics
     env_file:
       - conf/bigdata.env
     deploy:
@@ -39,19 +39,18 @@ services:
     ports:
       - 8080:8080
       - 7077:7077
+      - 6066:6066
     depends_on:
       - namenode
     env_file:
       - conf/bigdata.env
     volumes:
-      - ./conf/spark/master.conf:/spark/conf/spark-defaults.
+      - ./conf/spark/master.conf:/spark/conf/spark-defaults.conf
       - /pipelines:/pipelines
   spark-worker:
     image: bde2020/spark-worker:2.2.1-hadoop2.7
     environment:
       - SPARK_MASTER=spark://spark-master:7077
-    depends_on:
-      - spark-master
     deploy:
       mode: global
       restart_policy:
@@ -66,7 +65,7 @@ services:
       - ./conf/spark/worker.conf:/spark/conf/spark-defaults.conf
       - /pipelines:/pipelines
   spark-notebook:
-    image: quay.io/comp-bio-aging/notebook:master_spark_2.2.1
+    image: quay.io/comp-bio-aging/notebook:master
     environment:
       - SPARK_MASTER=spark://spark-master:7077
     env_file:
@@ -78,9 +77,6 @@ services:
       - ./notebooks:/opt/spark-notebook/notebooks
       - ./conf/notebook/application.conf:/opt/spark-notebook/conf/application.conf
       - /pipelines:/pipelines
-    depends_on:
-      - spark-master
-      - namenode
     deploy:
       replicas: 1
       mode: replicated
@@ -89,8 +85,6 @@ services:
   # HUE STUFF
   hue:
     image: gethue/hue:latest
-    depends_on:
-      - namenode
     ports:
       - 8888:8888
     volumes:
