@@ -1,7 +1,7 @@
 FROM bde2020/hadoop-base:2.0.0-hadoop2.7.4-java8
 MAINTAINER Anton Kulaga <antonkulaga@gmail.com>
 
-ENV APACHE_SPARK_VERSION 2.2.0
+ENV APACHE_SPARK_VERSION 2.2.1
 ENV APACHE_HADOOP_VERSION 2.7.4
 
 RUN set -x \

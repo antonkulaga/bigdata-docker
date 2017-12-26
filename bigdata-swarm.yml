@@ -76,7 +76,7 @@ services:
       - 9000:9000
     volumes:
       - ./notebooks:/opt/spark-notebook/notebooks
-      - ./conf/notebook/application.conf:/opt/spark-notebook/notebooks/application.conf
+      - ./conf/notebook/application.conf:/opt/spark-notebook/conf/application.conf
       - /pipelines:/pipelines
     depends_on:
       - spark-master
