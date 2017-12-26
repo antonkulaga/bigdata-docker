@@ -23,10 +23,25 @@ ENV SPARK_MASTER "spark://spark-master:7077"
 #ENV SPARK_EXECUTOR_MEMORY "12G"
 
 #fetch dependencies
-RUN curl -L -o coursier https://git.io/vgvpD && chmod +x coursier
-RUN ./coursier fetch org.typelevel:frameless-cats_2.11:0.4.0 org.typelevel:frameless-dataset_2.11:0.4.0 com.github.pathikrit:better-files-akka_2.11:3.4.0
-RUN ./coursier fetch -r https://oss.sonatype.org/content/repositories/snapshots org.bdgenomics.adam:adam-distribution-spark2_2.11:0.23.0-SNAPSHOT
+ENV FRAMELESS_VERSION "0.4.0"
+ENV BETTER_FILES_VERSION "3.4.0"
+ENV ADAM_VERSION "0.23.0-SNAPSHOT"
+ENV ADAM_PLAYGROUND_VERSION "0.0.7-SNAP6.6"
+ENV CRISPR_VERSION "0.0.6-SNAP11"
 
+RUN curl -L -o coursier https://git.io/vgvpD && chmod +x coursier
+RUN ./coursier fetch \
+    org.typelevel:frameless-cats_2.11:${FRAMELESS_VERSION} \
+    org.typelevel:frameless-dataset_2.11:${FRAMELESS_VERSION} \
+    com.github.pathikrit:better-files-akka_2.11:${BETTER_FILES_VERSION}
+
+RUN ./coursier fetch \
+    -r https://oss.sonatype.org/content/repositories/snapshots \
+    -r https://dl.bintray.com/comp-bio-aging/main \
+    -r https://dl.bintray.com/denigma/denigma-releases \
+    org.bdgenomics.adam:adam-core-spark2_2.11:${ADAM_VERSION} \
+    comp.bio.aging:adam-playground_2.11:${ADAM_PLAYGROUND_VERSION} \
+    comp.bio.aging:crispr_2.11:${CRISPR_VERSION}
 
 EXPOSE 9000
 
