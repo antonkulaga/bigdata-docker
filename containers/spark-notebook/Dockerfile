@@ -47,6 +47,9 @@ EXPOSE 9000
 
 WORKDIR /opt/spark-notebook/
 
+COPY clusters /opt/spark-notebook/conf/
+COPY profiles /opt/spark-notebook/conf/
+
 VOLUME ["/opt/spark-notebook/notebooks", "/root/.m2/repository"]
 
 CMD ["/run.sh"]

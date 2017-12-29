@@ -4,6 +4,7 @@ services:
     image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
     volumes:
       - namenode:/hadoop/dfs/name
+      - /pipelines:/pipelines
     environment:
       - CLUSTER_NAME=gerontomics
     env_file:
@@ -40,8 +41,6 @@ services:
       - 8080:8080
       - 7077:7077
       - 6066:6066
-    depends_on:
-      - namenode
     env_file:
       - conf/bigdata.env
     volumes:
@@ -49,8 +48,6 @@ services:
       - /pipelines:/pipelines
   spark-worker:
     image: bde2020/spark-worker:2.2.1-hadoop2.7
-    environment:
-      - SPARK_MASTER=spark://spark-master:7077
     deploy:
       mode: global
       restart_policy:
@@ -65,13 +62,10 @@ services:
       - ./conf/spark/worker.conf:/spark/conf/spark-defaults.conf
       - /pipelines:/pipelines
   spark-notebook:
-    image: quay.io/comp-bio-aging/notebook:master
-    environment:
-      - SPARK_MASTER=spark://spark-master:7077
+    image: quay.io/comp-bio-aging/notebook:master_spark_2.2.1
     env_file:
       - conf/bigdata.env
     ports:
-      #- 9001:9001
       - 9000:9000
     volumes:
       - ./notebooks:/opt/spark-notebook/notebooks

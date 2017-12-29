@@ -86,8 +86,6 @@ services:
     healthcheck:
       interval: 20s
       retries: 100
-    environment:
-      - SPARK_MASTER=spark://spark-master:7077
     ports:
       - 8081:8081
     env_file:
@@ -104,7 +102,7 @@ services:
       - 9000:9000
     volumes:
       - ./notebooks:/opt/spark-notebook/notebooks
-      - ./conf/notebook/repos/m2/repository:/root/.m2/repository
+      - ./conf/notebook/application.conf:/opt/spark-notebook/conf/application.conf
     depends_on:
       - spark-master
       - namenode
