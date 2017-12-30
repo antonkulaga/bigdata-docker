@@ -47,7 +47,7 @@ services:
       - ./conf/spark/master.conf:/spark/conf/spark-defaults.conf
       - /pipelines:/pipelines
   spark-worker:
-    image: bde2020/spark-worker:2.2.1-hadoop2.7
+    image: quay.io/comp-bio-aging/spark-worker:latest
     deploy:
       mode: global
       restart_policy:
