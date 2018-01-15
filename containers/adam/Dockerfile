@@ -23,9 +23,9 @@ RUN git clone https://github.com/bigdatagenomics/adam.git
 # build adam
 WORKDIR /opt/adam
 
-RUN /opt/adam/scripts/move_to_spark_2.sh
+#RUN /opt/adam/scripts/move_to_spark_2.sh
 
-RUN /opt/adam/scripts/move_to_scala_2.11.sh
+#RUN /opt/adam/scripts/move_to_scala_2.11.sh
 
 RUN /opt/apache-maven-$MAVEN_VERSION/bin/mvn package -DskipTests
 
