@@ -75,8 +75,9 @@ services:
       - ./conf/notebook/application.conf:/opt/spark-notebook/conf/application.conf
       - /pipelines:/pipelines
     deploy:
-      constraints:
-        - node.role == manager
+      placement:
+        constraints:
+          - node.role == manager
       replicas: 1
       mode: replicated
       restart_policy:
