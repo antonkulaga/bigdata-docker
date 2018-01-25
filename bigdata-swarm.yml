@@ -10,6 +10,9 @@ services:
     env_file:
       - conf/bigdata.env
     deploy:
+      placement:
+        constraints:
+          - node.role == manager
       mode: replicated
       replicas: 1
       restart_policy:
@@ -62,7 +65,7 @@ services:
       - ./conf/spark/worker.conf:/spark/conf/spark-defaults.conf
       - /pipelines:/pipelines
   spark-notebook:
-    image: quay.io/comp-bio-aging/notebook:master_spark_2.2.1
+    image: quay.io/comp-bio-aging/notebook:master
     env_file:
       - conf/bigdata.env
     ports:
@@ -72,6 +75,8 @@ services:
       - ./conf/notebook/application.conf:/opt/spark-notebook/conf/application.conf
       - /pipelines:/pipelines
     deploy:
+      constraints:
+        - node.role == manager
       replicas: 1
       mode: replicated
       restart_policy:
