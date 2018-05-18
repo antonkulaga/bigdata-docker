@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker build -t quay.io/comp-bio-aging/notebook:master_spark_2.2.1 .
+docker build -t quay.io/comp-bio-aging/notebook:master_spark_2.3.0 .
