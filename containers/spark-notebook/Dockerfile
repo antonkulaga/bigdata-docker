@@ -10,8 +10,6 @@ ENV APACHE_HADOOP_VERSION 2.7.5
 #    && mv /opt/spark-notebook-* /opt/spark-notebook \
 #    && rm /tmp/spark-notebook.tgz
 
-RUN cd /opt/ && git clone 
-
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
 
@@ -25,10 +23,10 @@ ENV SPARK_MASTER "spark://spark-master:7077"
 #ENV SPARK_EXECUTOR_MEMORY "12G"
 
 #fetch dependencies
-ENV FRAMELESS_VERSION "0.5.0"
+ENV FRAMELESS_VERSION "0.6.1"
 ENV BETTER_FILES_VERSION "3.4.0"
 ENV ADAM_VERSION "0.24.0"
-ENV ADAM_PLAYGROUND_VERSION "0.0.8"
+ENV ADAM_PLAYGROUND_VERSION "0.0.11"
 ENV CRISPR_VERSION "0.0.7"
 
 RUN curl -L -o coursier https://git.io/vgvpD && chmod +x coursier
@@ -42,8 +40,7 @@ RUN ./coursier fetch \
     -r https://dl.bintray.com/comp-bio-aging/main \
     -r https://dl.bintray.com/denigma/denigma-releases \
     org.bdgenomics.adam:adam-core-spark2_2.11:${ADAM_VERSION} \
-    comp.bio.aging:adam-playground_2.11:${ADAM_PLAYGROUND_VERSION} \
-    comp.bio.aging:crispr_2.11:${CRISPR_VERSION}
+    comp.bio.aging:adam-playground_2.11:${ADAM_PLAYGROUND_VERSION}
 
 EXPOSE 9000
 

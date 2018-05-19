@@ -72,9 +72,25 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - ./notebooks:/opt/spark-notebook/notebooks
+      - ./notebooks/spark-notebook:/opt/spark-notebook/notebooks
       - ./conf/notebook/application.conf:/opt/spark-notebook/conf/application.conf
       - /pipelines:/pipelines
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      replicas: 1
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+  jupyter:
+    image: jupyter/all-spark-notebook
+    env_file:
+      - conf/bigdata.env
+    ports:
+      - 9001:8888
+    volumes:
+         - /pipelines:/pipelines
     deploy:
       placement:
         constraints:
