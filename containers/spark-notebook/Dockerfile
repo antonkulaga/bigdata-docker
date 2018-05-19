@@ -10,7 +10,7 @@ ENV APACHE_HADOOP_VERSION 2.7.5
 #    && mv /opt/spark-notebook-* /opt/spark-notebook \
 #    && rm /tmp/spark-notebook.tgz
 
-RUN cd /opt/ && git clone
+RUN cd /opt/ && git clone 
 
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
