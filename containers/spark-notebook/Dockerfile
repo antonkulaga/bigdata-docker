@@ -4,11 +4,11 @@ MAINTAINER Anton Kulaga <antonkulaga@gmail.com>
 ENV APACHE_SPARK_VERSION 2.3.0
 ENV APACHE_HADOOP_VERSION 2.7.5
 
-#RUN set -x \
-#    && curl -fSL "https://s3.eu-central-1.amazonaws.com/spark-notebook/tgz/spark-notebook-master-scala-2.11.8-spark-${APACHE_SPARK_VERSION}-hadoop-${APACHE_HADOOP_VERSION}.tgz?max-keys=100000" -o /tmp/spark-notebook.tgz \
-#    && tar -xzvf /tmp/spark-notebook.tgz -C /opt/ \
-#    && mv /opt/spark-notebook-* /opt/spark-notebook \
-#    && rm /tmp/spark-notebook.tgz
+RUN set -x \
+    && curl -fSL "https://s3.eu-central-1.amazonaws.com/spark-notebook/tgz/spark-notebook-master-scala-2.11.8-spark-${APACHE_SPARK_VERSION}-hadoop-${APACHE_HADOOP_VERSION}.tgz?max-keys=100000" -o /tmp/spark-notebook.tgz \
+    && tar -xzvf /tmp/spark-notebook.tgz -C /opt/ \
+    && mv /opt/spark-notebook-* /opt/spark-notebook \
+    && rm /tmp/spark-notebook.tgz
 
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
