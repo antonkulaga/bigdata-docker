@@ -90,11 +90,9 @@ services:
     ports:
       - 9001:8888
     volumes:
+         - ./notebooks/jupyter:/home/jovyan/
          - /pipelines:/pipelines
     deploy:
-      placement:
-        constraints:
-          - node.role == manager
       replicas: 1
       mode: replicated
       restart_policy:
