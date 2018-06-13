@@ -1,0 +1,11 @@
+data/namenode
+data/datanode
+data/historyserver
+.DS_Store
+env
+target
+.idea
+.idea/*
+*.iml
+.local
+.ip
