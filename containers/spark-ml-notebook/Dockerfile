@@ -21,6 +21,12 @@ RUN pip install elephas && \
 
 USER root
 
+#elephas pre-requisites
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends liblapack-dev libblas-dev gfortran && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # R pre-requisites
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
