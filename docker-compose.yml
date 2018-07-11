@@ -99,7 +99,7 @@ services:
       restart_policy:
         condition: on-failure
   zeppelin:
-    image: apache/zeppelin:0.8.0
+    image: quay.io/comp-bio-aging/zeppelin
     env_file:
       - conf/bigdata.env
     ports:
