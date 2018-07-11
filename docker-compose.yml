@@ -84,7 +84,7 @@ services:
       restart_policy:
         condition: on-failure
   jupyter:
-    image: jupyter/all-spark-notebook
+    image: quay.io/comp-bio-aging/spark-ml-notebook
     env_file:
       - conf/bigdata.env
     ports:
@@ -98,7 +98,20 @@ services:
       mode: replicated
       restart_policy:
         condition: on-failure
-  # cromwell client stuff
+  zeppelin:
+    image: apache/zeppelin:0.8.0
+    env_file:
+      - conf/bigdata.env
+    ports:
+      - 9002:8080
+    volumes:
+         - ./notebooks/zeppelin:/zeppelin/notebook
+         - /pipelines:/pipelines
+    deploy:
+      replicas: 1
+      mode: replicated
+      restart_policy:
+        condition: on-failure
   cromwell-client:
     image: quay.io/comp-bio-aging/cromwell-web:0.0.13
     env_file:
