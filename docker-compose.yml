@@ -48,7 +48,7 @@ services:
     env_file:
       - conf/bigdata.env
     volumes:
-      - ./conf/spark/master.conf:/spark/conf/spark-defaults.conf
+      - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
       - /pipelines:/pipelines
   spark-worker:
     image: quay.io/comp-bio-aging/spark-worker:latest
@@ -63,7 +63,7 @@ services:
     env_file:
       - conf/bigdata.env
     volumes:
-      - ./conf/spark/worker.conf:/spark/conf/spark-defaults.conf
+      - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
       - /pipelines:/pipelines
   spark-notebook:
     image: quay.io/comp-bio-aging/notebook:master
@@ -105,7 +105,8 @@ services:
     ports:
       - 9002:8080
     volumes:
-         - ./notebooks/zeppelin:/zeppelin/notebook
+         - ./notebooks/zeppelin/notebook:/zeppelin/notebook
+         - ./notebooks/zeppelin/logs:/zeppelin/logs
          - /pipelines:/pipelines
     deploy:
       replicas: 1
