@@ -5,6 +5,8 @@ ENV SPARK_VERSION=2.3.1
 ENV HADOOP_VERSION=2.7
 ENV SPARK_HOME=/zeppelin/spark
 
+COPY conf /zepplin/conf
+
 ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
 RUN chmod +x /usr/bin/apt-get-install
 
@@ -17,3 +19,5 @@ RUN apt-get-install -y curl \
       && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
 
 RUN apt-get-install -y python3 python3-setuptools python3-pip
+
+ENV ZEPPELIN_INTP_MEM="-Xmx8192m -Xms1024m -XX:MaxPermSize=1024m"
