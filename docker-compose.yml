@@ -39,6 +39,9 @@ services:
     deploy:
       replicas: 1
       mode: replicated
+      placement:
+        constraints:
+        - node.role == manager
       restart_policy:
         condition: on-failure
     ports:
@@ -98,6 +101,9 @@ services:
       mode: replicated
       restart_policy:
         condition: on-failure
+      placement:
+        constraints:
+        - node.role == manager
   zeppelin:
     image: quay.io/comp-bio-aging/zeppelin
     env_file:
@@ -111,8 +117,12 @@ services:
     deploy:
       replicas: 1
       mode: replicated
+      placement:
+        constraints:
+        - node.role == manager
       restart_policy:
         condition: on-failure
+
   cromwell-client:
     image: quay.io/comp-bio-aging/cromwell-web:0.0.13
     env_file:
