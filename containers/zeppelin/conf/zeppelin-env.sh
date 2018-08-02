@@ -19,8 +19,8 @@
 # export JAVA_HOME=
 # export MASTER=                 		# Spark master url. eg. spark://master_addr:7077. Leave empty if you want to use local mode.
 # export ZEPPELIN_JAVA_OPTS      		# Additional jvm options. for example, export ZEPPELIN_JAVA_OPTS="-Dspark.executor.memory=8g -Dspark.cores.max=16"
-# export ZEPPELIN_MEM            		# Zeppelin jvm mem options Default -Xms1024m -Xmx1024m -XX:MaxPermSize=512m
-# export ZEPPELIN_INTP_MEM       		# zeppelin interpreter process jvm mem options. Default -Xms1024m -Xmx1024m -XX:MaxPermSize=512m
+export ZEPPELIN_MEM="-Xmx14g"            		# Zeppelin jvm mem options Default -Xms1024m -Xmx1024m -XX:MaxPermSize=512m
+export ZEPPELIN_INTP_MEM="-Xms1024m -Xmx14g -XX:MaxPermSize=10g"       		# zeppelin interpreter process jvm mem options. Default -Xms1024m -Xmx1024m -XX:MaxPermSize=512m
 # export ZEPPELIN_INTP_JAVA_OPTS 		# zeppelin interpreter process jvm options.
 # export ZEPPELIN_SSL_PORT       		# ssl port (used when ssl environment variable is set to true)
 # export ZEPPELIN_JMX_ENABLE    		# Enable JMX feature by defining "true"
@@ -70,7 +70,7 @@
 ## defining SPARK_HOME makes Zeppelin run spark interpreter process using spark-submit
 ##
 # export SPARK_HOME                             # (required) When it is defined, load it instead of Zeppelin embedded Spark libraries
-# export SPARK_SUBMIT_OPTIONS                   # (optional) extra options to pass to spark submit. eg) "--driver-memory 512M --executor-memory 1G".
+export SPARK_SUBMIT_OPTIONS="--driver-memory 8G --executor-memory 14G"                   # (optional) extra options to pass to spark submit. eg) "--driver-memory 512M --executor-memory 1G".
 # export SPARK_APP_NAME                         # (optional) The name of spark application.
 
 ## Use embedded spark binaries ##
@@ -87,8 +87,8 @@
 ## Spark interpreter options ##
 ##
 # export ZEPPELIN_SPARK_USEHIVECONTEXT  # Use HiveContext instead of SQLContext if set true. true by default.
-# export ZEPPELIN_SPARK_CONCURRENTSQL   # Execute multiple SQL concurrently if set true. false by default.
-# export ZEPPELIN_SPARK_IMPORTIMPLICIT  # Import implicits, UDF collection, and sql if set true. true by default.
+export ZEPPELIN_SPARK_CONCURRENTSQL=true   # Execute multiple SQL concurrently if set true. false by default.
+export ZEPPELIN_SPARK_IMPORTIMPLICIT=true  # Import implicits, UDF collection, and sql if set true. true by default.
 # export ZEPPELIN_SPARK_MAXRESULT       # Max number of Spark SQL result to display. 1000 by default.
 # export ZEPPELIN_WEBSOCKET_MAX_TEXT_MESSAGE_SIZE       # Size in characters of the maximum text message to be received by websocket. Defaults to 1024000
 
