@@ -1,0 +1,116 @@
+version: '3.4'
+services:
+  spark-master:
+    image: bde2020/spark-master:2.3.1-hadoop2.7
+    deploy:
+      replicas: 1
+      mode: replicated
+      placement:
+        constraints:
+        - node.role == manager
+      restart_policy:
+        condition: on-failure
+    ports:
+    - 8080:8080
+    - 7077:7077
+    - 6066:6066
+    env_file:
+    - conf/bigdata.env
+    volumes:
+    - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
+    - /pipelines:/pipelines
+  spark-worker:
+    image: quay.io/comp-bio-aging/spark-worker:latest
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+    ports:
+    - 8081:8081
+    - 8082:8082
+    - 8083:8083
+    env_file:
+    - conf/bigdata.env
+    volumes:
+    - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
+    - /pipelines:/pipelines
+  jupyter:
+    image: quay.io/comp-bio-aging/spark-ml-notebook
+    env_file:
+    - conf/bigdata.env
+    ports:
+    - 9001:8888
+    volumes:
+    - ./notebooks/jupyter:/home/jovyan/
+    - /pipelines:/pipelines
+    command: start.sh jupyter lab
+    deploy:
+      replicas: 1
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+        - node.role == manager
+  zeppelin:
+    image: quay.io/comp-bio-aging/zeppelin
+    env_file:
+    - conf/bigdata.env
+    ports:
+    - 9002:8080
+    volumes:
+    - ./notebooks/zeppelin/notebook:/zeppelin/notebook
+    - ./notebooks/zeppelin/logs:/zeppelin/logs
+    - /pipelines:/pipelines
+    deploy:
+      replicas: 1
+      mode: replicated
+      placement:
+        constraints:
+        - node.role == manager
+      restart_policy:
+        condition: on-failure
+  alluxio-master:
+    image: alluxio/alluxio-community:1.8.0
+    env_file:
+    - /pipelines/alluxio.env
+    command: master
+    volumes:
+    - /mnt/ramdisk:/opt/ramdisk
+    - ./alluxio-site.properties:/opt/alluxio/conf/alluxio-site.properties
+    - ./license.json:/opt/alluxio/license.json
+    - ./underStorage:/underStorage
+    deploy:
+      placement:
+        constraints:
+        - node.role == manager
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+    - 19998-19999
+    - 29998-30000
+  alluxio-worker:
+    image: alluxio/alluxio-community:1.8.0
+    env_file:
+    - /pipelines/alluxio.env
+    command: worker
+    volumes:
+    - /mnt/ramdisk:/opt/ramdisk
+    - ./alluxio-site.properties:/opt/alluxio/conf/alluxio-site.properties
+    - ./license.json:/opt/alluxio/license.json
+    - ./underStorage:/underStorage
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  datanode:
+  namenode:
+
+networks:
+  default:
+    driver: overlay
+    attachable: true
