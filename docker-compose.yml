@@ -104,24 +104,6 @@ services:
         - node.role == manager
       restart_policy:
         condition: on-failure
-
-  cromwell-client:
-    image: quay.io/comp-bio-aging/cromwell-web:0.0.13
-    env_file:
-      - conf/bigdata.env
-    ports:
-      - 8001:8080
-    volumes:
-         - /pipelines:/pipelines
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-      replicas: 1
-      mode: replicated
-      restart_policy:
-        condition: on-failure
-  # HUE STUFF
   hue:
     image: gethue/hue:latest
     ports:
