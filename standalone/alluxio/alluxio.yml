@@ -3,7 +3,7 @@ services:
   master:
     image: alluxio/alluxio-community:1.8.0
     env_file:
-      - /pipelines/alluxio.env
+      - ./alluxio.env
     command: master
     volumes:
       - /mnt/ramdisk:/opt/ramdisk
@@ -24,7 +24,7 @@ services:
   worker:
     image: alluxio/alluxio-community:1.8.0
     env_file:
-    - /pipelines/alluxio.env
+    - ./alluxio.env
     command: worker
     volumes:
     - /mnt/ramdisk:/opt/ramdisk
