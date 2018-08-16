@@ -5,7 +5,7 @@ ENV SPARK_VERSION=2.3.1
 ENV HADOOP_VERSION=2.7
 ENV SPARK_HOME=/zeppelin/spark
 
-COPY conf /zepplin/conf
+COPY conf /zeppelin/conf
 
 ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
 RUN chmod +x /usr/bin/apt-get-install

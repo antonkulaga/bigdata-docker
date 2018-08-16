@@ -234,7 +234,7 @@
         },
         "default.password": {
           "name": "default.password",
-          "value": "",
+          "value": "changeme",
           "type": "password"
         },
         "default.completer.schemaFilters": {
@@ -249,7 +249,7 @@
         },
         "default.user": {
           "name": "default.user",
-          "value": "gpadmin",
+          "value": "postgres",
           "type": "string"
         },
         "zeppelin.jdbc.concurrent.max_connection": {
@@ -306,10 +306,17 @@
           }
         }
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "groupArtifactVersion": "org.postgresql:postgresql:42.2.4",
+          "local": false
+        }
+      ],
       "option": {
         "remote": true,
         "port": -1,
+        "perNote": "shared",
+        "perUser": "shared",
         "isExistingProcess": false,
         "setPermission": false,
         "owners": [],
@@ -1263,18 +1270,6 @@
           "name": "spark.cores.max",
           "value": "",
           "type": "number"
-        },
-        "spark.serializer": {
-          "value": "org.apache.spark.serializer.KryoSerializer",
-          "type": "textarea"
-        },
-        "spark.kryo.registrator": {
-          "value": "org.bdgenomics.adam.serialization.ADAMKryoRegistrator",
-          "type": "textarea"
-        },
-        "spark.kryo.referenceTracking": {
-          "value": "true",
-          "type": "textarea"
         }
       },
       "status": "READY",
@@ -1348,8 +1343,6 @@
       "option": {
         "remote": true,
         "port": -1,
-        "perNote": "shared",
-        "perUser": "shared",
         "isExistingProcess": false,
         "setPermission": false,
         "owners": [],
@@ -1402,7 +1395,7 @@
         },
         "alluxio.master.hostname": {
           "name": "alluxio.master.hostname",
-          "value": "localhost",
+          "value": "alluxio-master",
           "type": "string"
         }
       },
@@ -1422,6 +1415,8 @@
       "option": {
         "remote": true,
         "port": -1,
+        "perNote": "shared",
+        "perUser": "shared",
         "isExistingProcess": false,
         "setPermission": false,
         "owners": [],
@@ -1471,6 +1466,121 @@
       "option": {
         "remote": true,
         "port": -1,
+        "isExistingProcess": false,
+        "setPermission": false,
+        "owners": [],
+        "isUserImpersonate": false
+      }
+    },
+    "geometa": {
+      "id": "geometa",
+      "name": "geometa",
+      "group": "jdbc",
+      "properties": {
+        "default.url": {
+          "name": "default.url",
+          "value": "jdbc:postgresql://db:5432/",
+          "type": "string"
+        },
+        "default.driver": {
+          "name": "default.driver",
+          "value": "org.postgresql.Driver",
+          "type": "string"
+        },
+        "zeppelin.jdbc.principal": {
+          "name": "zeppelin.jdbc.principal",
+          "value": "",
+          "type": "string"
+        },
+        "default.completer.ttlInSeconds": {
+          "name": "default.completer.ttlInSeconds",
+          "value": "120",
+          "type": "number"
+        },
+        "default.password": {
+          "name": "default.password",
+          "value": "changeme",
+          "type": "password"
+        },
+        "default.completer.schemaFilters": {
+          "name": "default.completer.schemaFilters",
+          "value": "",
+          "type": "textarea"
+        },
+        "default.splitQueries": {
+          "name": "default.splitQueries",
+          "value": false,
+          "type": "checkbox"
+        },
+        "default.user": {
+          "name": "default.user",
+          "value": "postgres",
+          "type": "string"
+        },
+        "zeppelin.jdbc.concurrent.max_connection": {
+          "name": "zeppelin.jdbc.concurrent.max_connection",
+          "value": "10",
+          "type": "number"
+        },
+        "common.max_count": {
+          "name": "common.max_count",
+          "value": "1000",
+          "type": "number"
+        },
+        "default.precode": {
+          "name": "default.precode",
+          "value": "",
+          "type": "textarea"
+        },
+        "zeppelin.jdbc.auth.type": {
+          "name": "zeppelin.jdbc.auth.type",
+          "value": "",
+          "type": "string"
+        },
+        "default.statementPrecode": {
+          "name": "default.statementPrecode",
+          "value": ""
+        },
+        "zeppelin.jdbc.concurrent.use": {
+          "name": "zeppelin.jdbc.concurrent.use",
+          "value": true,
+          "type": "checkbox"
+        },
+        "zeppelin.jdbc.keytab.location": {
+          "name": "zeppelin.jdbc.keytab.location",
+          "value": "",
+          "type": "string"
+        },
+        "zeppelin.jdbc.interpolation": {
+          "name": "zeppelin.jdbc.interpolation",
+          "value": false,
+          "type": "checkbox"
+        }
+      },
+      "status": "READY",
+      "interpreterGroup": [
+        {
+          "name": "sql",
+          "class": "org.apache.zeppelin.jdbc.JDBCInterpreter",
+          "defaultInterpreter": false,
+          "editor": {
+            "language": "sql",
+            "editOnDblClick": false,
+            "completionSupport": true
+          }
+        }
+      ],
+      "dependencies": [
+        {
+          "groupArtifactVersion": "org.postgresql:postgresql:9.4.1212",
+          "local": false
+        }
+      ],
+      "option": {
+        "remote": true,
+        "port": -1,
+        "perNote": "shared",
+        "perUser": "shared",
         "isExistingProcess": false,
         "setPermission": false,
         "owners": [],
@@ -1586,6 +1696,54 @@
     }
   },
   "interpreterBindings": {
+    "2DJJ56VW4": [
+      "spark",
+      "md",
+      "angular",
+      "sh",
+      "livy",
+      "alluxio",
+      "file",
+      "flink",
+      "python",
+      "ignite",
+      "lens",
+      "cassandra",
+      "kylin",
+      "elasticsearch",
+      "jdbc",
+      "geometa",
+      "hbase",
+      "bigquery",
+      "pig",
+      "groovy",
+      "neo4j",
+      "sap"
+    ],
+    "2DNP5ZAB2": [
+      "spark",
+      "md",
+      "angular",
+      "sh",
+      "livy",
+      "alluxio",
+      "file",
+      "flink",
+      "python",
+      "ignite",
+      "lens",
+      "cassandra",
+      "kylin",
+      "elasticsearch",
+      "jdbc",
+      "geometa",
+      "hbase",
+      "bigquery",
+      "pig",
+      "groovy",
+      "neo4j",
+      "sap"
+    ],
     "2DHEH875D": [
       "spark",
       "md",
@@ -1602,6 +1760,7 @@
       "kylin",
       "elasticsearch",
       "jdbc",
+      "geometa",
       "hbase",
       "bigquery",
       "pig",
@@ -1625,6 +1784,7 @@
       "kylin",
       "elasticsearch",
       "jdbc",
+      "geometa",
       "hbase",
       "bigquery",
       "pig",

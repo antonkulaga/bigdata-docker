@@ -10,3 +10,5 @@ target
 .ipynb_checkpoints
 .local
 underStorage/*
+logs/*
+.cache

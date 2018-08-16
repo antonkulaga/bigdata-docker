@@ -60,7 +60,8 @@ services:
     - 9002:8080
     volumes:
     - ./notebooks/zeppelin/notebook:/zeppelin/notebook
-    - ./notebooks/zeppelin/logs:/zeppelin/logs
+    - ./conf/zeppelin/conf:/zeppelin/conf
+    - ./conf/alluxio/alluxio-1.8.0-client.jar:/zeppelin/local-repo/org/alluxio/alluxio-core-client/1.8.0/alluxio-1.8.0-client.jar
     - /pipelines:/pipelines
     deploy:
       replicas: 1

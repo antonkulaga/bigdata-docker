@@ -1,0 +1,21 @@
+{
+  "enabled": {
+    "ultimate-column-chart": "ultimate-column-chart@0.0.2",
+    "zeppelin-plotly-bubble": "zeppelin-plotly-bubble@0.0.2",
+    "zeppelin-bubblechart": "zeppelin-bubblechart@0.0.4",
+    "zeppelin-highmaps": "zeppelin-highmaps@1.0.0",
+    "ultimate-scatter-chart": "ultimate-scatter-chart@0.0.2",
+    "ultimate-heatmap-chart": "ultimate-heatmap-chart@0.0.2",
+    "zeppelin-aggrid": "zeppelin-aggrid@0.1.1"
+  },
+  "packageConfig": {},
+  "bundleDisplayOrder": [
+    "zeppelin-aggrid",
+    "ultimate-scatter-chart",
+    "zeppelin-highmaps",
+    "ultimate-column-chart",
+    "ultimate-heatmap-chart",
+    "zeppelin-plotly-bubble",
+    "zeppelin-bubblechart"
+  ]
+}
