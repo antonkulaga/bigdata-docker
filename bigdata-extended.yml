@@ -60,7 +60,7 @@ services:
     - 9002:8080
     volumes:
     - ./notebooks/zeppelin/notebook:/zeppelin/notebook
-    - ./conf/zeppelin/conf:/zeppelin/conf
+    #- ./conf/zeppelin/conf:/zeppelin/conf
     - ./conf/alluxio/alluxio-1.8.0-client.jar:/zeppelin/local-repo/org/alluxio/alluxio-core-client/1.8.0/alluxio-1.8.0-client.jar
     - /pipelines:/pipelines
     deploy:
@@ -90,8 +90,11 @@ services:
       restart_policy:
         condition: on-failure
     ports:
-    - 19998-19999
-    - 29998-30000
+    - 19998:19998
+    - 19999:19999
+    - 29998:29998
+    - 29999:29999
+    - 30000:30000
   alluxio-worker:
     image: alluxio/alluxio-community:1.8.0
     command: worker
