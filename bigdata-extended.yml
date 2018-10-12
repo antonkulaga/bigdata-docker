@@ -18,7 +18,7 @@ services:
     - conf/bigdata.env
     volumes:
     - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
-    - /pipelines:/pipelines
+    - /data:/data
   spark-worker:
     image: quay.io/comp-bio-aging/spark-worker:latest
     deploy:
@@ -33,7 +33,7 @@ services:
     - conf/bigdata.env
     volumes:
     - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
-    - /pipelines:/pipelines
+    - /data:/data
   jupyter:
     image: quay.io/comp-bio-aging/spark-ml-notebook
     env_file:
@@ -42,7 +42,7 @@ services:
     - 9001:8888
     volumes:
     - ./notebooks/jupyter:/home/jovyan/
-    - /pipelines:/pipelines
+    - /data:/data
     command: start.sh jupyter lab
     deploy:
       replicas: 1
@@ -60,53 +60,14 @@ services:
     - 9002:8080
     volumes:
     - ./notebooks/zeppelin/notebook:/zeppelin/notebook
-    #- ./conf/zeppelin/conf:/zeppelin/conf
     - ./conf/alluxio/alluxio-1.8.0-client.jar:/zeppelin/local-repo/org/alluxio/alluxio-core-client/1.8.0/alluxio-1.8.0-client.jar
-    - /pipelines:/pipelines
+    - /data:/data
     deploy:
       replicas: 1
       mode: replicated
       placement:
         constraints:
         - node.role == manager
-      restart_policy:
-        condition: on-failure
-  alluxio-master:
-    image: alluxio/alluxio-community:1.8.0
-    command: master
-    environment:
-      ALLUXIO_RAM_FOLDER: /opt/ramdisk
-    volumes:
-    - /mnt/ramdisk:/opt/ramdisk
-    - ./conf/alluxio/alluxio-site.properties:/opt/alluxio/conf/alluxio-site.properties
-    - ./conf/alluxio/license.json:/opt/alluxio/license.json
-    - ./underStorage:/underStorage
-    deploy:
-      placement:
-        constraints:
-        - node.role == manager
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-    ports:
-    - 19998:19998
-    - 19999:19999
-    - 29998:29998
-    - 29999:29999
-    - 30000:30000
-  alluxio-worker:
-    image: alluxio/alluxio-community:1.8.0
-    command: worker
-    environment:
-      ALLUXIO_RAM_FOLDER: /opt/ramdisk
-    volumes:
-    - /mnt/ramdisk:/opt/ramdisk
-    - ./conf/alluxio/alluxio-site.properties:/opt/alluxio/conf/alluxio-site.properties
-    - ./conf/alluxio/license.json:/opt/alluxio/license.json
-    - ./underStorage:/underStorage
-    deploy:
-      mode: global
       restart_policy:
         condition: on-failure
   db:
@@ -118,8 +79,8 @@ services:
       PGDATA: /data/postgres
     volumes:
     #- ./init/geometa_schema.sql:/docker-entrypoint-initdb.d/geometa_schema.sql
-    - /pipelines/data/init/sequencing.sql:/docker-entrypoint-initdb.d/sequencing.sql
-    - /pipelines/data/postgres:/data/postgres
+    - /data/init/sequencing.sql:/docker-entrypoint-initdb.d/sequencing.sql
+    - /data/postgres:/data/postgres
     ports:
     - 5432:5432
 

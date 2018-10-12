@@ -10,9 +10,9 @@ services:
     ports:
       - 9003:8080
     volumes:
-      - /pipelines/data/zeppelin/notebook:/zeppelin/notebook
-      - /pipelines/data/zeppelin/logs:/zeppelin/logs
-      - /pipelines:/pipelines
+      - /data/zeppelin/notebook:/zeppelin/notebook
+      - /data/zeppelin/logs:/zeppelin/logs
+      - /data:/data
     deploy:
       mode: global
       restart_policy:
