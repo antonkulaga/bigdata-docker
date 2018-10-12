@@ -60,7 +60,7 @@ services:
     - 9002:8080
     volumes:
     - ./notebooks/zeppelin/notebook:/zeppelin/notebook
-    - ./conf/alluxio/alluxio-1.8.0-client.jar:/zeppelin/local-repo/org/alluxio/alluxio-core-client/1.8.0/alluxio-1.8.0-client.jar
+    #- ./conf/alluxio/alluxio-1.8.0-client.jar:/zeppelin/local-repo/org/alluxio/alluxio-core-client/1.8.0/alluxio-1.8.0-client.jar
     - /data:/data
     deploy:
       replicas: 1
@@ -78,8 +78,8 @@ services:
       POSTGRES_PASSWORD: changeme
       PGDATA: /data/postgres
     volumes:
-    #- ./init/geometa_schema.sql:/docker-entrypoint-initdb.d/geometa_schema.sql
-    - /data/init/sequencing.sql:/docker-entrypoint-initdb.d/sequencing.sql
+    - ./conf/geometa/init/sequencing.sql:/docker-entrypoint-initdb.d/sequencing.sql
+    #- /data/init/sequencing.sql:/docker-entrypoint-initdb.d/sequencing.sql
     - /data/postgres:/data/postgres
     ports:
     - 5432:5432
