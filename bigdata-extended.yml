@@ -72,7 +72,9 @@ services:
         condition: on-failure
   db:
     image: postgres:latest
-    restart: always
+    deploy:
+      restart_policy:
+        condition: on-failure
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: changeme
@@ -86,7 +88,9 @@ services:
 
   adminer:
     image: adminer:latest
-    restart: always
+    deploy:
+      restart_policy:
+        condition: on-failure
     ports:
     - 5050:8080
 

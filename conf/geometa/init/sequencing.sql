@@ -1,3 +1,6 @@
+CREATE DATABASE sequencing;
+\connect sequencing
+
 /* Tables for sequencing */
 
 /* Molecules table*/
