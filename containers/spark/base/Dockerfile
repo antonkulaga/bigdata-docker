@@ -1,4 +1,4 @@
-FROM bde2020/spark-base:2.3.2-hadoop2.8
+FROM bde2020/spark-base:2.3.2-hadoop2.7
 
 MAINTAINER Anton Kulaga <antonkulaga@gmail.com>
 
