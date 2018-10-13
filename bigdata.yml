@@ -41,7 +41,7 @@ services:
     ports:
     - 9001:8888
     volumes:
-    - ./notebooks/jupyter:/home/jovyan/
+    - /data/notebooks/jupyter:/home/jovyan/
     - /data:/data
     command: start.sh jupyter lab
     deploy:
@@ -59,7 +59,7 @@ services:
     ports:
     - 9002:8080
     volumes:
-    - ./notebooks/zeppelin/notebook:/zeppelin/notebook
+    - /data/notebooks/zeppelin:/zeppelin/notebook
     #- ./conf/alluxio/alluxio-1.8.0-client.jar:/zeppelin/local-repo/org/alluxio/alluxio-core-client/1.8.0/alluxio-1.8.0-client.jar
     - /data:/data
     deploy:
@@ -81,7 +81,6 @@ services:
       PGDATA: /data/postgres
     volumes:
     - ./conf/geometa/init/sequencing.sql:/docker-entrypoint-initdb.d/sequencing.sql
-    #- /data/init/sequencing.sql:/docker-entrypoint-initdb.d/sequencing.sql
     - /data/postgres:/data/postgres
     ports:
     - 5432:5432
