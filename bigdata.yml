@@ -71,7 +71,7 @@ services:
       restart_policy:
         condition: on-failure
   db:
-    image: postgres:latest
+    image: postgres:10.5
     deploy:
       restart_policy:
         condition: on-failure
@@ -81,7 +81,7 @@ services:
       PGDATA: /data/databases/postgres
     volumes:
     - ./conf/geometa/init/sequencing.sql:/docker-entrypoint-initdb.d/sequencing.sql
-    - /data/postgres:/data/postgres
+    - /data/databases/postgres:/data/databases/postgres
     ports:
     - 5432:5432
 
