@@ -78,7 +78,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: changeme
-      PGDATA: /data/postgres
+      PGDATA: /data/databases/postgres
     volumes:
     - ./conf/geometa/init/sequencing.sql:/docker-entrypoint-initdb.d/sequencing.sql
     - /data/postgres:/data/postgres

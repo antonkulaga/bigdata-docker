@@ -1,3 +1,5 @@
+CREATE DATABASE geometa;
+CREATE DATABASE sra;
 CREATE DATABASE sequencing;
 \connect sequencing
 
