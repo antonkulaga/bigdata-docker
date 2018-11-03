@@ -62,6 +62,7 @@ services:
     - /data/notebooks/zeppelin:/zeppelin/notebook
     #- ./conf/alluxio/alluxio-1.8.0-client.jar:/zeppelin/local-repo/org/alluxio/alluxio-core-client/1.8.0/alluxio-1.8.0-client.jar
     - /data:/data
+    - ./conf/zeppelin/conf:/zeppelin/conf
     deploy:
       replicas: 1
       mode: replicated

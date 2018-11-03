@@ -555,7 +555,7 @@
         },
         "livy.spark.dynamicAllocation.enabled": {
           "name": "livy.spark.dynamicAllocation.enabled",
-          "value": false,
+          "value": true,
           "type": "checkbox"
         },
         "zeppelin.livy.maxLogLines": {
@@ -580,7 +580,7 @@
         },
         "zeppelin.livy.spark.sql.maxResult": {
           "name": "zeppelin.livy.spark.sql.maxResult",
-          "value": "1000",
+          "value": "1000000",
           "type": "number"
         },
         "livy.spark.driver.cores": {
@@ -595,7 +595,7 @@
         },
         "zeppelin.livy.spark.sql.field.truncate": {
           "name": "zeppelin.livy.spark.sql.field.truncate",
-          "value": true,
+          "value": false,
           "type": "checkbox"
         },
         "livy.spark.driver.memory": {
@@ -637,7 +637,7 @@
           "defaultInterpreter": true,
           "editor": {
             "language": "scala",
-            "editOnDblClick": false,
+            "editOnDblClick": true,
             "completionKey": "TAB",
             "completionSupport": true
           }
@@ -648,7 +648,7 @@
           "defaultInterpreter": false,
           "editor": {
             "language": "sql",
-            "editOnDblClick": false,
+            "editOnDblClick": true,
             "completionKey": "TAB",
             "completionSupport": true
           }
@@ -659,7 +659,7 @@
           "defaultInterpreter": false,
           "editor": {
             "language": "python",
-            "editOnDblClick": false,
+            "editOnDblClick": true,
             "completionKey": "TAB",
             "completionSupport": true
           }
@@ -670,7 +670,7 @@
           "defaultInterpreter": false,
           "editor": {
             "language": "python",
-            "editOnDblClick": false,
+            "editOnDblClick": true,
             "completionKey": "TAB",
             "completionSupport": true
           }
@@ -681,7 +681,7 @@
           "defaultInterpreter": false,
           "editor": {
             "language": "r",
-            "editOnDblClick": false,
+            "editOnDblClick": true,
             "completionKey": "TAB",
             "completionSupport": true
           }
@@ -1203,7 +1203,7 @@
         },
         "zeppelin.spark.maxResult": {
           "name": "zeppelin.spark.maxResult",
-          "value": "1000",
+          "value": "10000000",
           "type": "number"
         },
         "master": {
@@ -1440,7 +1440,7 @@
         },
         "zeppelin.bigquery.max_no_of_rows": {
           "name": "zeppelin.bigquery.max_no_of_rows",
-          "value": "100000",
+          "value": "1000000",
           "type": "number"
         },
         "zeppelin.bigquery.wait_time": {
