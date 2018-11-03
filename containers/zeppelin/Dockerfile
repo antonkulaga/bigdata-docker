@@ -18,7 +18,7 @@ RUN apt-get-install -y curl \
 
 RUN apt-get-install -y python3 python3-setuptools python3-pip
 
-#COPY conf /zeppelin/conf
+COPY conf/interpreter.json /zeppelin/conf/interpreter.json
 
 ENV ZEPPELIN_INTERPRETER_OUTPUT_LIMIT=92160000
-ENV ZEPPELIN_INTP_MEM="-Xmx8192m -Xms1024m -XX:MaxPermSize=1024m"
+ENV ZEPPELIN_INTP_MEM="-Xmx10240m -Xms1024m -XX:MaxPermSize=1024m"
