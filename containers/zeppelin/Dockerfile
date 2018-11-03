@@ -2,7 +2,7 @@ FROM apache/zeppelin:0.8.0
 MAINTAINER Anton Kulaga <antonkulaga@gmail.com>
 
 ENV SPARK_VERSION=2.3.2
-ENV HADOOP_VERSION=2.8
+ENV HADOOP_VERSION=2.7
 ENV SPARK_HOME=/zeppelin/spark
 
 ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
