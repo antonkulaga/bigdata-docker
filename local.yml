@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.7'
 services:
   spark-master:
     image: bde2020/spark-master:2.3.2-hadoop2.7
