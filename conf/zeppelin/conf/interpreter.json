@@ -10,13 +10,13 @@
           "value": "",
           "type": "url"
         },
-        "ignite.peerClassLoadingEnabled": {
-          "name": "ignite.peerClassLoadingEnabled",
+        "ignite.clientMode": {
+          "name": "ignite.clientMode",
           "value": true,
           "type": "checkbox"
         },
-        "ignite.clientMode": {
-          "name": "ignite.clientMode",
+        "ignite.peerClassLoadingEnabled": {
+          "name": "ignite.peerClassLoadingEnabled",
           "value": true,
           "type": "checkbox"
         },
@@ -77,6 +77,11 @@
           "value": "30000",
           "type": "number"
         },
+        "zeppelin.python.maxResult": {
+          "name": "zeppelin.python.maxResult",
+          "value": "10000",
+          "type": "number"
+        },
         "zeppelin.python.useIPython": {
           "name": "zeppelin.python.useIPython",
           "value": true,
@@ -85,11 +90,6 @@
         "zeppelin.ipython.grpc.message_size": {
           "name": "zeppelin.ipython.grpc.message_size",
           "value": "33554432",
-          "type": "number"
-        },
-        "zeppelin.python.maxResult": {
-          "name": "zeppelin.python.maxResult",
-          "value": "1000",
           "type": "number"
         }
       },
@@ -163,11 +163,6 @@
       "name": "sap",
       "group": "sap",
       "properties": {
-        "universe.password": {
-          "name": "universe.password",
-          "value": "",
-          "type": "password"
-        },
         "universe.api.url": {
           "name": "universe.api.url",
           "value": "http://localhost:6405/biprws",
@@ -182,6 +177,11 @@
           "name": "universe.user",
           "value": "",
           "type": "string"
+        },
+        "universe.password": {
+          "name": "universe.password",
+          "value": "",
+          "type": "password"
         }
       },
       "status": "READY",
@@ -259,7 +259,7 @@
         },
         "common.max_count": {
           "name": "common.max_count",
-          "value": "1000",
+          "value": "10000",
           "type": "number"
         },
         "default.precode": {
@@ -293,7 +293,7 @@
           "type": "checkbox"
         }
       },
-      "status": "READY",
+      "status": "DOWNLOADING_DEPENDENCIES",
       "interpreterGroup": [
         {
           "name": "sql",
@@ -340,7 +340,7 @@
         },
         "zeppelin.lens.maxResults": {
           "name": "zeppelin.lens.maxResults",
-          "value": "1000",
+          "value": "10000",
           "type": "number"
         },
         "lens.client.dbname": {
@@ -391,6 +391,16 @@
       "name": "pig",
       "group": "pig",
       "properties": {
+        "zeppelin.pig.includeJobStats": {
+          "name": "zeppelin.pig.includeJobStats",
+          "value": false,
+          "type": "checkbox"
+        },
+        "zeppelin.pig.maxResult": {
+          "name": "zeppelin.pig.maxResult",
+          "value": "10000",
+          "type": "number"
+        },
         "zeppelin.pig.execType": {
           "name": "zeppelin.pig.execType",
           "value": "mapreduce",
@@ -400,16 +410,6 @@
           "name": "SPARK_JAR",
           "value": "",
           "type": "textarea"
-        },
-        "zeppelin.pig.includeJobStats": {
-          "name": "zeppelin.pig.includeJobStats",
-          "value": false,
-          "type": "checkbox"
-        },
-        "zeppelin.pig.maxResult": {
-          "name": "zeppelin.pig.maxResult",
-          "value": "1000",
-          "type": "number"
         },
         "SPARK_MASTER": {
           "name": "SPARK_MASTER",
@@ -453,15 +453,15 @@
       "name": "flink",
       "group": "flink",
       "properties": {
-        "port": {
-          "name": "port",
-          "value": "6123",
-          "type": "number"
-        },
         "host": {
           "name": "host",
           "value": "local",
           "type": "string"
+        },
+        "port": {
+          "name": "port",
+          "value": "6123",
+          "type": "number"
         }
       },
       "status": "READY",
@@ -560,7 +560,7 @@
         },
         "zeppelin.livy.maxLogLines": {
           "name": "zeppelin.livy.maxLogLines",
-          "value": "1000",
+          "value": "10000",
           "type": "number"
         },
         "livy.spark.dynamicAllocation.minExecutors": {
@@ -637,7 +637,7 @@
           "defaultInterpreter": true,
           "editor": {
             "language": "scala",
-            "editOnDblClick": true,
+            "editOnDblClick": false,
             "completionKey": "TAB",
             "completionSupport": true
           }
@@ -648,7 +648,7 @@
           "defaultInterpreter": false,
           "editor": {
             "language": "sql",
-            "editOnDblClick": true,
+            "editOnDblClick": false,
             "completionKey": "TAB",
             "completionSupport": true
           }
@@ -659,7 +659,7 @@
           "defaultInterpreter": false,
           "editor": {
             "language": "python",
-            "editOnDblClick": true,
+            "editOnDblClick": false,
             "completionKey": "TAB",
             "completionSupport": true
           }
@@ -670,7 +670,7 @@
           "defaultInterpreter": false,
           "editor": {
             "language": "python",
-            "editOnDblClick": true,
+            "editOnDblClick": false,
             "completionKey": "TAB",
             "completionSupport": true
           }
@@ -681,7 +681,7 @@
           "defaultInterpreter": false,
           "editor": {
             "language": "r",
-            "editOnDblClick": true,
+            "editOnDblClick": false,
             "completionKey": "TAB",
             "completionSupport": true
           }
@@ -806,7 +806,7 @@
         },
         "hdfs.maxlength": {
           "name": "hdfs.maxlength",
-          "value": "1000",
+          "value": "10000",
           "type": "number"
         }
       },
@@ -1524,7 +1524,7 @@
         },
         "common.max_count": {
           "name": "common.max_count",
-          "value": "1000",
+          "value": "100000",
           "type": "number"
         },
         "default.precode": {
@@ -1539,7 +1539,8 @@
         },
         "default.statementPrecode": {
           "name": "default.statementPrecode",
-          "value": ""
+          "value": "",
+          "type": "string"
         },
         "zeppelin.jdbc.concurrent.use": {
           "name": "zeppelin.jdbc.concurrent.use",
@@ -1557,7 +1558,7 @@
           "type": "checkbox"
         }
       },
-      "status": "READY",
+      "status": "DOWNLOADING_DEPENDENCIES",
       "interpreterGroup": [
         {
           "name": "sql",
@@ -1696,6 +1697,54 @@
     }
   },
   "interpreterBindings": {
+    "2DRP19U9Z": [
+      "spark",
+      "md",
+      "angular",
+      "sh",
+      "livy",
+      "alluxio",
+      "file",
+      "flink",
+      "python",
+      "ignite",
+      "lens",
+      "cassandra",
+      "kylin",
+      "elasticsearch",
+      "jdbc",
+      "geometa",
+      "hbase",
+      "bigquery",
+      "pig",
+      "groovy",
+      "neo4j",
+      "sap"
+    ],
+    "2DW18KZEN": [
+      "spark",
+      "md",
+      "angular",
+      "sh",
+      "livy",
+      "alluxio",
+      "file",
+      "flink",
+      "python",
+      "ignite",
+      "lens",
+      "cassandra",
+      "kylin",
+      "elasticsearch",
+      "jdbc",
+      "geometa",
+      "hbase",
+      "bigquery",
+      "pig",
+      "groovy",
+      "neo4j",
+      "sap"
+    ],
     "2DJJ56VW4": [
       "spark",
       "md",

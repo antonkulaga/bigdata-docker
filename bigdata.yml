@@ -1,4 +1,3 @@
-version: '3.4'
 services:
   spark-master:
     image: bde2020/spark-master:2.3.2-hadoop2.7
@@ -62,7 +61,7 @@ services:
     - /data/notebooks/zeppelin:/zeppelin/notebook
     - ./conf/alluxio/alluxio-1.8.0-client.jar:/zeppelin/local-repo/org/alluxio/alluxio-core-client/1.8.0/alluxio-1.8.0-client.jar
     - /data:/data
-    - ./conf/zeppelin/conf:/zeppelin/conf
+    #- ./conf/zeppelin/conf:/zeppelin/conf
     deploy:
       replicas: 1
       mode: replicated
@@ -93,7 +92,6 @@ services:
         condition: on-failure
     ports:
     - 5050:8080
-
   alluxio-master:
     image: alluxio/alluxio-community:1.8.0
     command: master

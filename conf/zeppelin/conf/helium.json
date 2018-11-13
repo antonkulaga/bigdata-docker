@@ -6,7 +6,12 @@
     "zeppelin-highmaps": "zeppelin-highmaps@1.0.0",
     "ultimate-scatter-chart": "ultimate-scatter-chart@0.0.2",
     "ultimate-heatmap-chart": "ultimate-heatmap-chart@0.0.2",
-    "zeppelin-aggrid": "zeppelin-aggrid@0.1.1"
+    "zeppelin-aggrid": "zeppelin-aggrid@0.1.1",
+    "zeppelin-highcharts-bubble": "zeppelin-highcharts-bubble@0.0.2",
+    "ultimate-dual-column-chart": "ultimate-dual-column-chart@0.0.5",
+    "zeppelin-highcharts-heatmap": "zeppelin-highcharts-heatmap@0.0.5",
+    "zeppelin-highcharts-scatterplot": "zeppelin-highcharts-scatterplot@0.0.2",
+    "ultimate-pie-chart": "ultimate-pie-chart@0.0.2"
   },
   "packageConfig": {},
   "bundleDisplayOrder": [
@@ -16,6 +21,11 @@
     "ultimate-column-chart",
     "ultimate-heatmap-chart",
     "zeppelin-plotly-bubble",
-    "zeppelin-bubblechart"
+    "zeppelin-bubblechart",
+    "zeppelin-highcharts-bubble",
+    "ultimate-dual-column-chart",
+    "zeppelin-highcharts-heatmap",
+    "zeppelin-highcharts-scatterplot",
+    "ultimate-pie-chart"
   ]
 }
