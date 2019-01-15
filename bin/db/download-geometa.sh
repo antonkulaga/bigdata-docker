@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-wget https://gbnci-abcc.ncifcrf.gov/geo/GEOmetadb.sqlite.gz
+wget http://starbuck1.s3.amazonaws.com/sradb/GEOmetadb.sqlite.gz
 gunzip GEOmetadb.sqlite.gz

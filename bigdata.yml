@@ -85,7 +85,6 @@ services:
     - /data/databases/postgres:/data/databases/postgres
     ports:
     - 5432:5432
-
   adminer:
     image: adminer:latest
     deploy:
@@ -103,6 +102,7 @@ services:
     - ./conf/alluxio/alluxio-site.properties:/opt/alluxio/conf/alluxio-site.properties
     - ./conf/alluxio/license.json:/opt/alluxio/license.json
     - /data/underStorage:/underStorage
+    - /data:/data
     deploy:
       placement:
         constraints:
@@ -127,11 +127,27 @@ services:
     - ./conf/alluxio/alluxio-site.properties:/opt/alluxio/conf/alluxio-site.properties
     - ./conf/alluxio/license.json:/opt/alluxio/license.json
     - /data/underStorage:/underStorage
+    - /data:/data
     deploy:
       mode: global
       restart_policy:
         condition: on-failure
-
+  rdf:
+    image: ontotext/graphdb:8.8.0-se
+    ports:
+    - 7200:7200
+    deploy:
+      replicas: 1
+      mode: replicated
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - conf/bigdata.env
+    volumes:
+      - /data:/data
 networks:
   default:
     driver: overlay
