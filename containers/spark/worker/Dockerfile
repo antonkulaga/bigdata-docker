@@ -2,8 +2,8 @@ FROM quay.io/comp-bio-aging/spark-base:latest
 
 COPY worker.sh /
 
-RUN apt-get update
-RUN apt-get install -y rsync
+RUN apk update
+RUN apk add rsync openssh
 
 ENV SPARK_WORKER_WEBUI_PORT 8081
 ENV SPARK_WORKER_LOG /spark/logs
