@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   spark-master:
-    image: bde2020/spark-master:2.4.0-hadoop2.7
+    image: quay.io/comp-bio-aging/spark-master:latest
     deploy:
       replicas: 1
       mode: replicated
