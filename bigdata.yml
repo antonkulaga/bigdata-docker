@@ -53,14 +53,14 @@ services:
         constraints:
         - node.role == manager
   zeppelin:
-    image: quay.io/comp-bio-aging/zeppelin
+    image: quay.io/comp-bio-aging/zeppelin:master
     env_file:
     - conf/bigdata.env
     ports:
     - 9002:8080
     volumes:
     - /data/notebooks/zeppelin:/zeppelin/notebook
-    - ./conf/alluxio/alluxio-1.8.0-client.jar:/zeppelin/local-repo/org/alluxio/alluxio-core-client/1.8.0/alluxio-1.8.0-client.jar
+    #- ./conf/alluxio/alluxio-1.8.0-client.jar:/zeppelin/local-repo/org/alluxio/alluxio-core-client/1.8.0/alluxio-1.8.0-client.jar
     - /data:/data
     #- ./conf/zeppelin/conf:/zeppelin/conf
     deploy:
@@ -93,7 +93,7 @@ services:
     ports:
     - 5050:8080
   alluxio-master:
-    image: alluxio/alluxio-community:1.8.0
+    image: alluxio/alluxio:2.0.0-preview
     command: master
     environment:
       ALLUXIO_RAM_FOLDER: /opt/ramdisk
@@ -118,7 +118,7 @@ services:
     - 29999:29999
     - 30000:30000
   alluxio-worker:
-    image: alluxio/alluxio-community:1.8.0
+    image: alluxio/alluxio:2.0.0-preview
     command: worker
     environment:
       ALLUXIO_RAM_FOLDER: /opt/ramdisk
