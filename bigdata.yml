@@ -20,7 +20,7 @@ services:
     - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
     - /data:/data
   spark-worker:
-    image: quay.io/comp-bio-aging/spark-worker:latest
+    image: quay.io/comp-bio-aging/spark-worker:master
     deploy:
       mode: global
       restart_policy:
@@ -149,6 +149,7 @@ services:
       - conf/bigdata.env
     volumes:
       - /data:/data
+
 networks:
   default:
     driver: overlay
