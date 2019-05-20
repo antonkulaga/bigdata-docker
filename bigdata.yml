@@ -34,24 +34,6 @@ services:
     volumes:
     - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
     - /data:/data
-  jupyter:
-    image: quay.io/comp-bio-aging/spark-ml-notebook
-    env_file:
-    - conf/bigdata.env
-    ports:
-    - 9001:8888
-    volumes:
-    - /data/notebooks/jupyter:/home/jovyan/
-    - /data:/data
-    command: start.sh jupyter lab
-    deploy:
-      replicas: 1
-      mode: replicated
-      restart_policy:
-        condition: on-failure
-      placement:
-        constraints:
-        - node.role == manager
   zeppelin:
     image: quay.io/comp-bio-aging/zeppelin:master
     env_file:
@@ -92,63 +74,6 @@ services:
         condition: on-failure
     ports:
     - 5050:8080
-  alluxio-master:
-    image: alluxio/alluxio:2.0.0-preview
-    command: master
-    environment:
-      ALLUXIO_RAM_FOLDER: /opt/ramdisk
-    volumes:
-    - /mnt/ramdisk:/opt/ramdisk
-    - ./conf/alluxio/alluxio-site.properties:/opt/alluxio/conf/alluxio-site.properties
-    - ./conf/alluxio/license.json:/opt/alluxio/license.json
-    - /data/underStorage:/underStorage
-    - /data:/data
-    deploy:
-      placement:
-        constraints:
-        - node.role == manager
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-    ports:
-    - 19998:19998
-    - 19999:19999
-    - 29998:29998
-    - 29999:29999
-    - 30000:30000
-  alluxio-worker:
-    image: alluxio/alluxio:2.0.0-preview
-    command: worker
-    environment:
-      ALLUXIO_RAM_FOLDER: /opt/ramdisk
-    volumes:
-    - /mnt/ramdisk:/opt/ramdisk
-    - ./conf/alluxio/alluxio-site.properties:/opt/alluxio/conf/alluxio-site.properties
-    - ./conf/alluxio/license.json:/opt/alluxio/license.json
-    - /data/underStorage:/underStorage
-    - /data:/data
-    deploy:
-      mode: global
-      restart_policy:
-        condition: on-failure
-  rdf:
-    image: floatingpurr/graphdb:8.7.0-free
-    #ontotext/graphdb:8.8.0-se
-    ports:
-    - 7200:7200
-    deploy:
-      replicas: 1
-      mode: replicated
-      placement:
-        constraints:
-          - node.role == manager
-      restart_policy:
-        condition: on-failure
-    env_file:
-      - conf/bigdata.env
-    volumes:
-      - /data:/data
 
 networks:
   default:
