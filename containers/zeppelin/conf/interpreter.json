@@ -1163,12 +1163,12 @@
         },
         "zeppelin.spark.sql.interpolation": {
           "name": "zeppelin.spark.sql.interpolation",
-          "value": false,
+          "value": true,
           "type": "checkbox"
         },
         "zeppelin.spark.concurrentSQL": {
           "name": "zeppelin.spark.concurrentSQL",
-          "value": false,
+          "value": true,
           "type": "checkbox"
         },
         "zeppelin.R.knitr": {
@@ -1339,7 +1339,12 @@
           }
         }
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "groupArtifactVersion": "org.apache.commons:commons-lang3:3.8.1",
+          "local": false
+        }
+      ],
       "option": {
         "remote": true,
         "port": -1,

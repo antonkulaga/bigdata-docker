@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM frolvlad/alpine-miniconda3:latest
 
 #temporaly copied from https://github.com/big-data-europe/docker-spark while waiting for their 2.4.3 release
 
@@ -36,3 +36,5 @@ RUN chmod +x /wait-for-step.sh && chmod +x /execute-step.sh && chmod +x /finish-
 ENV PYTHONHASHSEED 1
 
 COPY spark-defaults.conf /spark/conf/
+
+RUN conda install -c conda-forge pyarrow
