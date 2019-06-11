@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   spark-master:
-    image: quay.io/comp-bio-aging/spark-master:latest
+    image: quay.io/comp-bio-aging/spark-master:master
     deploy:
       replicas: 1
       mode: replicated
@@ -20,7 +20,7 @@ services:
     - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
     - /data:/data
   spark-worker:
-    image: quay.io/comp-bio-aging/spark-worker:latest
+    image: quay.io/comp-bio-aging/spark-worker:master
     deploy:
       mode: global
       restart_policy:
