@@ -70,7 +70,7 @@ export ZEPPELIN_INTP_MEM="-Xms1024m -Xmx16g -XX:MaxPermSize=10g"       		# zeppe
 ## defining SPARK_HOME makes Zeppelin run spark interpreter process using spark-submit
 ##
 # export SPARK_HOME                             # (required) When it is defined, load it instead of Zeppelin embedded Spark libraries
-export SPARK_SUBMIT_OPTIONS="--driver-memory 16G --executor-memory 22G"                   # (optional) extra options to pass to spark submit. eg) "--driver-memory 512M --executor-memory 1G".
+#export SPARK_SUBMIT_OPTIONS="--driver-memory 20G --executor-memory 22G"                   # (optional) extra options to pass to spark submit. eg) "--driver-memory 512M --executor-memory 1G".
 # export SPARK_APP_NAME                         # (optional) The name of spark application.
 
 ## Use embedded spark binaries ##
