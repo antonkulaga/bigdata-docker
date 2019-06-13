@@ -1270,6 +1270,16 @@
           "name": "spark.cores.max",
           "value": "",
           "type": "number"
+        },
+        "spark.dynamicAllocation.enabled": {
+          "name": "spark.dynamicAllocation.enabled",
+          "value": true,
+          "type": "checkbox"
+        },
+        "spark.shuffle.service.enabled": {
+          "name": "spark.shuffle.service.enabled",
+          "value": true,
+          "type": "checkbox"
         }
       },
       "status": "READY",
@@ -1349,6 +1359,7 @@
         "remote": true,
         "port": -1,
         "perNote": "isolated",
+        "perUser": "",
         "isExistingProcess": false,
         "setPermission": false,
         "owners": [],
