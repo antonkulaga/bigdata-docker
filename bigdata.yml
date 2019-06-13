@@ -74,6 +74,15 @@ services:
         condition: on-failure
     ports:
     - 5050:8080
+  cassandra:
+    image: 'bitnami/cassandra:3'
+    ports:
+      - '7000:7000'
+      - '9042:9042'
+    volumes:
+      - /data/databases/cassandra:/bitnami'
+    env_file:
+      - conf/bigdata.env
 
 networks:
   default:
