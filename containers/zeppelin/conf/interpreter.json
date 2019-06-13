@@ -655,7 +655,7 @@
         },
         {
           "name": "pyspark",
-          "class": "org.apache.zeppelin.livy.LivyPySparkInterpreter",
+          "class": "org.apache.zeppelin.livy.LivyPySpark3Interpreter",
           "defaultInterpreter": false,
           "editor": {
             "language": "python",
@@ -1348,6 +1348,7 @@
       "option": {
         "remote": true,
         "port": -1,
+        "perNote": "isolated",
         "isExistingProcess": false,
         "setPermission": false,
         "owners": [],
@@ -1420,7 +1421,7 @@
       "option": {
         "remote": true,
         "port": -1,
-        "perNote": "shared",
+        "perNote": "isolated",
         "perUser": "shared",
         "isExistingProcess": false,
         "setPermission": false,
@@ -1584,7 +1585,7 @@
       "option": {
         "remote": true,
         "port": -1,
-        "perNote": "shared",
+        "perNote": "isolated",
         "perUser": "shared",
         "isExistingProcess": false,
         "setPermission": false,
