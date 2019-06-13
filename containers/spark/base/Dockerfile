@@ -28,6 +28,8 @@ RUN apk add --no-cache curl bash openjdk8-jre python3 py-pip nss \
       #&& jar uf /spark/jars/spark-core_2.11-${SPARK_VERSION}.jar org/apache/spark/ui/static/timeline-view.css \
       && cd /
 
+RUN apk --update add coreutils procps
+
 #Give permission to execute scripts
 RUN chmod +x /wait-for-step.sh && chmod +x /execute-step.sh && chmod +x /finish-step.sh
 

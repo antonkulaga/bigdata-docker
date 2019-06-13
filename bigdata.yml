@@ -14,6 +14,9 @@ services:
     - 8080:8080
     - 7077:7077
     - 6066:6066
+    - 4040:4040
+    - 4041:4041
+    - 4042:4042
     env_file:
     - conf/bigdata.env
     volumes:
@@ -29,6 +32,7 @@ services:
     - 8081:8081
     - 8082:8082
     - 8083:8083
+    - 7337:7337
     env_file:
     - conf/bigdata.env
     volumes:
@@ -80,11 +84,16 @@ services:
       - '7000:7000'
       - '9042:9042'
     volumes:
-      - /data/databases/cassandra:/bitnami'
+      - 'cassandra_data:/bitnami'
     env_file:
       - conf/bigdata.env
+      -
+volumes:
+  cassandra_data:
+    driver: local
 
 networks:
   default:
     driver: overlay
     attachable: true
+
