@@ -14,9 +14,6 @@ services:
     - 8080:8080
     - 7077:7077
     - 6066:6066
-    - 4040:4040
-    - 4041:4041
-    - 4042:4042
     env_file:
     - conf/bigdata.env
     volumes:
@@ -44,6 +41,9 @@ services:
     - conf/bigdata.env
     ports:
     - 9002:8080
+    - 4040:4040
+    - 4041:4041
+    - 4042:4042
     volumes:
     - /data/notebooks/zeppelin:/zeppelin/notebook
     #- ./conf/alluxio/alluxio-1.8.0-client.jar:/zeppelin/local-repo/org/alluxio/alluxio-core-client/1.8.0/alluxio-1.8.0-client.jar
@@ -87,7 +87,7 @@ services:
       - 'cassandra_data:/bitnami'
     env_file:
       - conf/bigdata.env
-      -
+
 volumes:
   cassandra_data:
     driver: local
