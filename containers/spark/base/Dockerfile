@@ -16,8 +16,6 @@ COPY wait-for-step.sh /
 COPY execute-step.sh /
 COPY finish-step.sh /
 
-#COPY bde-spark.css /css/org/apache/spark/ui/static/timeline-view.css
-
 ENV GLIBC_VERSION=2.29-r0 \
     GRAALVM_VERSION=19.0.2 \
     JAVA_HOME=/usr/lib/jvm/graalvm-ce-19.0.2 \
@@ -26,9 +24,9 @@ ENV GLIBC_VERSION=2.29-r0 \
 RUN apk --no-cache add ca-certificates wget gcc zlib zlib-dev libc-dev bash
 
 RUN mkdir /usr/lib/jvm \
-    && wget "https://github.com/oracle/graal/releases/download/vm-${GRAALVM_VERSION}/graalvm-ce-linux-${GRAALVM_VERSION}-amd64.tar.gz" \
-    && tar -zxC /usr/lib/jvm -f graalvm-ce-linux-${GRAALVM_VERSION}-amd64.tar.gz \
-    && rm -f graalvm-ce-linux-${GRAALVM_VERSION}-amd64.tar.gz
+    && wget "https://github.com/oracle/graal/releases/download/vm-${GRAALVM_VERSION}/graalvm-ce-linux-amd64-${GRAALVM_VERSION}.tar.gz" \
+    && tar -zxC /usr/lib/jvm -f graalvm-ce-linux-amd64-${GRAALVM_VERSION}.tar.gz \
+    && rm -f graalvm-ce-linux-amd64-${GRAALVM_VERSION}.tar.gz
 
 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
     &&  wget "https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-$GLIBC_VERSION.apk" \
