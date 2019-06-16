@@ -23,12 +23,12 @@ ENV GLIBC_VERSION=2.29-r0 \
     JAVA_HOME=/usr/lib/jvm/graalvm-ce-19.0.2 \
     PATH=/usr/lib/jvm/graalvm-ce-19.0.2/bin:$PATH
 
-RUN apk --no-cache add ca-certificates wget gcc zlib zlib-dev libc-dev
+RUN apk --no-cache add ca-certificates wget gcc zlib zlib-dev libc-dev bash
 
-RUN mkdir /usr/lib/jvm; \
-    wget "https://github.com/oracle/graal/releases/download/vm-${GRAALVM_VERSION}/graalvm-ce-${GRAALVM_VERSION}-linux-amd64.tar.gz"; \
-    tar -zxC /usr/lib/jvm -f graalvm-ce-${GRAALVM_VERSION}-linux-amd64.tar.gz; \
-    rm -f graalvm-ce-${GRAALVM_VERSION}-linux-amd64.tar.gz
+RUN mkdir /usr/lib/jvm \
+    && wget "https://github.com/oracle/graal/releases/download/vm-${GRAALVM_VERSION}/graalvm-ce-linux-${GRAALVM_VERSION}-amd64.tar.gz" \
+    && tar -zxC /usr/lib/jvm -f graalvm-ce-linux-${GRAALVM_VERSION}-amd64.tar.gz \
+    && rm -f graalvm-ce-linux-${GRAALVM_VERSION}-amd64.tar.gz
 
 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
     &&  wget "https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-$GLIBC_VERSION.apk" \
