@@ -90,11 +90,6 @@ services:
       - conf/bigdata.env
     volumes:
       - "/data/databases/cassandra:/var/lib/cassandra"
-    # Allow DSE to lock memory with mlock
-    cap_add:
-      - IPC_LOCK
-    ulimits:
-      memlock: -1
   # One instance of DataStax Studio
   studio:
     image: datastax/dse-studio:latest
@@ -107,6 +102,7 @@ services:
       DS_LICENSE: accept
     env_file:
       - conf/bigdata.env
+    #note: nonroot container, so volume should be 777 or similar
     volumes:
       - "/data/notebooks/datastax:/var/lib/datastax-studio"
 
@@ -114,4 +110,3 @@ networks:
   default:
     driver: overlay
     attachable: true
-
