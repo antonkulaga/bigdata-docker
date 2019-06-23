@@ -19,8 +19,8 @@
 # export JAVA_HOME=
 # export MASTER=                 		# Spark master url. eg. spark://master_addr:7077. Leave empty if you want to use local mode.
 # export ZEPPELIN_JAVA_OPTS      		# Additional jvm options. for example, export ZEPPELIN_JAVA_OPTS="-Dspark.executor.memory=8g -Dspark.cores.max=16"
-export ZEPPELIN_MEM="-Xmx16g"            		# Zeppelin jvm mem options Default -Xms1024m -Xmx1024m -XX:MaxPermSize=512m
-export ZEPPELIN_INTP_MEM="-Xms1024m -Xmx16g -XX:MaxPermSize=10g"       		# zeppelin interpreter process jvm mem options. Default -Xms1024m -Xmx1024m -XX:MaxPermSize=512m
+export ZEPPELIN_MEM="-Xmx20g"            		# Zeppelin jvm mem options Default -Xms1024m -Xmx1024m -XX:MaxPermSize=512m
+export ZEPPELIN_INTP_MEM="-Xms1024m -Xmx20g -XX:MaxPermSize=10g"       		# zeppelin interpreter process jvm mem options. Default -Xms1024m -Xmx1024m -XX:MaxPermSize=512m
 # export ZEPPELIN_INTP_JAVA_OPTS 		# zeppelin interpreter process jvm options.
 # export ZEPPELIN_SSL_PORT       		# ssl port (used when ssl environment variable is set to true)
 # export ZEPPELIN_JMX_ENABLE    		# Enable JMX feature by defining "true"
@@ -70,7 +70,7 @@ export ZEPPELIN_INTP_MEM="-Xms1024m -Xmx16g -XX:MaxPermSize=10g"       		# zeppe
 ## defining SPARK_HOME makes Zeppelin run spark interpreter process using spark-submit
 ##
 # export SPARK_HOME                             # (required) When it is defined, load it instead of Zeppelin embedded Spark libraries
-export SPARK_SUBMIT_OPTIONS="--driver-memory 16G --executor-memory 16G"                   # (optional) extra options to pass to spark submit. eg) "--driver-memory 512M --executor-memory 1G".
+#export SPARK_SUBMIT_OPTIONS="--driver-memory 20G --executor-memory 22G"                   # (optional) extra options to pass to spark submit. eg) "--driver-memory 512M --executor-memory 1G".
 # export SPARK_APP_NAME                         # (optional) The name of spark application.
 
 ## Use embedded spark binaries ##

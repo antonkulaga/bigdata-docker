@@ -10,13 +10,13 @@
           "value": "",
           "type": "url"
         },
-        "ignite.clientMode": {
-          "name": "ignite.clientMode",
+        "ignite.peerClassLoadingEnabled": {
+          "name": "ignite.peerClassLoadingEnabled",
           "value": true,
           "type": "checkbox"
         },
-        "ignite.peerClassLoadingEnabled": {
-          "name": "ignite.peerClassLoadingEnabled",
+        "ignite.clientMode": {
+          "name": "ignite.clientMode",
           "value": true,
           "type": "checkbox"
         },
@@ -77,11 +77,6 @@
           "value": "30000",
           "type": "number"
         },
-        "zeppelin.python.maxResult": {
-          "name": "zeppelin.python.maxResult",
-          "value": "10000",
-          "type": "number"
-        },
         "zeppelin.python.useIPython": {
           "name": "zeppelin.python.useIPython",
           "value": true,
@@ -90,6 +85,11 @@
         "zeppelin.ipython.grpc.message_size": {
           "name": "zeppelin.ipython.grpc.message_size",
           "value": "33554432",
+          "type": "number"
+        },
+        "zeppelin.python.maxResult": {
+          "name": "zeppelin.python.maxResult",
+          "value": "1000",
           "type": "number"
         }
       },
@@ -163,6 +163,11 @@
       "name": "sap",
       "group": "sap",
       "properties": {
+        "universe.password": {
+          "name": "universe.password",
+          "value": "",
+          "type": "password"
+        },
         "universe.api.url": {
           "name": "universe.api.url",
           "value": "http://localhost:6405/biprws",
@@ -177,11 +182,6 @@
           "name": "universe.user",
           "value": "",
           "type": "string"
-        },
-        "universe.password": {
-          "name": "universe.password",
-          "value": "",
-          "type": "password"
         }
       },
       "status": "READY",
@@ -259,7 +259,7 @@
         },
         "common.max_count": {
           "name": "common.max_count",
-          "value": "10000",
+          "value": "1000",
           "type": "number"
         },
         "default.precode": {
@@ -293,7 +293,7 @@
           "type": "checkbox"
         }
       },
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "sql",
@@ -340,7 +340,7 @@
         },
         "zeppelin.lens.maxResults": {
           "name": "zeppelin.lens.maxResults",
-          "value": "10000",
+          "value": "1000",
           "type": "number"
         },
         "lens.client.dbname": {
@@ -391,16 +391,6 @@
       "name": "pig",
       "group": "pig",
       "properties": {
-        "zeppelin.pig.includeJobStats": {
-          "name": "zeppelin.pig.includeJobStats",
-          "value": false,
-          "type": "checkbox"
-        },
-        "zeppelin.pig.maxResult": {
-          "name": "zeppelin.pig.maxResult",
-          "value": "10000",
-          "type": "number"
-        },
         "zeppelin.pig.execType": {
           "name": "zeppelin.pig.execType",
           "value": "mapreduce",
@@ -410,6 +400,16 @@
           "name": "SPARK_JAR",
           "value": "",
           "type": "textarea"
+        },
+        "zeppelin.pig.includeJobStats": {
+          "name": "zeppelin.pig.includeJobStats",
+          "value": false,
+          "type": "checkbox"
+        },
+        "zeppelin.pig.maxResult": {
+          "name": "zeppelin.pig.maxResult",
+          "value": "1000",
+          "type": "number"
         },
         "SPARK_MASTER": {
           "name": "SPARK_MASTER",
@@ -453,15 +453,15 @@
       "name": "flink",
       "group": "flink",
       "properties": {
-        "host": {
-          "name": "host",
-          "value": "local",
-          "type": "string"
-        },
         "port": {
           "name": "port",
           "value": "6123",
           "type": "number"
+        },
+        "host": {
+          "name": "host",
+          "value": "local",
+          "type": "string"
         }
       },
       "status": "READY",
@@ -555,12 +555,12 @@
         },
         "livy.spark.dynamicAllocation.enabled": {
           "name": "livy.spark.dynamicAllocation.enabled",
-          "value": true,
+          "value": false,
           "type": "checkbox"
         },
         "zeppelin.livy.maxLogLines": {
           "name": "zeppelin.livy.maxLogLines",
-          "value": "10000",
+          "value": "1000",
           "type": "number"
         },
         "livy.spark.dynamicAllocation.minExecutors": {
@@ -580,7 +580,7 @@
         },
         "zeppelin.livy.spark.sql.maxResult": {
           "name": "zeppelin.livy.spark.sql.maxResult",
-          "value": "1000000",
+          "value": "1000",
           "type": "number"
         },
         "livy.spark.driver.cores": {
@@ -595,7 +595,7 @@
         },
         "zeppelin.livy.spark.sql.field.truncate": {
           "name": "zeppelin.livy.spark.sql.field.truncate",
-          "value": false,
+          "value": true,
           "type": "checkbox"
         },
         "livy.spark.driver.memory": {
@@ -655,7 +655,7 @@
         },
         {
           "name": "pyspark",
-          "class": "org.apache.zeppelin.livy.LivyPySparkInterpreter",
+          "class": "org.apache.zeppelin.livy.LivyPySpark3Interpreter",
           "defaultInterpreter": false,
           "editor": {
             "language": "python",
@@ -806,7 +806,7 @@
         },
         "hdfs.maxlength": {
           "name": "hdfs.maxlength",
-          "value": "10000",
+          "value": "1000",
           "type": "number"
         }
       },
@@ -1163,12 +1163,12 @@
         },
         "zeppelin.spark.sql.interpolation": {
           "name": "zeppelin.spark.sql.interpolation",
-          "value": false,
+          "value": true,
           "type": "checkbox"
         },
         "zeppelin.spark.concurrentSQL": {
           "name": "zeppelin.spark.concurrentSQL",
-          "value": false,
+          "value": true,
           "type": "checkbox"
         },
         "zeppelin.R.knitr": {
@@ -1203,7 +1203,7 @@
         },
         "zeppelin.spark.maxResult": {
           "name": "zeppelin.spark.maxResult",
-          "value": "10000000",
+          "value": "1000",
           "type": "number"
         },
         "master": {
@@ -1270,6 +1270,21 @@
           "name": "spark.cores.max",
           "value": "",
           "type": "number"
+        },
+        "spark.dynamicAllocation.enabled": {
+          "name": "spark.dynamicAllocation.enabled",
+          "value": true,
+          "type": "checkbox"
+        },
+        "spark.shuffle.service.enabled": {
+          "name": "spark.shuffle.service.enabled",
+          "value": true,
+          "type": "checkbox"
+        },
+        "spark.cassandra.connection.host": {
+          "name": "spark.cassandra.connection.host",
+          "value": "dse",
+          "type": "textarea"
         }
       },
       "status": "READY",
@@ -1339,10 +1354,17 @@
           }
         }
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "groupArtifactVersion": "org.apache.commons:commons-lang3:3.8.1",
+          "local": false
+        }
+      ],
       "option": {
         "remote": true,
         "port": -1,
+        "perNote": "isolated",
+        "perUser": "",
         "isExistingProcess": false,
         "setPermission": false,
         "owners": [],
@@ -1415,7 +1437,7 @@
       "option": {
         "remote": true,
         "port": -1,
-        "perNote": "shared",
+        "perNote": "isolated",
         "perUser": "shared",
         "isExistingProcess": false,
         "setPermission": false,
@@ -1440,7 +1462,7 @@
         },
         "zeppelin.bigquery.max_no_of_rows": {
           "name": "zeppelin.bigquery.max_no_of_rows",
-          "value": "1000000",
+          "value": "100000",
           "type": "number"
         },
         "zeppelin.bigquery.wait_time": {
@@ -1524,7 +1546,7 @@
         },
         "common.max_count": {
           "name": "common.max_count",
-          "value": "100000",
+          "value": "1000",
           "type": "number"
         },
         "default.precode": {
@@ -1539,8 +1561,7 @@
         },
         "default.statementPrecode": {
           "name": "default.statementPrecode",
-          "value": "",
-          "type": "string"
+          "value": ""
         },
         "zeppelin.jdbc.concurrent.use": {
           "name": "zeppelin.jdbc.concurrent.use",
@@ -1558,7 +1579,7 @@
           "type": "checkbox"
         }
       },
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "sql",
@@ -1580,7 +1601,7 @@
       "option": {
         "remote": true,
         "port": -1,
-        "perNote": "shared",
+        "perNote": "isolated",
         "perUser": "shared",
         "isExistingProcess": false,
         "setPermission": false,
@@ -1697,54 +1718,6 @@
     }
   },
   "interpreterBindings": {
-    "2DRP19U9Z": [
-      "spark",
-      "md",
-      "angular",
-      "sh",
-      "livy",
-      "alluxio",
-      "file",
-      "flink",
-      "python",
-      "ignite",
-      "lens",
-      "cassandra",
-      "kylin",
-      "elasticsearch",
-      "jdbc",
-      "geometa",
-      "hbase",
-      "bigquery",
-      "pig",
-      "groovy",
-      "neo4j",
-      "sap"
-    ],
-    "2DW18KZEN": [
-      "spark",
-      "md",
-      "angular",
-      "sh",
-      "livy",
-      "alluxio",
-      "file",
-      "flink",
-      "python",
-      "ignite",
-      "lens",
-      "cassandra",
-      "kylin",
-      "elasticsearch",
-      "jdbc",
-      "geometa",
-      "hbase",
-      "bigquery",
-      "pig",
-      "groovy",
-      "neo4j",
-      "sap"
-    ],
     "2DJJ56VW4": [
       "spark",
       "md",
@@ -1847,6 +1820,40 @@
       "id": "central",
       "type": "default",
       "url": "http://repo1.maven.org/maven2/",
+      "releasePolicy": {
+        "enabled": true,
+        "updatePolicy": "daily",
+        "checksumPolicy": "warn"
+      },
+      "snapshotPolicy": {
+        "enabled": true,
+        "updatePolicy": "daily",
+        "checksumPolicy": "warn"
+      },
+      "mirroredRepositories": [],
+      "repositoryManager": false
+    },
+    {
+      "id": "spark_packages",
+      "type": "default",
+      "url": "https://dl.bintray.com/spark-packages/maven/",
+      "releasePolicy": {
+        "enabled": true,
+        "updatePolicy": "daily",
+        "checksumPolicy": "warn"
+      },
+      "snapshotPolicy": {
+        "enabled": true,
+        "updatePolicy": "daily",
+        "checksumPolicy": "warn"
+      },
+      "mirroredRepositories": [],
+      "repositoryManager": false
+    },
+    {
+      "id": "compbioaging",
+      "type": "default",
+      "url": "https://dl.bintray.com/comp-bio-aging/main/",
       "releasePolicy": {
         "enabled": true,
         "updatePolicy": "daily",

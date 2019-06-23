@@ -1280,6 +1280,11 @@
           "name": "spark.shuffle.service.enabled",
           "value": true,
           "type": "checkbox"
+        },
+        "spark.cassandra.connection.host": {
+          "name": "spark.cassandra.connection.host",
+          "value": "dse",
+          "type": "textarea"
         }
       },
       "status": "READY",
@@ -1815,6 +1820,40 @@
       "id": "central",
       "type": "default",
       "url": "http://repo1.maven.org/maven2/",
+      "releasePolicy": {
+        "enabled": true,
+        "updatePolicy": "daily",
+        "checksumPolicy": "warn"
+      },
+      "snapshotPolicy": {
+        "enabled": true,
+        "updatePolicy": "daily",
+        "checksumPolicy": "warn"
+      },
+      "mirroredRepositories": [],
+      "repositoryManager": false
+    },
+    {
+      "id": "spark_packages",
+      "type": "default",
+      "url": "https://dl.bintray.com/spark-packages/maven/",
+      "releasePolicy": {
+        "enabled": true,
+        "updatePolicy": "daily",
+        "checksumPolicy": "warn"
+      },
+      "snapshotPolicy": {
+        "enabled": true,
+        "updatePolicy": "daily",
+        "checksumPolicy": "warn"
+      },
+      "mirroredRepositories": [],
+      "repositoryManager": false
+    },
+    {
+      "id": "compbioaging",
+      "type": "default",
+      "url": "https://dl.bintray.com/comp-bio-aging/main/",
       "releasePolicy": {
         "enabled": true,
         "updatePolicy": "daily",
