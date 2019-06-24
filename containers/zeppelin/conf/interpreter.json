@@ -1276,6 +1276,21 @@
           "value": true,
           "type": "checkbox"
         },
+        "spark.dynamicAllocation.minExecutors": {
+          "name": "spark.dynamicAllocation.minExecutors",
+          "value": 1,
+          "type": "number"
+        },
+        "spark.dynamicAllocation.initialExecutors": {
+          "name": "spark.dynamicAllocation.initialExecutors",
+          "value": 1,
+          "type": "number"
+        },
+        "spark.scheduler.mode": {
+          "name": "spark.scheduler.mode",
+          "value": "FAIR",
+          "type": "textarea"
+        },
         "spark.shuffle.service.enabled": {
           "name": "spark.shuffle.service.enabled",
           "value": true,

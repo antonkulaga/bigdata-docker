@@ -84,6 +84,8 @@ services:
     command: [ -s ]
     ports:
       - "9042:9042" # cassandra
+    environment:
+      DS_LICENSE: accept
     env_file:
       - conf/bigdata.env
     volumes:
@@ -96,6 +98,8 @@ services:
       - "9091:9091"
     depends_on:
       - dse
+    environment:
+      DS_LICENSE: accept
     env_file:
       - conf/bigdata.env
     #note: nonroot container, so volume should be 777 or similar
