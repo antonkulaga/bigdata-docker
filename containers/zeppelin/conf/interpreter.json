@@ -1278,13 +1278,13 @@
         },
         "spark.dynamicAllocation.minExecutors": {
           "name": "spark.dynamicAllocation.minExecutors",
-          "value": 1,
-          "type": "number"
+          "value": "1",
+          "type": "textarea"
         },
         "spark.dynamicAllocation.initialExecutors": {
           "name": "spark.dynamicAllocation.initialExecutors",
-          "value": 1,
-          "type": "number"
+          "value": "1",
+          "type": "textarea"
         },
         "spark.scheduler.mode": {
           "name": "spark.scheduler.mode",
