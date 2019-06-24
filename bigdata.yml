@@ -105,6 +105,14 @@ services:
     #note: nonroot container, so volume should be 777 or similar
     volumes:
       - "/data/notebooks/datastax:/var/lib/datastax-studio"
+  graphdb:
+    image: ontotext/graphdb:8.10.1-se
+    ports:
+      - "7200:7200"
+    volumes:
+      - "/data/databases/graphdb:/opt/graphdb/home"
+    env_file:
+      - conf/bigdata.env
 
 networks:
   default:
