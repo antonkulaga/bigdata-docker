@@ -11,5 +11,4 @@ ENV SPARK_WORKER_LOG /spark/logs
 ENV SPARK_MASTER "spark://spark-master:7077"
 
 EXPOSE 8081
-RUN useradd -r -u 1002 spark
 CMD ["/bin/bash", "/worker.sh"]

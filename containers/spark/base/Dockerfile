@@ -18,8 +18,8 @@ COPY finish-step.sh /
 
 ENV GLIBC_VERSION=2.29-r0 \
     GRAALVM_VERSION=19.0.2 \
-    JAVA_HOME=/usr/lib/jvm/graalvm-ce-19.0.2 \
-    PATH=/usr/lib/jvm/graalvm-ce-19.0.2/bin:$PATH
+    JAVA_HOME=/usr/lib/jvm/graalvm-ce-19.1.0 \
+    PATH=/usr/lib/jvm/graalvm-ce-19.1.0/bin:$PATH
 
 RUN apk --no-cache add ca-certificates wget gcc zlib zlib-dev libc-dev bash
 
@@ -62,3 +62,4 @@ ENV PYTHONHASHSEED 1
 COPY spark-defaults.conf /spark/conf/
 
 RUN conda install -c conda-forge pyarrow
+RUN adduser -D -u 1002 spark
