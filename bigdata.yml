@@ -2,6 +2,7 @@ version: '3.7'
 services:
   spark-master:
     image: quay.io/comp-bio-aging/spark-master:master
+    user: "spark"
     deploy:
       replicas: 1
       mode: replicated
@@ -21,6 +22,7 @@ services:
     - /data:/data
   spark-worker:
     image: quay.io/comp-bio-aging/spark-worker:master
+    user: "spark"
     deploy:
       mode: global
       restart_policy:
@@ -37,6 +39,7 @@ services:
     - /data:/data
   zeppelin:
     image: quay.io/comp-bio-aging/zeppelin:master
+    user: "zeppelin"
     env_file:
     - conf/bigdata.env
     ports:

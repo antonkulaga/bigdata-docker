@@ -31,3 +31,4 @@ ENV ZEPPELIN_WEBSOCKET_MAX_TEXT_MESSAGE_SIZE=2048000
 ENV ZEPPELIN_SPARK_CONCURRENTSQL=true
 
 COPY conf/zeppelin-env.sh /zeppelin/conf/zeppelin-env.sh
+RUN useradd -r -u 1002 zeppelin
