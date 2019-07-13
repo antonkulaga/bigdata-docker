@@ -63,3 +63,4 @@ COPY spark-defaults.conf /spark/conf/
 
 RUN conda install -c conda-forge pyarrow
 RUN adduser -D -u 1002 spark
+RUN chmod -R 777 /spark

@@ -32,3 +32,4 @@ ENV ZEPPELIN_SPARK_CONCURRENTSQL=true
 
 COPY conf/zeppelin-env.sh /zeppelin/conf/zeppelin-env.sh
 RUN useradd -r -u 1002 zeppelin
+RUN chmod -R 777 /zeppelin
