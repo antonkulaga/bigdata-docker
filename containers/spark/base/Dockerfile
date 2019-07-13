@@ -17,7 +17,7 @@ COPY execute-step.sh /
 COPY finish-step.sh /
 
 ENV GLIBC_VERSION=2.29-r0 \
-    GRAALVM_VERSION=19.0.2 \
+    GRAALVM_VERSION=19.1.0 \
     JAVA_HOME=/usr/lib/jvm/graalvm-ce-19.1.0 \
     PATH=/usr/lib/jvm/graalvm-ce-19.1.0/bin:$PATH
 
