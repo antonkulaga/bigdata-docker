@@ -87,7 +87,7 @@ export ZEPPELIN_INTP_MEM="-Xms1024m -Xmx20g -XX:MaxPermSize=10g"       		# zeppe
 ## Spark interpreter options ##
 ##
 # export ZEPPELIN_SPARK_USEHIVECONTEXT  # Use HiveContext instead of SQLContext if set true. true by default.
-export ZEPPELIN_SPARK_CONCURRENTSQL=true   # Execute multiple SQL concurrently if set true. false by default.
+#export ZEPPELIN_SPARK_CONCURRENTSQL=true   # Execute multiple SQL concurrently if set true. false by default.
 export ZEPPELIN_SPARK_IMPORTIMPLICIT=true  # Import implicits, UDF collection, and sql if set true. true by default.
 # export ZEPPELIN_SPARK_MAXRESULT       # Max number of Spark SQL result to display. 1000 by default.
 # export ZEPPELIN_WEBSOCKET_MAX_TEXT_MESSAGE_SIZE       # Size in characters of the maximum text message to be received by websocket. Defaults to 1024000

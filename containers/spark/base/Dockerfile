@@ -9,7 +9,7 @@ ENV ENABLE_INIT_DAEMON true
 ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
-ENV SPARK_VERSION=2.4.3
+ENV SPARK_VERSION=2.4.4
 ENV HADOOP_VERSION=2.7
 
 COPY wait-for-step.sh /
@@ -17,9 +17,9 @@ COPY execute-step.sh /
 COPY finish-step.sh /
 
 ENV GLIBC_VERSION=2.29-r0 \
-    GRAALVM_VERSION=19.1.0 \
-    JAVA_HOME=/usr/lib/jvm/graalvm-ce-19.1.0 \
-    PATH=/usr/lib/jvm/graalvm-ce-19.1.0/bin:$PATH
+    GRAALVM_VERSION=19.2.0.1 \
+    JAVA_HOME=/usr/lib/jvm/graalvm-ce-19.2.0.1\
+    PATH=/usr/lib/jvm/graalvm-ce-19.2.0.1/bin:$PATH
 
 RUN apk --no-cache add ca-certificates wget gcc zlib zlib-dev libc-dev bash
 

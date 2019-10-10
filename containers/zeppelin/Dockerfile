@@ -1,7 +1,7 @@
-FROM apache/zeppelin:0.8.1
+FROM apache/zeppelin:0.8.2
 MAINTAINER Anton Kulaga <antonkulaga@gmail.com>
 
-ENV SPARK_VERSION=2.4.3
+ENV SPARK_VERSION=2.4.4
 ENV HADOOP_VERSION=2.7
 ENV SPARK_HOME=/zeppelin/spark
 

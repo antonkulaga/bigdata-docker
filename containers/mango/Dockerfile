@@ -1,8 +1,8 @@
-FROM bde2020/spark-base:2.3.2-hadoop2.8
+FROM bde2020/spark-base:2.4.4-hadoop2.7
 
 MAINTAINER Anton Kulaga antonkulaga@gmail.com
 
-ENV MAVEN_VERSION="3.5.4"
+ENV MAVEN_VERSION="3.6.2"
 
 ENV MAVEN_HOME /opt/apache-maven-$MAVEN_VERSION
 
