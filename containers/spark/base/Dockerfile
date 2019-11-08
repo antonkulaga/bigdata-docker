@@ -17,9 +17,9 @@ COPY execute-step.sh /
 COPY finish-step.sh /
 
 ENV GLIBC_VERSION=2.29-r0 \
-    GRAALVM_VERSION=19.2.0.1 \
-    JAVA_HOME=/usr/lib/jvm/graalvm-ce-19.2.0.1\
-    PATH=/usr/lib/jvm/graalvm-ce-19.2.0.1/bin:$PATH
+    GRAALVM_VERSION=19.2.1 \
+    JAVA_HOME=/usr/lib/jvm/graalvm-ce-19.2.1\
+    PATH=/usr/lib/jvm/graalvm-ce-19.2.1/bin:$PATH
 
 RUN apk --no-cache add ca-certificates wget gcc zlib zlib-dev libc-dev bash
 
