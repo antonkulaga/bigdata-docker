@@ -9,9 +9,6 @@ ENV POLYNOTE_VERSION=0.2.13
 
 RUN echo "alias pip3=/opt/conda/bin/pip" >> ~/.bashrc
 
-RUN pip install --upgrade pip \
-  && pip install jep
-
 RUN conda install -y pyspark virtualenv keras plotly
 RUN conda install -y -c conda-forge jedi
 RUN conda clean -y --all
