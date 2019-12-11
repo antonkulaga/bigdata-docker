@@ -2,7 +2,7 @@ FROM quay.io/comp-bio-aging/spark-base:master
 
 COPY master.sh /
 
-RUN apk --update add coreutils procps
+#RUN apk --update add coreutils procps
 
 ENV SPARK_MASTER_PORT 7077
 ENV SPARK_MASTER_WEBUI_PORT 8080
