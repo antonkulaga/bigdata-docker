@@ -1,45 +1,19 @@
 FROM quay.io/comp-bio-aging/spark-master:master
 
-ENV SCALA_VERSION=2.11.12
-ENV POLYNOTE_VERSION=0.2.11
-
 
 WORKDIR /usr/src/app
 ENV SCALA_VERSION=2.11.12
 ENV POLYNOTE_VERSION=0.2.13
 
-# Install pre-requisites needed for python dependencies
-RUN set -e; \
-  apk add --no-cache --virtual \
-    .build-deps \
-    gcc \
-    g++ \
-    libc-dev \
-    linux-headers \
-    mariadb-dev \
-    python3-dev \
-    postgresql-dev \
-    freetype-dev \
-    libpng-dev \
-    libxml2-dev \
-    libxslt-dev \
-    zlib-dev \
-    jpeg-dev \
-  ;
-
 # Install Python and dependencies
 
-RUN conda install -y -c anaconda gcc_linux-64
+RUN echo "alias pip3=/opt/conda/bin/pip" >> ~/.bashrc
+
+RUN pip install --upgrade pip \
+  && pip install jep
+
 RUN conda install -y pyspark virtualenv keras plotly
 RUN conda install -y -c conda-forge jedi
-
-# Install Python and dependencies
-ENV PYTHONUNBUFFERED=1
-COPY requirements.txt ./requirements.txt
-RUN apk add python3-dev \
-  && pip3 install --upgrade pip \
-  && pip3 install jep
-
 RUN conda clean -y --all
 
 # Download and extract polynote
