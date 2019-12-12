@@ -9,9 +9,7 @@ ENV POLYNOTE_VERSION=0.2.13
 
 RUN echo "alias pip3=/opt/conda/bin/pip" >> ~/.bashrc
 
-RUN conda install -y pyspark virtualenv keras plotly
-RUN conda install -y -c conda-forge jedi
-RUN conda clean -y --all
+RUN conda install -y -c conda-forge jedi pyspark virtualenv keras plotly && conda clean -y --all
 
 # Download and extract polynote
 RUN curl -Lk https://github.com/polynote/polynote/releases/download/${POLYNOTE_VERSION}/polynote-dist.tar.gz \

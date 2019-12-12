@@ -22,8 +22,7 @@ ENV PYTHONHASHSEED 1
 
 COPY spark-defaults.conf /spark/conf/
 
-RUN conda install -c conda-forge pyarrow
-RUN conda install -y pyspark
 RUN pip install jep
+RUN conda install -c conda-forge pyarrow pyspark
 RUN adduser --disabled-password -u 1002 spark
 RUN chmod -R 777 /spark

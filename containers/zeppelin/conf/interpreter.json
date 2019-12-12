@@ -1286,10 +1286,15 @@
           "value": true,
           "type": "checkbox"
         },
-        "spark.cassandra.connection.host": {
-          "name": "spark.cassandra.connection.host",
-          "value": "dse",
-          "type": "textarea"
+        "spark.dynamicAllocation.initialExecutors": {
+          "name": "spark.dynamicAllocation.initialExecutors",
+          "value": "1",
+          "type": "number"
+        },
+        "spark.dynamicAllocation.maxExecutors": {
+          "name": "spark.dynamicAllocation.minExecutors",
+          "value": "1",
+          "type": "number"
         }
       },
       "status": "READY",

@@ -11,5 +11,5 @@ services:
       - "8192:8192"
     volumes:
       - /data:/data
-      - /usr/src/app/polynote/notebooks:/.notebooks
+      - ./notebooks:/usr/src/app/polynote/notebooks
     container_name: polynote
