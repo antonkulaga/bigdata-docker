@@ -7,7 +7,7 @@ ENV POLYNOTE_VERSION=0.2.13
 
 # Install Python and dependencies
 
-RUN echo "alias pip3=/opt/conda/bin/pip" >> ~/.bashrc
+RUN ln -s /opt/conda/bin/pip /usr/bin/pip3
 
 RUN conda install -y -c conda-forge jedi pyspark virtualenv keras plotly && conda clean -y --all
 
