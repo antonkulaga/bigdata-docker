@@ -3,7 +3,7 @@ FROM quay.io/comp-bio-aging/spark-master:master
 
 WORKDIR /usr/src/app
 ENV SCALA_VERSION=2.11.12
-ENV POLYNOTE_VERSION=0.2.13
+ENV POLYNOTE_VERSION=0.2.14
 
 # Install Python and dependencies
 
