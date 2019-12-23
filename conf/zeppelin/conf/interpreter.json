@@ -10,13 +10,13 @@
           "value": "",
           "type": "url"
         },
-        "ignite.peerClassLoadingEnabled": {
-          "name": "ignite.peerClassLoadingEnabled",
+        "ignite.clientMode": {
+          "name": "ignite.clientMode",
           "value": true,
           "type": "checkbox"
         },
-        "ignite.clientMode": {
-          "name": "ignite.clientMode",
+        "ignite.peerClassLoadingEnabled": {
+          "name": "ignite.peerClassLoadingEnabled",
           "value": true,
           "type": "checkbox"
         },
@@ -77,6 +77,11 @@
           "value": "30000",
           "type": "number"
         },
+        "zeppelin.python.maxResult": {
+          "name": "zeppelin.python.maxResult",
+          "value": "1000",
+          "type": "number"
+        },
         "zeppelin.python.useIPython": {
           "name": "zeppelin.python.useIPython",
           "value": true,
@@ -85,11 +90,6 @@
         "zeppelin.ipython.grpc.message_size": {
           "name": "zeppelin.ipython.grpc.message_size",
           "value": "33554432",
-          "type": "number"
-        },
-        "zeppelin.python.maxResult": {
-          "name": "zeppelin.python.maxResult",
-          "value": "1000",
           "type": "number"
         }
       },
@@ -163,10 +163,25 @@
       "name": "sap",
       "group": "sap",
       "properties": {
+        "universe.queryTimeout": {
+          "name": "universe.queryTimeout",
+          "value": "7200000",
+          "type": "number"
+        },
+        "universe.concurrent.use": {
+          "name": "universe.concurrent.use",
+          "value": true,
+          "type": "checkbox"
+        },
         "universe.password": {
           "name": "universe.password",
           "value": "",
           "type": "password"
+        },
+        "universe.interpolation": {
+          "name": "universe.interpolation",
+          "value": false,
+          "type": "checkbox"
         },
         "universe.api.url": {
           "name": "universe.api.url",
@@ -177,6 +192,11 @@
           "name": "universe.authType",
           "value": "secEnterprise",
           "type": "string"
+        },
+        "universe.concurrent.maxConnection": {
+          "name": "universe.concurrent.maxConnection",
+          "value": "10",
+          "type": "number"
         },
         "universe.user": {
           "name": "universe.user",
@@ -193,7 +213,7 @@
           "editor": {
             "editOnDblClick": false,
             "completionKey": "TAB",
-            "completionSupport": true
+            "completionSupport": false
           }
         }
       ],
@@ -291,6 +311,16 @@
           "name": "zeppelin.jdbc.interpolation",
           "value": false,
           "type": "checkbox"
+        },
+        "zeppelin.jdbc.maxConnLifetime": {
+          "name": "zeppelin.jdbc.maxConnLifetime",
+          "value": "-1",
+          "type": "number"
+        },
+        "zeppelin.jdbc.maxRows": {
+          "name": "zeppelin.jdbc.maxRows",
+          "value": "1000",
+          "type": "number"
         }
       },
       "status": "READY",
@@ -391,16 +421,6 @@
       "name": "pig",
       "group": "pig",
       "properties": {
-        "zeppelin.pig.execType": {
-          "name": "zeppelin.pig.execType",
-          "value": "mapreduce",
-          "type": "string"
-        },
-        "SPARK_JAR": {
-          "name": "SPARK_JAR",
-          "value": "",
-          "type": "textarea"
-        },
         "zeppelin.pig.includeJobStats": {
           "name": "zeppelin.pig.includeJobStats",
           "value": false,
@@ -410,6 +430,16 @@
           "name": "zeppelin.pig.maxResult",
           "value": "1000",
           "type": "number"
+        },
+        "zeppelin.pig.execType": {
+          "name": "zeppelin.pig.execType",
+          "value": "mapreduce",
+          "type": "string"
+        },
+        "SPARK_JAR": {
+          "name": "SPARK_JAR",
+          "value": "",
+          "type": "textarea"
         },
         "SPARK_MASTER": {
           "name": "SPARK_MASTER",
@@ -453,15 +483,15 @@
       "name": "flink",
       "group": "flink",
       "properties": {
-        "port": {
-          "name": "port",
-          "value": "6123",
-          "type": "number"
-        },
         "host": {
           "name": "host",
           "value": "local",
           "type": "string"
+        },
+        "port": {
+          "name": "port",
+          "value": "6123",
+          "type": "number"
         }
       },
       "status": "READY",
@@ -655,7 +685,7 @@
         },
         {
           "name": "pyspark",
-          "class": "org.apache.zeppelin.livy.LivyPySpark3Interpreter",
+          "class": "org.apache.zeppelin.livy.LivyPySparkInterpreter",
           "defaultInterpreter": false,
           "editor": {
             "language": "python",
@@ -1156,16 +1186,6 @@
       "name": "spark",
       "group": "spark",
       "properties": {
-        "spark.executor.memory": {
-          "name": "spark.executor.memory",
-          "value": "",
-          "type": "string"
-        },
-        "zeppelin.spark.sql.interpolation": {
-          "name": "zeppelin.spark.sql.interpolation",
-          "value": true,
-          "type": "checkbox"
-        },
         "zeppelin.spark.concurrentSQL": {
           "name": "zeppelin.spark.concurrentSQL",
           "value": true,
@@ -1181,10 +1201,10 @@
           "value": "R",
           "type": "string"
         },
-        "spark.app.name": {
-          "name": "spark.app.name",
-          "value": "Zeppelin",
-          "type": "string"
+        "spark.cassandra.connection.host": {
+          "name": "spark.cassandra.connection.host",
+          "value": "dse",
+          "type": "textarea"
         },
         "zeppelin.R.image.width": {
           "name": "zeppelin.R.image.width",
@@ -1198,13 +1218,58 @@
         },
         "zeppelin.dep.additionalRemoteRepository": {
           "name": "zeppelin.dep.additionalRemoteRepository",
-          "value": "spark-packages,http://dl.bintray.com/spark-packages/maven,false;",
+          "value": "compbioaging, https://dl.bintray.com/comp-bio-aging/main, true;",
           "type": "textarea"
+        },
+        "zeppelin.dep.localrepo": {
+          "name": "zeppelin.dep.localrepo",
+          "value": "local-repo",
+          "type": "string"
+        },
+        "zeppelin.spark.sql.stacktrace": {
+          "name": "zeppelin.spark.sql.stacktrace",
+          "value": false,
+          "type": "checkbox"
+        },
+        "zeppelin.spark.useHiveContext": {
+          "name": "zeppelin.spark.useHiveContext",
+          "value": true,
+          "type": "checkbox"
+        },
+        "zeppelin.spark.printREPLOutput": {
+          "name": "zeppelin.spark.printREPLOutput",
+          "value": true,
+          "type": "checkbox"
+        },
+        "spark.cores.max": {
+          "name": "spark.cores.max",
+          "value": "",
+          "type": "number"
+        },
+        "spark.executor.memory": {
+          "name": "spark.executor.memory",
+          "value": "",
+          "type": "string"
+        },
+        "zeppelin.spark.sql.interpolation": {
+          "name": "zeppelin.spark.sql.interpolation",
+          "value": true,
+          "type": "checkbox"
+        },
+        "spark.app.name": {
+          "name": "spark.app.name",
+          "value": "Zeppelin",
+          "type": "string"
         },
         "zeppelin.spark.maxResult": {
           "name": "zeppelin.spark.maxResult",
           "value": "1000",
           "type": "number"
+        },
+        "zeppelin.spark.ui.hidden": {
+          "name": "zeppelin.spark.ui.hidden",
+          "value": false,
+          "type": "checkbox"
         },
         "master": {
           "name": "master",
@@ -1228,51 +1293,11 @@
         },
         "zeppelin.spark.useNew": {
           "name": "zeppelin.spark.useNew",
-          "value": true,
-          "type": "checkbox"
-        },
-        "zeppelin.dep.localrepo": {
-          "name": "zeppelin.dep.localrepo",
-          "value": "local-repo",
-          "type": "string"
-        },
-        "zeppelin.pyspark.useIPython": {
-          "name": "zeppelin.pyspark.useIPython",
-          "value": true,
-          "type": "checkbox"
-        },
-        "zeppelin.spark.sql.stacktrace": {
-          "name": "zeppelin.spark.sql.stacktrace",
           "value": false,
           "type": "checkbox"
         },
-        "zeppelin.spark.useHiveContext": {
-          "name": "zeppelin.spark.useHiveContext",
-          "value": true,
-          "type": "checkbox"
-        },
-        "zeppelin.spark.uiWebUrl": {
-          "name": "zeppelin.spark.uiWebUrl",
-          "value": "",
-          "type": "string"
-        },
-        "zeppelin.R.render.options": {
-          "name": "zeppelin.R.render.options",
-          "value": "out.format \u003d \u0027html\u0027, comment \u003d NA, echo \u003d FALSE, results \u003d \u0027asis\u0027, message \u003d F, warning \u003d F, fig.retina \u003d 2",
-          "type": "textarea"
-        },
-        "zeppelin.spark.printREPLOutput": {
-          "name": "zeppelin.spark.printREPLOutput",
-          "value": true,
-          "type": "checkbox"
-        },
-        "spark.cores.max": {
-          "name": "spark.cores.max",
-          "value": "",
-          "type": "number"
-        },
-        "spark.dynamicAllocation.enabled": {
-          "name": "spark.dynamicAllocation.enabled",
+        "zeppelin.pyspark.useIPython": {
+          "name": "zeppelin.pyspark.useIPython",
           "value": true,
           "type": "checkbox"
         },
@@ -1286,10 +1311,20 @@
           "value": true,
           "type": "checkbox"
         },
-        "spark.cassandra.connection.host": {
-          "name": "spark.cassandra.connection.host",
-          "value": "dse",
+        "zeppelin.spark.uiWebUrl": {
+          "name": "zeppelin.spark.uiWebUrl",
+          "value": "",
+          "type": "string"
+        },
+        "zeppelin.R.render.options": {
+          "name": "zeppelin.R.render.options",
+          "value": "out.format \u003d \u0027html\u0027, comment \u003d NA, echo \u003d FALSE, results \u003d \u0027asis\u0027, message \u003d F, warning \u003d F, fig.retina \u003d 2",
           "type": "textarea"
+        },
+        "spark.dynamicAllocation.enabled": {
+          "name": "spark.dynamicAllocation.enabled",
+          "value": true,
+          "type": "checkbox"
         }
       },
       "status": "READY",
@@ -1361,7 +1396,7 @@
       ],
       "dependencies": [
         {
-          "groupArtifactVersion": "org.apache.commons:commons-lang3:3.8.1",
+          "groupArtifactVersion": "com.lihaoyi:ammonite-ops_2.11:1.6.7",
           "local": false
         }
       ],
@@ -1566,7 +1601,8 @@
         },
         "default.statementPrecode": {
           "name": "default.statementPrecode",
-          "value": ""
+          "value": "",
+          "type": "string"
         },
         "zeppelin.jdbc.concurrent.use": {
           "name": "zeppelin.jdbc.concurrent.use",
@@ -1582,6 +1618,16 @@
           "name": "zeppelin.jdbc.interpolation",
           "value": false,
           "type": "checkbox"
+        },
+        "zeppelin.jdbc.maxConnLifetime": {
+          "name": "zeppelin.jdbc.maxConnLifetime",
+          "value": "-1",
+          "type": "number"
+        },
+        "zeppelin.jdbc.maxRows": {
+          "name": "zeppelin.jdbc.maxRows",
+          "value": "1000",
+          "type": "number"
         }
       },
       "status": "READY",
@@ -1723,6 +1769,54 @@
     }
   },
   "interpreterBindings": {
+    "2EXJKCVS2": [
+      "spark",
+      "md",
+      "angular",
+      "sh",
+      "livy",
+      "alluxio",
+      "file",
+      "flink",
+      "python",
+      "ignite",
+      "lens",
+      "cassandra",
+      "kylin",
+      "elasticsearch",
+      "geometa",
+      "jdbc",
+      "hbase",
+      "bigquery",
+      "groovy",
+      "neo4j",
+      "pig",
+      "sap"
+    ],
+    "2EJ4FG4WX": [
+      "spark",
+      "md",
+      "angular",
+      "sh",
+      "livy",
+      "alluxio",
+      "file",
+      "flink",
+      "python",
+      "ignite",
+      "lens",
+      "cassandra",
+      "kylin",
+      "elasticsearch",
+      "geometa",
+      "jdbc",
+      "hbase",
+      "bigquery",
+      "groovy",
+      "neo4j",
+      "pig",
+      "sap"
+    ],
     "2DJJ56VW4": [
       "spark",
       "md",
@@ -1745,6 +1839,30 @@
       "pig",
       "groovy",
       "neo4j",
+      "sap"
+    ],
+    "2EDN59YYY": [
+      "spark",
+      "md",
+      "angular",
+      "sh",
+      "livy",
+      "alluxio",
+      "file",
+      "flink",
+      "python",
+      "ignite",
+      "lens",
+      "cassandra",
+      "kylin",
+      "elasticsearch",
+      "geometa",
+      "jdbc",
+      "hbase",
+      "bigquery",
+      "groovy",
+      "neo4j",
+      "pig",
       "sap"
     ],
     "2DNP5ZAB2": [
@@ -1795,6 +1913,30 @@
       "neo4j",
       "sap"
     ],
+    "2EQQYJSDG": [
+      "spark",
+      "md",
+      "angular",
+      "sh",
+      "livy",
+      "alluxio",
+      "file",
+      "flink",
+      "python",
+      "ignite",
+      "lens",
+      "cassandra",
+      "kylin",
+      "elasticsearch",
+      "geometa",
+      "jdbc",
+      "hbase",
+      "bigquery",
+      "groovy",
+      "neo4j",
+      "pig",
+      "sap"
+    ],
     "2DJTDQG6B": [
       "spark",
       "md",
@@ -1825,6 +1967,23 @@
       "id": "central",
       "type": "default",
       "url": "http://repo1.maven.org/maven2/",
+      "releasePolicy": {
+        "enabled": true,
+        "updatePolicy": "daily",
+        "checksumPolicy": "warn"
+      },
+      "snapshotPolicy": {
+        "enabled": true,
+        "updatePolicy": "daily",
+        "checksumPolicy": "warn"
+      },
+      "mirroredRepositories": [],
+      "repositoryManager": false
+    },
+    {
+      "id": "local",
+      "type": "default",
+      "url": "file:///home/zeppelin/.m2/repository",
       "releasePolicy": {
         "enabled": true,
         "updatePolicy": "daily",
