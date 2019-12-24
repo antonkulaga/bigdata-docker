@@ -9,6 +9,7 @@ ENV SPARK_MASTER_WEBUI_PORT 8080
 ENV SPARK_MASTER_LOG /spark/logs
 
 RUN chmod -R 777 /spark
+RUN chmod +x /master.sh
 
 EXPOSE 8080 7077 6066
 CMD ["/bin/bash", "/master.sh"]
