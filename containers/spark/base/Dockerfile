@@ -7,7 +7,20 @@ ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
 ENV SPARK_VERSION=2.4.4
-ENV HADOOP_VERSION=2.7
+ENV HADOOP_VERSION=2.8
+
+ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
+RUN chmod +x /usr/bin/apt-get-install
+
+RUN apt-get-install -y curl \
+      && chmod +x *.sh \
+      && wget http://apache.mirror.iphh.net/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-without-hadoop-scala-2.12.tgz \
+      && tar -xvzf spark-${SPARK_VERSION}-bin-without-hadoop-scala-2.12.tgz \
+      && mv spark-${SPARK_VERSION}-bin-without-hadoop-scala-2.12 spark \
+      && rm spark-${SPARK_VERSION}-bin-without-hadoop-scala-2.12.tgz \
+      #&& cd /css \
+      #&& jar uf /spark/jars/spark-core_2.12-${SPARK_VERSION}.jar org/apache/spark/ui/static/timeline-view.css \
+      && cd /
 
 COPY wait-for-step.sh /
 COPY execute-step.sh /
@@ -17,7 +30,6 @@ COPY finish-step.sh /
 RUN chmod +x /wait-for-step.sh && chmod +x /execute-step.sh && chmod +x /finish-step.sh
 
 # Fix the value of PYTHONHASHSEED
-# Note: this is needed when you use Python 3.3 or greater
 ENV PYTHONHASHSEED 1
 
 COPY spark-defaults.conf /spark/conf/
