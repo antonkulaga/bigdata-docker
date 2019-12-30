@@ -15,7 +15,7 @@ RUN chmod +x /usr/bin/apt-get-install
 RUN wget http://apache.mirror.iphh.net/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-without-hadoop-scala-2.12.tgz \
       && tar -xvzf spark-${SPARK_VERSION}-bin-without-hadoop-scala-2.12.tgz \
       && mv spark-${SPARK_VERSION}-bin-without-hadoop-scala-2.12 spark \
-      && rm spark-${SPARK_VERSION}-bin-without-hadoop-scala-2.12.tgz \
+      && rm spark-${SPARK_VERSION}-bin-without-hadoop-scala-2.12.tgz
 
 COPY wait-for-step.sh /
 COPY execute-step.sh /
