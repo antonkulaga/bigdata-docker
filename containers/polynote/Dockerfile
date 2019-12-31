@@ -31,8 +31,8 @@ COPY config.yml ./polynote/config.yml
 # expose the (internal) port that polynote runs on
 EXPOSE 8192
 
-RUN useradd -r -u 1002 $NB_USER
-ENV EUID=1002
+#RUN useradd -r -u 1002 $NB_USER
+#ENV EUID=1002
 
 # start polynote on container run
 CMD ["./polynote/polynote.py"]

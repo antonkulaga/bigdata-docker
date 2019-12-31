@@ -8,6 +8,7 @@ ENV INIT_DAEMON_STEP spark_master_init
 
 ENV SPARK_VERSION=2.4.4
 ENV HADOOP_VERSION=2.8
+ENV SPARK_HOME=/spark
 
 ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
 RUN chmod +x /usr/bin/apt-get-install
