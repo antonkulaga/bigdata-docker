@@ -3,7 +3,7 @@ FROM quay.io/comp-bio-aging/spark-master:master
 
 WORKDIR /usr/src/app
 ENV SCALA_VERSION=2.12.10
-ENV POLYNOTE_VERSION=0.2.15
+ENV POLYNOTE_VERSION=0.2.17
 
 ENV NB_USER=polynote
 
