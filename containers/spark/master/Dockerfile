@@ -11,5 +11,7 @@ ENV SPARK_MASTER_LOG /spark/logs
 RUN chmod -R 777 /spark
 RUN chmod +x /master.sh
 
+WORKDIR /data
+
 EXPOSE 8080 7077 6066
 CMD ["/bin/bash", "/master.sh"]

@@ -13,6 +13,8 @@ ENV SPARK_HOME=/spark
 ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
 RUN chmod +x /usr/bin/apt-get-install
 
+WORKDIR /
+
 RUN wget http://apache.mirror.iphh.net/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-without-hadoop-scala-2.12.tgz \
       && tar -xvzf spark-${SPARK_VERSION}-bin-without-hadoop-scala-2.12.tgz \
       && mv spark-${SPARK_VERSION}-bin-without-hadoop-scala-2.12 spark \

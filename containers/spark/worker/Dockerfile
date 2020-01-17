@@ -13,5 +13,7 @@ ENV SPARK_MASTER "spark://spark-master:7077"
 RUN chmod -R 777 /spark
 RUN chmod +x /worker.sh
 
+WORKDIR /data
+
 EXPOSE 8081
 CMD ["/bin/bash", "/worker.sh"]
