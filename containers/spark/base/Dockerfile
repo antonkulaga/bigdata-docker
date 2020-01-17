@@ -64,7 +64,7 @@ ENV PYTHONHASHSEED 1
 COPY hive-site.xml /spark/conf/
 COPY spark-env.sh /spark/conf/
 
-RUN apt-get install rsync
+RUN apt-get install -y rsync
 
 
 # Install Python and dependencies
