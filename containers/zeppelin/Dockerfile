@@ -2,6 +2,9 @@ FROM quay.io/comp-bio-aging/spark-base:master
 #FROM apache/zeppelin:0.8.2
 MAINTAINER Anton Kulaga <antonkulaga@gmail.com>
 
+ENV DEBIAN_FRONTEND=noninteractive
+RUN ln -fs /usr/share/zoneinfo/Europe/Bucharest /etc/localtime
+
 # `Z_VERSION` will be updated by `dev/change_zeppelin_version.sh`
 ENV Z_VERSION="0.9.0"
 ENV LOG_TAG="[ZEPPELIN_${Z_VERSION}]:" \
@@ -19,7 +22,7 @@ RUN echo "$LOG_TAG install tini related packages" && \
     rm tini.deb
 
 
-RUN apt-get-install -y python3 python3-setuptools python3-pip npm libfontconfig r-base-dev r-cran-evaluate
+RUN apt-get install -y python3 python3-setuptools python3-pip npm libfontconfig r-base-dev r-cran-evaluate
 RUN git clone https://github.com/apache/zeppelin.git
 WORKDIR zeppelin
 
