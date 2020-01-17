@@ -1,21 +1,29 @@
-FROM quay.io/comp-bio-aging/spark-master:master
-
+FROM quay.io/comp-bio-aging/spark-base:master
 
 WORKDIR /usr/src/app
 ENV SCALA_VERSION=2.12.10
 ENV POLYNOTE_VERSION=0.2.17
 
-ENV NB_USER=polynote
 
-# Install Python and dependencies
+ARG POLYNOTE_VERSION
+ARG SCALA_VERSION="2.12"
+ARG DIST_TAR="polynote-dist.tar.gz"
 
-RUN ln -s /opt/conda/bin/pip /usr/bin/pip3
+WORKDIR /opt
 
-RUN conda install -y -c conda-forge jedi pyspark virtualenv keras plotly && conda clean -y --all
+RUN if test "${SCALA_VERSION}" = "2.12"; then export DIST_TAR="polynote-dist-2.12.tar.gz"; fi && \
+    wget -q https://github.com/polynote/polynote/releases/download/$POLYNOTE_VERSION/$DIST_TAR && \
+    tar xfzp $DIST_TAR && \
+    echo "DIST_TAR=$DIST_TAR" && \
+    rm $DIST_TAR
+
 
 # Download and extract polynote
 RUN curl -Lk https://github.com/polynote/polynote/releases/download/${POLYNOTE_VERSION}/polynote-dist-2.12.tar.gz \
   | tar -xzvpf -
+
+# allow user access to the WORKDIR
+RUN chown -R spark:spark /opt/
 
 RUN  rm -rf \
          /var/lib/apt/lists/* \
@@ -31,8 +39,7 @@ COPY config.yml ./polynote/config.yml
 # expose the (internal) port that polynote runs on
 EXPOSE 8192
 
-#RUN useradd -r -u 1002 $NB_USER
-#ENV EUID=1002
+USER spark
 
 # start polynote on container run
 CMD ["./polynote/polynote.py"]

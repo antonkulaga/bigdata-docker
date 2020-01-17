@@ -50,6 +50,8 @@ COPY finish-step.sh /
 #Give permission to execute scripts
 RUN chmod +x /wait-for-step.sh && chmod +x /execute-step.sh && chmod +x /finish-step.sh
 
+ENV PATH="$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin"
+
 # Fix the value of PYTHONHASHSEED
 ENV PYTHONHASHSEED 1
 
@@ -62,9 +64,18 @@ ENV PYTHONHASHSEED 1
 COPY hive-site.xml /spark/conf/
 COPY spark-env.sh /spark/conf/
 
+RUN apt-get install rsync
+
+
+# Install Python and dependencies
+
 RUN pip install jep
 RUN conda install -c conda-forge pyarrow
-RUN conda install -y pyspark
+RUN conda install -y -c conda-forge pyspark
+
+RUN ln -s /opt/conda/bin/pip /usr/bin/pip3
+RUN conda install -y -c conda-forge jedi virtualenv keras plotly && conda clean -y --all
+
 RUN adduser --disabled-password -u 1002 spark
 RUN chmod -R 777 /spark
 
