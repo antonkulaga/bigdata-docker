@@ -6,9 +6,9 @@ COPY master.sh /
 
 ENV SPARK_MASTER_PORT 7077
 ENV SPARK_MASTER_WEBUI_PORT 8080
-ENV SPARK_MASTER_LOG /spark/logs
+ENV SPARK_MASTER_LOG /opt/spark/logs
 
-RUN chmod -R 777 /spark
+RUN chmod -R 777 /opt/spark
 RUN chmod +x /master.sh
 
 WORKDIR /data

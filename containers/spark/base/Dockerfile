@@ -7,12 +7,12 @@ ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
 ENV SPARK_VERSION=2.4.4
-ENV SPARK_HOME=/spark
+ENV SPARK_HOME=/opt/spark
 
 ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
 RUN chmod +x /usr/bin/apt-get-install
-
-WORKDIR /
+RUN mkdir /tmp/spark-events && chmod -R 777 /tmp/spark-events
+WORKDIR /opt
 
 #INSTALL HADOOP
 
@@ -51,14 +51,14 @@ RUN chmod +x /wait-for-step.sh && chmod +x /execute-step.sh && chmod +x /finish-
 
 ENV PATH="$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin"
 
-COPY spark-defaults.conf /spark/conf/
+COPY spark-defaults.conf /opt/spark/conf/
 
 # Fix the value of PYTHONHASHSEED
 # Note: this is needed when you use Python 3.3 or greater
 ENV PYTHONHASHSEED 1
 
-COPY hive-site.xml /spark/conf/
-COPY spark-env.sh /spark/conf/
+COPY hive-site.xml /opt/spark/conf/
+COPY spark-env.sh /opt/spark/conf/
 
 RUN apt-get install -y rsync
 
@@ -79,8 +79,7 @@ RUN bash -l -c 'echo export SPARK_DIST_CLASSPATH="$(hadoop classpath)" >> /etc/b
 ENV PATH /opt/conda/envs/env/bin:$PATH
 
 RUN adduser --disabled-password -u 1002 spark
-RUN chmod -R 777 /spark
-
+RUN chmod -R 777 /opt/spark
 
 COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
