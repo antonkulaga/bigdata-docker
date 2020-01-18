@@ -7,23 +7,18 @@ ENV POLYNOTE_VERSION=0.2.17
 
 ARG POLYNOTE_VERSION
 ARG SCALA_VERSION="2.12"
-ARG DIST_TAR="polynote-dist.tar.gz"
+ARG DIST_TAR="polynote-dist-2.12.tar.gz"
 
 WORKDIR /opt
 
-RUN if test "${SCALA_VERSION}" = "2.12"; then export DIST_TAR="polynote-dist-2.12.tar.gz"; fi && \
-    wget -q https://github.com/polynote/polynote/releases/download/$POLYNOTE_VERSION/$DIST_TAR && \
+RUN wget -q https://github.com/polynote/polynote/releases/download/$POLYNOTE_VERSION/$DIST_TAR && \
     tar xfzp $DIST_TAR && \
     echo "DIST_TAR=$DIST_TAR" && \
     rm $DIST_TAR
 
-
-# Download and extract polynote
-RUN curl -Lk https://github.com/polynote/polynote/releases/download/${POLYNOTE_VERSION}/polynote-dist-2.12.tar.gz \
-  | tar -xzvpf -
-
 # allow user access to the WORKDIR
-RUN chown -R spark:spark /opt/
+#RUN chown -R spark:spark /opt/
+RUN chmod -R 777 /opt/
 
 RUN  rm -rf \
          /var/lib/apt/lists/* \
