@@ -7,7 +7,6 @@ ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
 ENV SPARK_VERSION=2.4.4
-ENV HADOOP_VERSION=2.8
 ENV SPARK_HOME=/spark
 
 ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
@@ -17,7 +16,7 @@ WORKDIR /
 
 #INSTALL HADOOP
 
-ENV HADOOP_VERSION 2.9.2
+ENV HADOOP_VERSION=2.9.2
 ENV HADOOP_URL https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
 RUN set -x \
     && curl -fSL "$HADOOP_URL" -o /tmp/hadoop.tar.gz \
@@ -52,9 +51,6 @@ RUN chmod +x /wait-for-step.sh && chmod +x /execute-step.sh && chmod +x /finish-
 
 ENV PATH="$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin"
 
-# Fix the value of PYTHONHASHSEED
-ENV PYTHONHASHSEED 1
-
 COPY spark-defaults.conf /spark/conf/
 
 # Fix the value of PYTHONHASHSEED
@@ -75,6 +71,9 @@ RUN conda install -y -c conda-forge pyspark
 
 RUN ln -s /opt/conda/bin/pip /usr/bin/pip3
 RUN conda install -y -c conda-forge jedi virtualenv keras plotly && conda clean -y --all
+
+RUN echo "source activate" > ~/.bashrc
+ENV PATH /opt/conda/envs/env/bin:$PATH
 
 RUN adduser --disabled-password -u 1002 spark
 RUN chmod -R 777 /spark
