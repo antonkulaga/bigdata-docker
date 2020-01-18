@@ -1,7 +1,7 @@
 version: '3'
 services:
   polynote:
-    image: quay.io/comp-bio-aging/polynote
+    image: quay.io/comp-bio-aging/polynote:master
     environment:
       POLYNOTE_CONFIG: |
         listen:
@@ -11,5 +11,5 @@ services:
       - "8192:8192"
     volumes:
       - /data:/data
-      - ./notebooks:/usr/src/app/polynote/notebooks
+      - ./notebooks:/opt/polynote/notebooks
     container_name: polynote

@@ -38,7 +38,7 @@ services:
     - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
     - /data:/data
   polynote:
-    image: quay.io/comp-bio-aging/polynote
+    image: quay.io/comp-bio-aging/polynote:master
     env_file:
       - conf/bigdata.env
     environment:
@@ -50,7 +50,8 @@ services:
       - "8192:8192"
     volumes:
       - /data:/data
-      - /data/notebooks/polynote:/usr/src/app/polynote/notebooks
+      - /data/notebooks/polynote:/opt/polynote/notebooks
+      - ./containers/polynote/config.yml:/opt/config.yml
     container_name: polynote
   zeppelin:
     image: quay.io/comp-bio-aging/zeppelin:master
