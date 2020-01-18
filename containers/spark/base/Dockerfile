@@ -73,12 +73,14 @@ RUN ln -s /opt/conda/bin/pip /usr/bin/pip3
 RUN conda install -y -c conda-forge jedi virtualenv keras plotly && conda clean -y --all
 
 RUN echo "source activate" > ~/.bashrc
+RUN export SPARK_DIST_CLASSPATH=$(hadoop classpath);echo $SPARK_DIST_CLASSPATH;
+RUN bash -l -c 'echo export SPARK_DIST_CLASSPATH="$(hadoop classpath)" >> /etc/bash.bashrc'
+
 ENV PATH /opt/conda/envs/env/bin:$PATH
 
 RUN adduser --disabled-password -u 1002 spark
 RUN chmod -R 777 /spark
 
-RUN export SPARK_DIST_CLASSPATH=$(hadoop classpath)
 
 COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
