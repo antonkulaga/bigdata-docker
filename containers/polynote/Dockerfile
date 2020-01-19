@@ -17,7 +17,7 @@ RUN  rm -rf \
          /usr/share/doc \
          /usr/share/doc-base \
          /root/.cache/pip
-
+RUN mkdir /tmp/spark-events && chmod -R 777 /tmp/spark-events
 COPY config.yml ./polynote/config.yml
 
 # expose the (internal) port that polynote runs on
