@@ -92,41 +92,16 @@ services:
         condition: on-failure
     ports:
     - 5050:8080
-  # DataStax Enterprise
-#  dse:
-#    image: datastax/dse-server:latest
-#    command: [ -s ]
-#    ports:
-#      - "9042:9042" # cassandra
-#    environment:
-#      DS_LICENSE: accept
-#    env_file:
-#      - conf/bigdata.env
-#    volumes:
-#      - "/data/databases/cassandra:/var/lib/cassandra"
-  # One instance of DataStax Studio
-#  studio:
-#    image: datastax/dse-studio:latest
-#    ports:
-#      # The Web UI exposed to our host
-#      - "9091:9091"
-#    depends_on:
-#      - dse
-#    environment:
-#      DS_LICENSE: accept
-#    env_file:
-#      - conf/bigdata.env
-#    #note: nonroot container, so volume should be 777 or similar
-#    volumes:
-#      - "/data/notebooks/datastax:/var/lib/datastax-studio"
-#  graphdb:
-#    image: ontotext/graphdb:8.10.1-se
-#    ports:
-#      - "7200:7200"
-#    volumes:
-#      - "/data/databases/graphdb:/opt/graphdb/home"
-#    env_file:
-#      - conf/bigdata.env
+  graphdb:
+    image: "daschswiss/graphdb:9.0.0-free"
+    ports:
+      - "7200:7200"
+    volumes:
+      - "/data/databases/graphdb:/opt/graphdb/home"
+    env_file:
+      - conf/bigdata.env
+    entrypoint: /opt/graphdb/dist/bin/graphdb
+    command:  -Xmx20g -Dgraphdb.home=/opt/graphdb/home -Dgraphdb.global.page.cache=true -Ddefault.min.distinct.threshold=12g
 
 networks:
   default:
