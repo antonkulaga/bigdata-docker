@@ -47,7 +47,6 @@ services:
       - /data:/data
       - /data/notebooks/polynote:/opt/polynote/notebooks
       - ./containers/polynote/config.yml:/opt/config.yml
-    container_name: polynote
   zeppelin:
     image: quay.io/comp-bio-aging/zeppelin:master
     user: "zeppelin"
@@ -98,6 +97,7 @@ services:
       - "7200:7200"
     volumes:
       - "/data/databases/graphdb:/opt/graphdb/home"
+      - "./conf/graphdb/graphdb.properties:/opt/graphdb/dist/conf/graphdb.properties"
     env_file:
       - conf/bigdata.env
     entrypoint: /opt/graphdb/dist/bin/graphdb
