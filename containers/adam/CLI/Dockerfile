@@ -1,4 +1,4 @@
-FROM bde2020/spark-base:2.4.4-hadoop2.7
+FROM quay.io/comp-bio-aging/spark-base:master
 
 MAINTAINER Anton Kulaga antonkulaga@gmail.com
 
@@ -25,7 +25,7 @@ WORKDIR /opt/adam
 
 #RUN /opt/adam/scripts/move_to_spark_2.sh
 
-#RUN /opt/adam/scripts/move_to_scala_2.11.sh
+RUN /opt/adam/scripts/move_to_scala_2.12.sh
 
 RUN /opt/apache-maven-$MAVEN_VERSION/bin/mvn package -DskipTests
 
