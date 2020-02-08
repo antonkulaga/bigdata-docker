@@ -2,7 +2,7 @@ FROM quay.io/comp-bio-aging/spark-master:master
 
 WORKDIR /opt
 ENV SCALA_VERSION=2.12.10
-ENV POLYNOTE_VERSION=0.3.0
+ENV POLYNOTE_VERSION=0.2.17
 #ENV SPARK_DIST_CLASSPATH=/etc/hadoop:/opt/hadoop-2.9.2/share/hadoop/common/lib/*:/opt/hadoop-2.9.2/share/hadoop/common/*:/opt/hadoop-2.9.2/share/hadoop/hdfs:/opt/hadoop-2.9.2/share/hadoop/hdfs/lib/*:/opt/hadoop-2.9.2/share/hadoop/hdfs/*:/opt/hadoop-2.9.2/share/hadoop/yarn:/opt/hadoop-2.9.2/share/hadoop/yarn/lib/*:/opt/hadoop-2.9.2/share/hadoop/yarn/*:/opt/hadoop-2.9.2/share/hadoop/mapreduce/lib/*:/opt/hadoop-2.9.2/share/hadoop/mapreduce/*:/contrib/capacity-scheduler/*.jar
 
 # Download and extract polynote
