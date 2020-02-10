@@ -11,5 +11,3 @@ repositories:
   - maven:
       base: https://dl.bintray.com/comp-bio-aging/main/
       changing: true
-
-spark_dist_classpath_filter: "*"
