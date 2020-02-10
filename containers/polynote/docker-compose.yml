@@ -12,4 +12,5 @@ services:
     volumes:
       - /data:/data
       - ./notebooks:/opt/polynote/notebooks
+      - ./config.yml:/opt/polynote/config.yml
     container_name: polynote

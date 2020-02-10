@@ -46,7 +46,7 @@ services:
     volumes:
       - /data:/data
       - /data/notebooks/polynote:/opt/polynote/notebooks
-      - ./containers/polynote/config.yml:/opt/config.yml
+      - ./containers/polynote/config.yml:/opt/polynote/config.yml
   zeppelin:
     image: quay.io/comp-bio-aging/zeppelin:master
     user: "zeppelin"
