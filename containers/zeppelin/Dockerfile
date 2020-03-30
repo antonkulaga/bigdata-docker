@@ -37,25 +37,7 @@ RUN mkdir /opt/apache-maven-$MAVEN_VERSION
 RUN curl http://mirror.evowise.com/apache/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
   | tar --strip-components=1 -xzC /opt/apache-maven-$MAVEN_VERSION
 
-RUN mvn clean package -DskipTests -Pspark-2.4 -Phadoop-2.6 -Pscala-2.12 -Dspark.version=2.4.4
-
-
-#ENV SPARK_VERSION=2.4.4
-#ENV HADOOP_VERSION=2.7
-#ENV SPARK_HOME=/zeppelin/spark
-
-#ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
-#RUN chmod +x /usr/bin/apt-get-install
-
-#RUN mkdir logs && mkdir run
-
-#RUN apt-get-install -y curl \
-#      && wget http://apache.mirror.iphh.net/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
-#      && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
-#      && mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} spark \
-#      && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
-
-#COPY conf/interpreter.json /zeppelin/conf/interpreter.json
+RUN mvn clean package -DskipTests -Pspark-2.4 -Phadoop-2.6 -Pscala-2.12 -Dspark.version=2.4.5
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
