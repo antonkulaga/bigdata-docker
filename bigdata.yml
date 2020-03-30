@@ -1,42 +1,42 @@
 version: '3.7'
 services:
-  spark-master:
-    image: quay.io/comp-bio-aging/spark-master:master
-    user: "spark"
-    deploy:
-      replicas: 1
-      mode: replicated
-      placement:
-        constraints:
-        - node.role == manager
-      restart_policy:
-        condition: on-failure
-    ports:
-    - 8080:8080
-    - 7077:7077
-    - 6066:6066
-    env_file:
-    - conf/bigdata.env
-    volumes:
-    - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
-    - /data:/data
-  spark-worker:
-    image: quay.io/comp-bio-aging/spark-worker:master
-    user: "spark"
-    deploy:
-      mode: global
-      restart_policy:
-        condition: on-failure
-    ports:
-    - 8081:8081
-    - 8082:8082
-    - 8083:8083
-    - 7337:7337
-    env_file:
-    - conf/bigdata.env
-    volumes:
-    - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
-    - /data:/data
+  #spark-master:
+  #  image: quay.io/comp-bio-aging/spark-master:master
+  #  user: "spark"
+  #  deploy:
+  #    replicas: 1
+  #    mode: replicated
+  #    placement:
+  #      constraints:
+  #      - node.role == manager
+  #    restart_policy:
+  #      condition: on-failure
+  #  ports:
+  #  - 8080:8080
+  #  - 7077:7077
+  #  - 6066:6066
+  #  env_file:
+  #  - conf/bigdata.env
+  #  volumes:
+  #  - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
+  #  - /data:/data
+  #spark-worker:
+  #  image: quay.io/comp-bio-aging/spark-worker:master
+  #  user: "spark"
+  #  deploy:
+  #    mode: global
+  #    restart_policy:
+  #      condition: on-failure
+  #  ports:
+  #  - 8081:8081
+  #  - 8082:8082
+  #  - 8083:8083
+  #  - 7337:7337
+  #  env_file:
+  #  - conf/bigdata.env
+  #  volumes:
+  #  - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
+  #  - /data:/data
   polynote:
     image: quay.io/comp-bio-aging/polynote:master
     #env_file:
