@@ -93,7 +93,7 @@ services:
     ports:
     - 5050:8080
   graphdb:
-    image: "daschswiss/graphdb:9.0.0-free"
+    image: "daschswiss/knora-graphdb-free:v13.0.0-PR1-4-g683a3ed"
     ports:
       - "7200:7200"
     volumes:
@@ -102,7 +102,7 @@ services:
     env_file:
       - conf/bigdata.env
     entrypoint: /opt/graphdb/dist/bin/graphdb
-    command:  -Xmx20g -Dgraphdb.home=/opt/graphdb/home -Dgraphdb.global.page.cache=true -Ddefault.min.distinct.threshold=12g
+    command:  -Xmx42G -Dgraphdb.home=/opt/graphdb/home -Dgraphdb.global.page.cache=true -Ddefault.min.distinct.threshold=36864M
 
 networks:
   default:
