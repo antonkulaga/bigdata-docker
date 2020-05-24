@@ -1,5 +1,5 @@
 FROM quay.io/comp-bio-aging/spark-base:master
-#FROM apache/zeppelin:0.8.2
+
 MAINTAINER Anton Kulaga <antonkulaga@gmail.com>
 
 ENV DEBIAN_FRONTEND=noninteractive
