@@ -93,7 +93,7 @@ services:
     ports:
     - 5050:8080
   graphdb:
-    image: "daschswiss/knora-graphdb-free:v13.0.0-PR1-4-g683a3ed"
+    image: "daschswiss/knora-graphdb-free:v13.0.0-rc.4-1-gbd08f2c"
     ports:
       - "7200:7200"
     volumes:
