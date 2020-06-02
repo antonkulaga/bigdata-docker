@@ -102,7 +102,7 @@ services:
     env_file:
       - conf/bigdata.env
     entrypoint: /opt/graphdb/dist/bin/graphdb
-    command:  -Xmx42G -Dgraphdb.home=/opt/graphdb/home -Dgraphdb.global.page.cache=true -Ddefault.min.distinct.threshold=36864M
+    command: -Xms3g -Xmx42G -Dgraphdb.home=/opt/graphdb/home -Dgraphdb.global.page.cache=true
 
 networks:
   default:
