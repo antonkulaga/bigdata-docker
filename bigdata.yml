@@ -1,75 +1,17 @@
 version: '3.7'
 services:
-  #spark-master:
-  #  image: quay.io/comp-bio-aging/spark-master:master
-  #  user: "spark"
-  #  deploy:
-  #    replicas: 1
-  #    mode: replicated
-  #    placement:
-  #      constraints:
-  #      - node.role == manager
-  #    restart_policy:
-  #      condition: on-failure
-  #  ports:
-  #  - 8080:8080
-  #  - 7077:7077
-  #  - 6066:6066
-  #  env_file:
-  #  - conf/bigdata.env
-  #  volumes:
-  #  - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
-  #  - /data:/data
-  #spark-worker:
-  #  image: quay.io/comp-bio-aging/spark-worker:master
-  #  user: "spark"
-  #  deploy:
-  #    mode: global
-  #    restart_policy:
-  #      condition: on-failure
-  #  ports:
-  #  - 8081:8081
-  #  - 8082:8082
-  #  - 8083:8083
-  #  - 7337:7337
-  #  env_file:
-  #  - conf/bigdata.env
-  #  volumes:
-  #  - ./conf/spark/spark.conf:/spark/conf/spark-defaults.conf
-  #  - /data:/data
   polynote:
     image: quay.io/comp-bio-aging/polynote:master
-    #env_file:
-    #  - conf/bigdata.env
     ports:
-      - "8192:8192"
+      - 8192:8192
+      - 4040:4040
+      - 4041:4041
+      - 4042:4042
+      - 4043:4043
     volumes:
       - /data:/data
       - /data/notebooks/polynote:/opt/polynote/notebooks
       - ./containers/polynote/config.yml:/opt/polynote/config.yml
-  zeppelin:
-    image: quay.io/comp-bio-aging/zeppelin:master
-    user: "zeppelin"
-    env_file:
-    - conf/bigdata.env
-    ports:
-    - 9002:8080
-    - 4040:4040
-    - 4041:4041
-    - 4042:4042
-    volumes:
-    - /data/notebooks/zeppelin:/zeppelin/notebook
-    #- ./conf/alluxio/alluxio-1.8.0-client.jar:/zeppelin/local-repo/org/alluxio/alluxio-core-client/1.8.0/alluxio-1.8.0-client.jar
-    - /data:/data
-    - ./conf/zeppelin/conf:/zeppelin/conf
-    deploy:
-      replicas: 1
-      mode: replicated
-      placement:
-        constraints:
-        - node.role == manager
-      restart_policy:
-        condition: on-failure
   db:
     image: postgres:10.5
     deploy:
