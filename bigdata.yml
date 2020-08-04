@@ -35,10 +35,11 @@ services:
     ports:
     - 5050:8080
   graphdb:
-    image: "daschswiss/knora-graphdb-free:v13.0.0-rc.4-1-gbd08f2c"
+    image: "daschswiss/knora-graphdb-free:v13.0.0-rc.5-2-g24db3bf"
     ports:
       - "7200:7200"
     volumes:
+      - "/data/databases/graphdb/import:/root/graphdb-import"
       - "/data/databases/graphdb:/opt/graphdb/home"
       - "./conf/graphdb/graphdb.properties:/opt/graphdb/dist/conf/graphdb.properties"
     env_file:
