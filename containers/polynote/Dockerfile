@@ -9,7 +9,6 @@ WORKDIR /opt
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED TRUE
 
-ENV JAVA_HOME /usr/lib/jvm/default-java/
 RUN pip3 install \
   jep \
   jedi \
