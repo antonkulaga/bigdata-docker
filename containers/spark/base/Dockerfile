@@ -49,7 +49,7 @@ RUN apt-get install -y rsync
 # Install Python and dependencies
 
 RUN pip install jep
-RUN conda install -c conda-forge pyarrow
+RUN conda install -y -c conda-forge pyarrow
 RUN conda install -y -c conda-forge pyspark
 
 RUN ln -s /opt/conda/bin/pip /usr/bin/pip3

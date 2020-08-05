@@ -1,9 +1,26 @@
 FROM quay.io/comp-bio-aging/spark-master:master
 
 WORKDIR /opt
-ENV SCALA_VERSION=2.12.11
+ENV SCALA_VERSION=2.12.12
 ENV POLYNOTE_VERSION=0.3.11
-#ENV SPARK_DIST_CLASSPATH=/etc/hadoop:/opt/hadoop-2.9.2/share/hadoop/common/lib/*:/opt/hadoop-2.9.2/share/hadoop/common/*:/opt/hadoop-2.9.2/share/hadoop/hdfs:/opt/hadoop-2.9.2/share/hadoop/hdfs/lib/*:/opt/hadoop-2.9.2/share/hadoop/hdfs/*:/opt/hadoop-2.9.2/share/hadoop/yarn:/opt/hadoop-2.9.2/share/hadoop/yarn/lib/*:/opt/hadoop-2.9.2/share/hadoop/yarn/*:/opt/hadoop-2.9.2/share/hadoop/mapreduce/lib/*:/opt/hadoop-2.9.2/share/hadoop/mapreduce/*:/contrib/capacity-scheduler/*.jar
+
+WORKDIR /opt
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED TRUE
+
+ENV JAVA_HOME /usr/lib/jvm/default-java/
+RUN pip3 install \
+  jep \
+  jedi \
+  pyspark==3.0.0 \
+  virtualenv \
+  numpy \
+  pandas
+
+ENV PYSPARK_ALLOW_INSECURE_GATEWAY 1
+ENV SPARK_HOME /opt/spark
+ENV PATH "$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin"
 
 # Download and extract polynote
 RUN curl -Lk https://github.com/polynote/polynote/releases/download/${POLYNOTE_VERSION}/polynote-dist-2.12.tar.gz \
