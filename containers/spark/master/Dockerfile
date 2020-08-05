@@ -1,4 +1,4 @@
-FROM quay.io/comp-bio-aging/spark-base:master
+FROM quay.io/comp-bio-aging/spark-base:spark2
 
 COPY master.sh /
 

@@ -1,4 +1,4 @@
-FROM quay.io/comp-bio-aging/spark-master:master
+FROM quay.io/comp-bio-aging/spark-master:spark2
 
 WORKDIR /opt
 ENV SCALA_VERSION=2.12.11
