@@ -2,7 +2,7 @@ FROM quay.io/comp-bio-aging/spark-master:master
 
 WORKDIR /opt
 ENV SCALA_VERSION=2.12.12
-ENV POLYNOTE_VERSION=0.3.11
+ENV POLYNOTE_VERSION=0.3.12
 
 WORKDIR /opt
 
@@ -12,7 +12,7 @@ ENV PYTHONUNBUFFERED TRUE
 RUN pip3 install \
   jep \
   jedi \
-  pyspark==3.0.0 \
+  pyspark==3.0.1 \
   virtualenv \
   numpy \
   pandas
