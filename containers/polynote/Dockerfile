@@ -1,7 +1,7 @@
 FROM quay.io/comp-bio-aging/spark-master:master
 
 WORKDIR /opt
-ENV SCALA_VERSION=2.12.12
+ENV SCALA_VERSION=2.12.13
 ENV POLYNOTE_VERSION=0.3.12
 
 WORKDIR /opt
