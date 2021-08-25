@@ -1,0 +1,60 @@
+version: '3.9'
+services:
+  polynote:
+    image: quay.io/comp-bio-aging/polynote:master
+    ports:
+      - 8192:8192
+      - 4040:4040
+      - 4041:4041
+      - 4042:4042
+      - 4043:4043
+    volumes:
+      - /data:/data
+      - /data/notebooks/polynote:/opt/polynote/notebooks
+      - ./containers/polynote/config.yml:/opt/polynote/config.yml
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      # polynote.agingkills.eu
+      - "traefik.http.routers.polynote.rule=Host(`polynote.agingkills.eu`)"
+      - "traefik.http.routers.polynote.middlewares=auth@file"
+      - "traefik.http.routers.polynote.entrypoints=http"
+      # cromwell local
+      - "traefik.http.routers.local_polynote.rule=Host(`polynote.localhost`)"
+      - "traefik.http.routers.local_polynote.middlewares=auth@file"
+      - "traefik.http.routers.local_polynote.entrypoints=http"
+      # services
+      - "traefik.http.services.polynote.loadbalancer.server.port=8192"
+    deploy:
+      restart_policy:
+        condition: any
+  graphdb:
+    image: "daschswiss/knora-graphdb-free:v13.0.0-rc.5-2-g24db3bf"
+    ports:
+      - "7200:7200"
+    volumes:
+      - "/data/databases/graphdb/import:/root/graphdb-import"
+      - "/data/databases/graphdb:/opt/graphdb/home"
+      - "./conf/graphdb/graphdb.properties:/opt/graphdb/dist/conf/graphdb.properties"
+    env_file:
+      - conf/bigdata.env
+    entrypoint: /opt/graphdb/dist/bin/graphdb
+    command: -Xms4g -Xmx42G -Dgraphdb.home=/opt/graphdb/home -Dgraphdb.global.page.cache=true
+    labels:
+      - "traefik.enable=true"
+      # graphdb.agingkills.eu
+      - "traefik.http.routers.graphdb.rule=Host(`graphdb.agingkills.eu`)"
+      - "traefik.http.routers.graphdb.entrypoints=http"
+      # graphdb.localhost
+      - "traefik.http.routers.local_graphdb.rule=Host(`graphdb.localhost`)"
+      - "traefik.http.routers.local_graphdb.entrypoints=http"
+      # services
+      - "traefik.http.services.graphdb.loadbalancer.server.port=7200"
+    deploy:
+      restart_policy:
+        condition: any
+networks:
+  web:
+    name: web
+    external: true
