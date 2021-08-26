@@ -18,11 +18,9 @@ services:
       - "traefik.enable=true"
       # polynote.agingkills.eu
       - "traefik.http.routers.polynote.rule=Host(`polynote.agingkills.eu`)"
-      - "traefik.http.routers.polynote.middlewares=auth@file"
       - "traefik.http.routers.polynote.entrypoints=http"
-      # cromwell local
+      # polynote local
       - "traefik.http.routers.local_polynote.rule=Host(`polynote.localhost`)"
-      - "traefik.http.routers.local_polynote.middlewares=auth@file"
       - "traefik.http.routers.local_polynote.entrypoints=http"
       # services
       - "traefik.http.services.polynote.loadbalancer.server.port=8192"
@@ -51,6 +49,8 @@ services:
       - "traefik.http.routers.local_graphdb.entrypoints=http"
       # services
       - "traefik.http.services.graphdb.loadbalancer.server.port=7200"
+    networks:
+      - web
     deploy:
       restart_policy:
         condition: any
