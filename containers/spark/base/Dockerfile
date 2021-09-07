@@ -1,4 +1,4 @@
-FROM quay.io/comp-bio-aging/java
+FROM quay.io/comp-bio-aging/scala
 
 MAINTAINER Anton Kulaga <antonkulaga@gmail.com>
 

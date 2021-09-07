@@ -9,5 +9,10 @@ repositories:
       base: http://oss.sonatype.org/content/repositories/snapshots
       changing: true
   - maven:
-      base: https://dl.bintray.com/comp-bio-aging/main/
+      base: https://jitpack.io
       changing: true
+
+
+spark:
+  properties:
+    master: "http://spark:7070[12]"

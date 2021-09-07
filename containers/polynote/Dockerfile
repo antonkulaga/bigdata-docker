@@ -34,10 +34,16 @@ RUN  rm -rf \
          /usr/share/doc-base \
          /root/.cache/pip
 RUN mkdir /tmp/spark-events && chmod -R 777 /tmp/spark-events
-COPY config.yml ./polynote/config.yml
+COPY config.yml /opt/polynote/config.yml
+COPY notebooks /opt/polynote/notebooks
+COPY run.sh /opt/polynote
+RUN chmod +x /opt/polynote/run.sh
+
+
+WORKDIR /opt/polynote
 
 # expose the (internal) port that polynote runs on
 EXPOSE 8192
 
 # start polynote on container run
-CMD ["./polynote/polynote.py"]
+CMD ["/opt/polynote/polynote.py"]
