@@ -6,7 +6,7 @@ ENV ENABLE_INIT_DAEMON true
 ENV INIT_DAEMON_BASE_URI http://identifier/init-daemon
 ENV INIT_DAEMON_STEP spark_master_init
 
-ENV SPARK_VERSION=3.1.2
+ENV SPARK_VERSION=3.2.0
 ENV SPARK_HOME=/opt/spark
 
 ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
@@ -47,13 +47,10 @@ RUN apt-get install -y rsync
 
 
 # Install Python and dependencies
-
-RUN pip install jep
-RUN conda install -y -c conda-forge pyarrow
-RUN conda install -y -c conda-forge pyspark
+RUN micromamba install -y -n base -c conda-forge pyarrow pyspark
 
 RUN ln -s /opt/conda/bin/pip /usr/bin/pip3
-RUN conda install -y -c conda-forge jedi virtualenv keras plotly && conda clean -y --all
+RUN micromamba install -y  -n base -c conda-forge jedi virtualenv keras plotly ptpython && micromamba clean -y --all
 
 RUN echo "source activate" > ~/.bashrc
 RUN export SPARK_DIST_CLASSPATH=$(hadoop classpath);echo $SPARK_DIST_CLASSPATH;
