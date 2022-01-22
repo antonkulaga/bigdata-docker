@@ -19,9 +19,9 @@ WORKDIR /opt
 #INSTALL SPARK
 
 RUN wget https://mirrors.nav.ro/apache/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.2${SCALA_SUFFIX}.tgz \
-      && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop3.2.tgz \
-      && mv spark-${SPARK_VERSION}-bin-hadoop3.2 spark \
-      && rm spark-${SPARK_VERSION}-bin-hadoop3.2.tgz
+      && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop3.2${SCALA_SUFFIX}.tgz \
+      && mv spark-${SPARK_VERSION}-bin-hadoop3.2${SCALA_SUFFIX} spark \
+      && rm spark-${SPARK_VERSION}-bin-hadoop3.2${SCALA_SUFFIX}.tgz
 
 COPY wait-for-step.sh /
 COPY execute-step.sh /
