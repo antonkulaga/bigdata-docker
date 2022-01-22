@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   polynote:
-    image: quay.io/comp-bio-aging/polynote:master
+    image: quay.io/comp-bio-aging/polynote:2.13
     ports:
       - 8192:8192
       - 4040:4040

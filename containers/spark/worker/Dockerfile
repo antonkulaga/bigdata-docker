@@ -1,4 +1,4 @@
-FROM quay.io/comp-bio-aging/spark-base:master
+FROM quay.io/comp-bio-aging/spark-base:2.13
 
 COPY worker.sh /
 

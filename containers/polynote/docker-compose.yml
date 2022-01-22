@@ -1,7 +1,7 @@
 version: '3'
 services:
   polynote:
-    image: quay.io/comp-bio-aging/polynote:latest
+    image: quay.io/comp-bio-aging/polynote:2.13
     environment:
       POLYNOTE_CONFIG: |
         listen:
