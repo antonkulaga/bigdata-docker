@@ -9,15 +9,16 @@ ENV INIT_DAEMON_STEP spark_master_init
 ENV SPARK_VERSION=3.2.0
 ENV SPARK_HOME=/opt/spark
 
+ENV SCALA_SUFFIX=-scala2.13
+
 ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
 RUN chmod +x /usr/bin/apt-get-install
 RUN mkdir /tmp/spark-events && chmod -R 777 /tmp/spark-events
 WORKDIR /opt
 
-#INSTALL HADOOP
-
 #INSTALL SPARK
 
+https://www.apache.org/dyn/closer.lua/spark/spark-3.2.0/spark-3.2.0-bin-hadoop3.2${SCALA_SUFFIX}.tgz
 RUN wget https://mirrors.nav.ro/apache/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.2.tgz \
       && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop3.2.tgz \
       && mv spark-${SPARK_VERSION}-bin-hadoop3.2 spark \
