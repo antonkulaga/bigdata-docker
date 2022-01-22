@@ -9,7 +9,7 @@ WORKDIR /opt
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED TRUE
 
-SHELL ["/bin/bash"]
+SHELL  ["/bin/bash", "-c"]
 ENTRYPOINT []
 
 RUN pip3 install \
