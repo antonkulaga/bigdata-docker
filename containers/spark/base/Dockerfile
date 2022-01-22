@@ -18,8 +18,7 @@ WORKDIR /opt
 
 #INSTALL SPARK
 
-https://www.apache.org/dyn/closer.lua/spark/spark-3.2.0/spark-3.2.0-bin-hadoop3.2${SCALA_SUFFIX}.tgz
-RUN wget https://mirrors.nav.ro/apache/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.2.tgz \
+RUN wget https://mirrors.nav.ro/apache/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.2${SCALA_SUFFIX}.tgz \
       && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop3.2.tgz \
       && mv spark-${SPARK_VERSION}-bin-hadoop3.2 spark \
       && rm spark-${SPARK_VERSION}-bin-hadoop3.2.tgz
