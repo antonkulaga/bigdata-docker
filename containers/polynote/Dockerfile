@@ -9,6 +9,9 @@ WORKDIR /opt
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED TRUE
 
+SHELL ["/bin/bash"]
+ENTRYPOINT []
+
 RUN pip3 install \
   jep \
   jedi \
