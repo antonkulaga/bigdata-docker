@@ -3,14 +3,13 @@ FROM quay.io/comp-bio-aging/spark-master:2.13
 WORKDIR /opt
 ENV SCALA_VERSION=2.13.8
 ENV POLYNOTE_VERSION=0.4.4
+ENV POLYNOTE_SCALA_VERSION=2.13
 
 WORKDIR /opt
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED TRUE
-
-SHELL  ["/bin/bash", "-c"]
-ENTRYPOINT []
+ENV LD_PRELOAD ${MAMBA_ROOT_PREFIX}/lib
 
 RUN pip3 install \
   jep \
