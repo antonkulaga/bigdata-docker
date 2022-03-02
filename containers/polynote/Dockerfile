@@ -2,7 +2,7 @@ FROM quay.io/comp-bio-aging/spark-master:2.13
 
 WORKDIR /opt
 ENV SCALA_VERSION=2.13.8
-ENV POLYNOTE_VERSION=0.4.4
+ENV POLYNOTE_VERSION=0.4.5
 ENV POLYNOTE_SCALA_VERSION=2.13
 
 WORKDIR /opt
@@ -14,7 +14,7 @@ ENV LD_PRELOAD ${MAMBA_ROOT_PREFIX}/lib
 RUN pip3 install \
   jep \
   jedi \
-  pyspark==3.2.0 \
+  pyspark==3.2.1 \
   virtualenv \
   numpy \
   pandas
