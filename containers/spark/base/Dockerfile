@@ -9,7 +9,7 @@ ENV INIT_DAEMON_STEP spark_master_init
 ENV SPARK_VERSION=3.3.1
 ENV SPARK_HOME=/opt/spark
 
-ENV SCALA_SUFFIX=-scala2.13
+ENV SCALA_SUFFIX=2.13
 
 ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
 RUN chmod +x /usr/bin/apt-get-install
@@ -17,8 +17,7 @@ RUN mkdir /tmp/spark-events && chmod -R 777 /tmp/spark-events
 WORKDIR /opt
 
 #INSTALL SPARK
-
-RUN wget https://www.apache.org/dyn/closer.lua/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3-scala${SCALA_SUFFIX}.tgz \
+RUN wget https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3-scala${SCALA_SUFFIX}.tgz \
       && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop3-scala${SCALA_SUFFIX}.tgz \
       && mv spark-${SPARK_VERSION}-bin-hadoop3-scala${SCALA_SUFFIX} spark \
       && rm spark-${SPARK_VERSION}-bin-hadoop3-scala${SCALA_SUFFIX}.tgz
@@ -43,7 +42,7 @@ ENV PYTHONHASHSEED 1
 COPY hive-site.xml /opt/spark/conf/
 COPY spark-env.sh /opt/spark/conf/
 
-RUN apt-get install -y rsync
+RUN apt update && apt install -y rsync
 
 
 # Install Python and dependencies
@@ -52,9 +51,9 @@ RUN micromamba install -y -n base -c conda-forge pyarrow pyspark
 RUN ln -s /opt/conda/bin/pip /usr/bin/pip3
 RUN micromamba install -y  -n base -c conda-forge jedi virtualenv keras plotly ptpython && micromamba clean -y --all
 
-RUN echo "source activate" > ~/.bashrc
-RUN export SPARK_DIST_CLASSPATH=$(hadoop classpath);echo $SPARK_DIST_CLASSPATH;
-RUN bash -l -c 'echo export SPARK_DIST_CLASSPATH="$(hadoop classpath)" >> /etc/bash.bashrc'
+#RUN echo "source activate" > ~/.bashrc
+#RUN export SPARK_DIST_CLASSPATH=$(hadoop classpath);echo $SPARK_DIST_CLASSPATH;
+#RUN bash -l -c 'echo export SPARK_DIST_CLASSPATH="$(hadoop classpath)" >> /etc/bash.bashrc'
 
 ENV PATH /opt/conda/envs/env/bin:$PATH
 
