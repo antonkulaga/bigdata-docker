@@ -18,10 +18,10 @@ WORKDIR /opt
 
 #INSTALL SPARK
 
-RUN wget https://mirrors.nav.ro/apache/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.2${SCALA_SUFFIX}.tgz \
-      && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop3.2${SCALA_SUFFIX}.tgz \
-      && mv spark-${SPARK_VERSION}-bin-hadoop3.2${SCALA_SUFFIX} spark \
-      && rm spark-${SPARK_VERSION}-bin-hadoop3.2${SCALA_SUFFIX}.tgz
+RUN wget https://www.apache.org/dyn/closer.lua/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3-scala${SCALA_SUFFIX}.tgz \
+      && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop3-scala${SCALA_SUFFIX}.tgz \
+      && mv spark-${SPARK_VERSION}-bin-hadoop3-scala${SCALA_SUFFIX} spark \
+      && rm spark-${SPARK_VERSION}-bin-hadoop3-scala${SCALA_SUFFIX}.tgz
 
 COPY wait-for-step.sh /
 COPY execute-step.sh /
