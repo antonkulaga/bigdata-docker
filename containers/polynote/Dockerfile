@@ -14,7 +14,7 @@ ENV LD_PRELOAD ${MAMBA_ROOT_PREFIX}/lib
 RUN pip3 install \
   jep \
   jedi \
-  pyspark==3.2.1 \
+  pyspark==3.3.1 \
   virtualenv \
   numpy \
   pandas
