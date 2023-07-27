@@ -4,6 +4,7 @@ WORKDIR /opt
 ENV SCALA_VERSION=2.13.10
 ENV POLYNOTE_VERSION=0.5.1
 ENV POLYNOTE_SCALA_VERSION=2.13
+ENV SPARK_VERSION=3.4.1
 
 WORKDIR /opt
 
@@ -14,7 +15,7 @@ ENV LD_PRELOAD ${MAMBA_ROOT_PREFIX}/lib
 RUN pip3 install \
   jep \
   jedi \
-  pyspark==3.3.1 \
+  pyspark==$SPARK_VERSION \
   virtualenv \
   numpy \
   pandas
