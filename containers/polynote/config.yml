@@ -16,3 +16,5 @@ repositories:
 spark:
   properties:
     master: "http://spark:7070[12]"
+    spark.driver.memory: 28g
+    spark.executor.memory: 60g
