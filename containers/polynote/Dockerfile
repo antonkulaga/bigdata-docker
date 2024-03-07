@@ -25,7 +25,7 @@ ENV SPARK_HOME /opt/spark
 ENV PATH "$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin"
 
 # Download and extract polynote
-RUN curl -Lk https://github.com/polynote/polynote/releases/download/${POLYNOTE_VERSION}/polynote-dist.tar.gz \
+RUN curl -Lk https://github.com/polynote/polynote/archive/refs/tags/${POLYNOTE_VERSION}.tar.gz # https://github.com/polynote/polynote/releases/download/${POLYNOTE_VERSION}/polynote-dist.tar.gz \
   | tar -xzvpf -
 
 RUN  rm -rf \
