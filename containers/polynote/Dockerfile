@@ -2,7 +2,8 @@ FROM quay.io/comp-bio-aging/spark-master:2.13
 
 WORKDIR /opt
 ENV SCALA_VERSION=2.13.13
-ENV POLYNOTE_VERSION=0.5.2
+ENV POLYNOTE_VERSION=0.5.1
+#0.5.2
 ENV POLYNOTE_SCALA_VERSION=2.13
 ENV SPARK_VERSION=3.5.1
 
@@ -25,7 +26,8 @@ ENV SPARK_HOME /opt/spark
 ENV PATH "$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin"
 
 # Download and extract polynote
-RUN curl -Lk https://github.com/polynote/polynote/archive/refs/tags/${POLYNOTE_VERSION}.tar.gz # https://github.com/polynote/polynote/releases/download/${POLYNOTE_VERSION}/polynote-dist.tar.gz \
+# not working tag: https://github.com/polynote/polynote/archive/refs/tags/${POLYNOTE_VERSION}.tar.gz
+RUN curl -Lk https://github.com/polynote/polynote/releases/download/${POLYNOTE_VERSION}/polynote-dist.tar.gz \
   | tar -xzvpf -
 
 RUN  rm -rf \
