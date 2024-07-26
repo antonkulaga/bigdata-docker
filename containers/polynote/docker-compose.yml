@@ -1,8 +1,7 @@
 services:
   polynote:
-    image: quay.io/comp-bio-aging/polynote:latest
+    image: quay.io/comp-bio-aging/polynote:2.13
     environment:
-      PYTHONPATH: "/opt/conda/bin/python"
       POLYNOTE_CONFIG: |
         listen:
           host: 0.0.0.0
